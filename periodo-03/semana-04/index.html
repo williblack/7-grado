@@ -1,1 +1,327 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase: Combinar Correspondencia - Prof. William Fdo Bernal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .card-hover:hover { transform: translateY(-10px) scale(1.02); transition: all 0.3s ease; }
+        .flip-card { background-color: transparent; perspective: 1000px; height: 250px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1.5rem; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .flip-card-back { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+<div class="max-w-6xl mx-auto p-4 flex flex-wrap justify-end gap-3 sticky top-0 z-50">
+    <a href="../../../index.html" 
+       class="bg-slate-800/80 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 backdrop-blur border border-slate-700">
+        ⬅ Inicio (Grado)
+    </a>
+    <a href="../../index.html" 
+       class="bg-purple-600 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 border border-purple-400">
+        ⬅ Menú del Periodo
+    </a>
+    <button type="button" onclick="copiarEnlace()" 
+            class="bg-emerald-600 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 border border-emerald-400">
+        🔗 Copiar enlace
+    </button>
+</div>
+
+<div id="toastCopiado" class="fixed top-20 right-6 hidden bg-emerald-500 text-white px-6 py-3 rounded-2xl shadow-2xl z-[100] animate-bounce">
+    ¡Enlace copiado con éxito! ✅
+</div>
+
+<header class="relative overflow-hidden pt-10 pb-20 px-6">
+    <div class="max-w-5xl mx-auto relative z-10 text-center">
+        <p class="text-emerald-400 font-bold tracking-widest uppercase mb-2">Colegio Santa Mariana de Jesús</p>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-400 to-emerald-400">
+            Combinar Correspondencia
+        </h1>
+        <div class="glass p-6 rounded-3xl max-w-2xl mx-auto shadow-2xl">
+            <h2 class="text-xl font-semibold mb-2 text-purple-300 italic">"El superpoder de crear muchos documentos a la vez"</h2>
+            <p class="text-slate-300">Prof. William Fdo Bernal • Grado 7° • Semana 4</p>
+        </div>
+    </div>
+    <div class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+        <canvas id="heroCanvas"></canvas>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 space-y-24 pb-20">
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-slate-900/50 p-8 rounded-3xl border border-slate-800 shadow-inner">
+        <div class="md:col-span-1 flex justify-center">
+            <div class="w-32 h-32 bg-emerald-500/20 rounded-full flex items-center justify-center animate-pulse border border-emerald-500/50">
+                <span class="text-5xl">🎯</span>
+            </div>
+        </div>
+        <div class="md:col-span-2">
+            <h3 class="text-2xl font-bold text-emerald-400 mb-2">¿Qué aprenderemos hoy?</h3>
+            <p class="text-lg text-slate-300">Entenderemos cómo conectar una <b>Base de Datos</b> (una tabla de Excel) con una <b>Carta</b> para generar invitaciones o diplomas automáticamente sin tener que escribir uno por uno.</p>
+        </div>
+    </section>
+
+    <section>
+        <h3 class="text-3xl font-bold mb-10 text-center">¿Cómo funciona la magia? ✨</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="flip-card">
+                <div class="flip-card-inner shadow-2xl">
+                    <div class="flip-card-front bg-slate-800 border-2 border-purple-500">
+                        <div class="text-center">
+                            <span class="text-5xl mb-4 block">📄</span>
+                            <h4 class="text-xl font-bold">1. El Documento Maestro</h4>
+                            <p class="text-xs mt-2 text-slate-400">(Pasa el ratón para ver)</p>
+                        </div>
+                    </div>
+                    <div class="flip-card-back bg-purple-700">
+                        <p class="text-sm">Es la carta, diploma o invitación original que tiene espacios vacíos para los nombres.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner shadow-2xl">
+                    <div class="flip-card-front bg-slate-800 border-2 border-emerald-500">
+                        <div class="text-center">
+                            <span class="text-5xl mb-4 block">📊</span>
+                            <h4 class="text-xl font-bold">2. La Base de Datos</h4>
+                            <p class="text-xs mt-2 text-slate-400">(Pasa el ratón para ver)</p>
+                        </div>
+                    </div>
+                    <div class="flip-card-back bg-emerald-700">
+                        <p class="text-sm">Es una tabla en <b>Excel</b> donde tenemos la lista de todos los nombres y datos que queremos usar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner shadow-2xl">
+                    <div class="flip-card-front bg-slate-800 border-2 border-pink-500">
+                        <div class="text-center">
+                            <span class="text-5xl mb-4 block">🪄</span>
+                            <h4 class="text-xl font-bold">3. La Fusión</h4>
+                            <p class="text-xs mt-2 text-slate-400">(Pasa el ratón para ver)</p>
+                        </div>
+                    </div>
+                    <div class="flip-card-back bg-pink-700">
+                        <p class="text-sm">La computadora une los dos archivos y ¡BOOM! crea cientos de cartas personalizadas en un segundo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-br from-indigo-900/40 to-slate-900 p-8 rounded-[3rem] border border-indigo-500/30 shadow-2xl overflow-hidden relative">
+        <div class="relative z-10">
+            <h3 class="text-3xl font-extrabold mb-6 flex items-center gap-3">
+                <span class="bg-indigo-500 p-2 rounded-lg text-2xl">🤖</span> 
+                Actividad: El Laboratorio de Datos IA
+            </h3>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <div class="bg-slate-800/80 p-6 rounded-2xl border-l-4 border-indigo-500">
+                        <h4 class="font-bold text-indigo-300 mb-2">PASO 1: En el Cuaderno ✍️</h4>
+                        <p class="text-slate-300 text-sm">Dibuja una tabla vacía con 4 columnas y 4 filas. Las columnas serán: <b>Nombre, Personaje Favorito, Poder (1-100) y Color.</b></p>
+                    </div>
+
+                    <div class="bg-slate-800/80 p-6 rounded-2xl border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-emerald-300 mb-2">PASO 2: Habla con la IA 🗣️</h4>
+                        <p class="text-slate-300 text-sm mb-4">Copia este "Hechizo" (Prompt) y pégalo en el Chatbot (Gemini o ChatGPT) en la sala de sistemas:</p>
+                        <div class="bg-black/50 p-4 rounded-xl text-xs font-mono text-emerald-400 relative group">
+                            "Hola IA. Crea una tabla con 5 personajes de videojuegos. Las columnas deben ser: Nombre, Personaje, Poder (número del 1 al 100) y Color. Dame la tabla lista para copiar a Excel."
+                            <button onclick="copiarTextoPrompt()" class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 bg-emerald-600 text-white px-2 py-1 rounded text-[10px] transition-all">Copiar Prompt</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass p-6 rounded-3xl">
+                    <h4 class="font-bold text-purple-300 mb-4 text-center">Visualización de Datos (Ejemplo)</h4>
+                    <canvas id="iaDataChart" height="250"></canvas>
+                    <p class="text-center text-xs text-slate-400 mt-4">La IA te dará datos que luego graficaremos así en Excel.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-amber-500/10 border border-amber-500/40 p-6 rounded-2xl">
+                <h4 class="font-bold text-amber-400 mb-2 italic">⚠️ Misión Final en la Sala de Sistemas:</h4>
+                <ul class="list-disc list-inside text-sm text-slate-200 space-y-2">
+                    <li>Abre <b>Microsoft Excel</b>.</li>
+                    <li>Copia la tabla que te dio la IA y pégala en la hoja.</li>
+                    <li>Selecciona los datos y ponles <b>Bordes y Colores</b>.</li>
+                    <li>Guarda el archivo como: <code class="bg-black px-2 py-1 rounded text-pink-400">Mis_Datos_IA.xlsx</code></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-3xl mx-auto">
+        <div class="text-center mb-10">
+            <h3 class="text-3xl font-bold">¿Qué tanto aprendiste? 🏆</h3>
+            <p class="text-slate-400">Responde estas 3 preguntas de "Fuego Rápido"</p>
+        </div>
+        
+        <div id="quizContainer" class="space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 quiz-card shadow-lg transition-all overflow-hidden">
+                <p class="text-lg font-medium mb-4">1. ¿Cuál es el programa ideal para crear la "Base de Datos"?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="checkQuiz(this, false)" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl transition-all">Paint</button>
+                    <button onclick="checkQuiz(this, true)" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl transition-all">Microsoft Excel</button>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700 quiz-card shadow-lg transition-all overflow-hidden">
+                <p class="text-lg font-medium mb-4">2. "Combinar correspondencia" sirve para:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="checkQuiz(this, true)" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl transition-all">Hacer muchas cartas rápido</button>
+                    <button onclick="checkQuiz(this, false)" class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl transition-all">Formatear el computador</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white text-slate-900 p-10 rounded-[3rem] shadow-2xl flex flex-col md:flex-row gap-10 items-center">
+        <div class="flex-1">
+            <h3 class="text-4xl font-black mb-4 uppercase tracking-tighter">Tarea en Casa 🏠</h3>
+            <p class="text-xl mb-6">Demuestra tu creatividad y lo aprendido.</p>
+            <ul class="space-y-4 font-medium">
+                <li class="flex items-start gap-3">
+                    <span class="bg-pink-500 text-white p-1 rounded-full text-xs">✔</span>
+                    Dibuja en tu cuaderno el icono de Excel y el icono de un Robot IA.
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="bg-pink-500 text-white p-1 rounded-full text-xs">✔</span>
+                    Escribe una lista de 3 situaciones donde usarías "Combinar Correspondencia" (Ej: Invitaciones de 15 años).
+                </li>
+            </ul>
+        </div>
+        <div class="w-48 h-48 bg-slate-100 rounded-3xl flex items-center justify-center border-4 border-slate-900 shadow-[10px_10px_0px_#000]">
+            <span class="text-8xl">📒</span>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-900 py-12 border-t border-slate-800 text-center">
+    <p class="text-slate-500 font-medium">
+        © 2026 | Prof. <span class="text-white">William Fdo Bernal</span> - Área de Tecnología e Informática
+    </p>
+    <p class="text-slate-600 text-xs mt-2 uppercase tracking-widest">Colegio Santa Mariana de Jesús • Buga, Valle del Cauca</p>
+</footer>
+
+<script>
+    // --- FUNCIÓN COPIAR ENLACE ---
+    function copiarEnlace(){
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const t = document.getElementById('toastCopiado');
+            t.classList.remove('hidden');
+            setTimeout(()=> t.classList.add('hidden'), 3000);
+        }).catch(() => {
+            alert("Enlace copiado ✅");
+        });
+    }
+
+    function copiarTextoPrompt() {
+        const texto = "Hola IA. Crea una tabla con 5 personajes de videojuegos. Las columnas deben ser: Nombre, Personaje, Poder (número del 1 al 100) y Color. Dame la tabla lista para copiar a Excel.";
+        navigator.clipboard.writeText(texto);
+        alert("¡Prompt copiado! Úsalo con la IA en clase.");
+    }
+
+    // --- QUIZ LOGIC ---
+    function checkQuiz(btn, isCorrect) {
+        const parent = btn.parentElement;
+        const buttons = parent.querySelectorAll('button');
+        
+        buttons.forEach(b => b.disabled = true);
+        
+        if(isCorrect) {
+            btn.classList.remove('bg-slate-800');
+            btn.classList.add('bg-emerald-500', 'scale-105', 'text-white');
+            btn.innerHTML += " ✅";
+        } else {
+            btn.classList.remove('bg-slate-800');
+            btn.classList.add('bg-red-500', 'text-white');
+            btn.innerHTML += " ❌";
+        }
+    }
+
+    // --- CHART.JS ---
+    const ctx = document.getElementById('iaDataChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Mario', 'Steve', 'Sonic', 'Zelda', 'Kratos'],
+            datasets: [{
+                label: 'Nivel de Poder',
+                data: [85, 95, 90, 88, 98],
+                backgroundColor: [
+                    'rgba(244, 63, 94, 0.6)',
+                    'rgba(34, 197, 94, 0.6)',
+                    'rgba(59, 130, 246, 0.6)',
+                    'rgba(234, 179, 8, 0.6)',
+                    'rgba(168, 85, 247, 0.6)'
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                borderRadius: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#fff' } },
+                x: { ticks: { color: '#fff' } }
+            }
+        }
+    });
+
+    // --- BACKGROUND ANIMATION ---
+    const canvas = document.getElementById('heroCanvas');
+    const c = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = 400;
+
+    let particles = [];
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if(this.x > canvas.width) this.x = 0;
+            if(this.y > canvas.height) this.y = 0;
+        }
+        draw() {
+            c.fillStyle = 'rgba(168, 85, 247, 0.5)';
+            c.beginPath();
+            c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            c.fill();
+        }
+    }
+
+    function init() {
+        for(let i=0; i<50; i++) particles.push(new Particle());
+    }
+
+    function animate() {
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    init();
+    animate();
+</script>
+
+</body>
+</html>
