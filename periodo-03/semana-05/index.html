@@ -1,1 +1,264 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel I: Entorno y Tablas - Prof. William Bernal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .card-3d { transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
+        .card-3d:hover { transform: rotateY(10deg) rotateX(5deg) scale(1.02); }
+        .excel-grid { background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(90deg, #e5e7eb 1px, transparent 1px); background-size: 100px 30px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+<div class="max-w-6xl mx-auto flex justify-end gap-3 p-4">
+    <a href="../../../index.html" class="bg-slate-800/70 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 backdrop-blur flex items-center gap-2">
+        <span>⬅</span> Inicio (Grado)
+    </a>
+    <a href="../../index.html" class="bg-purple-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        <span>⬅</span> Menú del Periodo
+    </a>
+    <button type="button" onclick="copiarEnlace()" class="bg-emerald-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        <span>🔗</span> Copiar enlace
+    </button>
+</div>
+
+<div id="toastCopiado" class="fixed top-6 right-6 hidden bg-black/80 text-white px-6 py-3 rounded-2xl shadow-2xl backdrop-blur-md z-50 animate-bounce">
+    Enlace copiado al portapapeles ✅
+</div>
+
+<header class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-600 via-emerald-500 to-blue-600 text-white px-6">
+    <div class="absolute inset-0 opacity-20 excel-grid"></div>
+    <div class="relative z-10 text-center max-w-4xl">
+        <p class="uppercase tracking-widest font-bold text-green-200 mb-2">Colegio Santa Mariana de Jesús (Buga)</p>
+        <h1 class="text-6xl md:text-8xl font-extrabold mb-6 drop-shadow-2xl">Excel: El Mundo de los Datos</h1>
+        <p class="text-xl md:text-2xl font-light mb-8">Semana 5 | Clases 9 y 10</p>
+        <div class="glass p-6 rounded-3xl inline-block shadow-2xl border border-white/40">
+            <p class="text-slate-800 font-semibold italic text-lg text-center">
+                🎯 "Hoy aprenderás a dominar la interfaz de Excel, reconocer celdas y convertir el caos en tablas perfectas."
+            </p>
+        </div>
+        <div class="mt-4 text-sm font-bold opacity-80 italic">Prof. William Fdo Bernal - 2026</div>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6 space-y-24 mt-12">
+
+    <section class="space-y-8">
+        <div class="text-center">
+            <h2 class="text-4xl font-extrabold text-slate-800">1. Explorador del Entorno 🔎</h2>
+            <p class="text-slate-500">Haz clic en las zonas para conocer sus funciones secretas.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-[2rem] shadow-xl">
+            <div class="space-y-4">
+                <button onclick="showInfo('cintas')" class="w-full text-left p-4 rounded-2xl border-l-8 border-purple-500 bg-purple-50 hover:bg-purple-100 transition-all font-bold">📂 Cintas de Opciones (Ribbons)</button>
+                <button onclick="showInfo('hojas')" class="w-full text-left p-4 rounded-2xl border-l-8 border-emerald-500 bg-emerald-50 hover:bg-emerald-100 transition-all font-bold">📄 Hojas y Libros</button>
+                <button onclick="showInfo('celdas')" class="w-full text-left p-4 rounded-2xl border-l-8 border-blue-500 bg-blue-50 hover:bg-blue-100 transition-all font-bold">🔳 Celdas (La dirección mágica)</button>
+                <button onclick="showInfo('tipos')" class="w-full text-left p-4 rounded-2xl border-l-8 border-amber-500 bg-amber-50 hover:bg-amber-100 transition-all font-bold">🔢 Tipos de Datos</button>
+            </div>
+            <div id="display-info" class="min-h-[250px] glass rounded-[2rem] p-8 flex items-center justify-center text-center animate-pulse border-2 border-dashed border-slate-300">
+                <p class="text-slate-400 font-medium">Selecciona un elemento para aprender sobre él.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-y-8 bg-slate-900 p-10 rounded-[3rem] text-white">
+        <div class="text-center">
+            <h2 class="text-4xl font-extrabold">2. El Poder de las Tablas ⚡</h2>
+            <p class="text-slate-400">¿Por qué usar tablas? Mira cómo Excel organiza todo automáticamente.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div class="space-y-6">
+                <p class="text-lg">Las tablas no son solo cuadros con bordes. Nos permiten:</p>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3"><span class="bg-green-500 p-1 rounded-full text-xs">✔</span> <b>Formato Rápido:</b> Colores alternos para no perder la vista.</li>
+                    <li class="flex items-center gap-3"><span class="bg-green-500 p-1 rounded-full text-xs">✔</span> <b>Filtros:</b> Encontrar datos específicos en segundos.</li>
+                    <li class="flex items-center gap-3"><span class="bg-green-500 p-1 rounded-full text-xs">✔</span> <b>Orden:</b> De la A a la Z con un solo clic.</li>
+                </ul>
+                <div class="flex gap-4 pt-4">
+                    <button onclick="updateChart('desorden')" class="bg-rose-500 px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all">Ver Datos Desordenados</button>
+                    <button onclick="updateChart('orden')" class="bg-emerald-500 px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all">Ver Datos en Tabla</button>
+                </div>
+            </div>
+            <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                <canvas id="excelChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-y-8">
+        <div class="bg-amber-50 border-4 border-amber-200 p-10 rounded-[3rem] relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 text-8xl opacity-10 font-bold">PROMPT</div>
+            <h2 class="text-4xl font-extrabold text-amber-800 mb-6">🚀 Reto Práctico: ¡Genera tu Tabla de Datos!</h2>
+            <p class="text-slate-700 text-lg mb-6">
+                Copia el siguiente prompt y pégalo en una IA (como ChatGPT o Gemini) para que te cree la base de datos que usaremos en Excel.
+            </p>
+            
+            <div class="bg-white p-6 rounded-2xl border-2 border-amber-300 shadow-inner group">
+                <p id="promptText" class="text-slate-600 italic font-mono leading-relaxed">
+                    "Actúa como un experto en Excel. Crea una tabla de datos de ejemplo para 30 estudiantes con 5 columnas: 1) Nombre Completo, 2) Edad, 3) Deporte Favorito, 4) Calificación Tecnología (1.0 a 5.0), 5) Fecha de Nacimiento. Entrega los datos en un formato de tabla simple para copiar y pegar directamente en Microsoft Excel."
+                </p>
+                <button onclick="copiarTextoPrompt()" class="mt-6 bg-amber-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-amber-600 transition-colors shadow-lg shadow-amber-200">
+                    📋 Copiar Prompt del Estudiante
+                </button>
+            </div>
+            
+            <div class="mt-10 bg-white/50 p-6 rounded-2xl border border-amber-200">
+                <h3 class="font-bold text-amber-900 text-xl mb-4">Preguntas de Análisis (Para tu cuaderno):</h3>
+                <ol class="list-decimal list-inside space-y-4 text-slate-700 font-medium">
+                    <li>Al pegar los datos, ¿qué celdas contienen datos de tipo "Fecha"?</li>
+                    <li>Usa la función <b>"Ordenar"</b> en la columna de Calificación. ¿Quién es el estudiante con la nota más alta?</li>
+                    <li>Aplica un <b>"Formato de Tabla"</b> de color verde. ¿Qué cambió en los encabezados?</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
+        <h2 class="text-4xl font-extrabold text-center mb-10 text-slate-800">🏆 Quiz de Excel I</h2>
+        <div id="quiz-container" class="space-y-8 max-w-2xl mx-auto">
+            </div>
+        <div id="quiz-result" class="hidden mt-8 p-8 rounded-3xl text-center text-2xl font-bold animate-bounce"></div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-900 text-white py-12 mt-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <p class="text-2xl font-extrabold mb-2 italic">"Convertimos los datos en conocimiento."</p>
+        <p class="opacity-50 tracking-widest text-sm uppercase">© 2026 | Prof. William Fdo Bernal - Área de Tecnología e Informática</p>
+        <div class="mt-6 flex justify-center gap-4">
+            <span class="bg-white/10 px-4 py-1 rounded-full text-xs">📍 Buga, Colombia</span>
+            <span class="bg-white/10 px-4 py-1 rounded-full text-xs">🏫 Santa Mariana de Jesús</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Configuración de Chart.js
+    const ctx = document.getElementById('excelChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Camiseta', 'Zapatos', 'Gorra', 'Pantalón'],
+            datasets: [{
+                label: 'Ventas Desordenadas',
+                data: [12, 19, 3, 5],
+                backgroundColor: ['#f43f5e', '#f43f5e', '#f43f5e', '#f43f5e'],
+                borderRadius: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { labels: { color: 'white' } } },
+            scales: { y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } }, x: { ticks: { color: 'white' } } }
+        }
+    });
+
+    function updateChart(mode) {
+        if(mode === 'orden') {
+            myChart.data.datasets[0].label = 'Ventas Organizadas (Tabla)';
+            myChart.data.datasets[0].data = [19, 12, 5, 3];
+            myChart.data.datasets[0].backgroundColor = ['#10b981', '#10b981', '#10b981', '#10b981'];
+        } else {
+            myChart.data.datasets[0].label = 'Ventas Desordenadas';
+            myChart.data.datasets[0].data = [12, 19, 3, 5];
+            myChart.data.datasets[0].backgroundColor = ['#f43f5e', '#f43f5e', '#f43f5e', '#f43f5e'];
+        }
+        myChart.update();
+    }
+
+    // Lógica del Explorador
+    const info = {
+        cintas: { title: "Cintas de Opciones", text: "Son como las cajas de herramientas. En 'Inicio' tienes colores y fuentes, en 'Insertar' tienes gráficos y tablas.", color: "text-purple-600" },
+        hojas: { title: "Hojas y Libros", text: "Un archivo de Excel es un 'Libro'. Las 'Hojas' son las pestañas abajo. ¡Puedes tener cientos de hojas en un solo libro!", color: "text-emerald-600" },
+        celdas: { title: "Celdas", text: "Es el nombre de un cuadrito. Se dice primero la Letra (Columna) y luego el Número (Fila). Ej: B10.", color: "text-blue-600" },
+        tipos: { title: "Tipos de Datos", text: "Excel reconoce Texto (nombres), Números (precios) y Fechas. Si mezclas peras con manzanas, las fórmulas fallarán.", color: "text-amber-600" }
+    };
+
+    function showInfo(key) {
+        const div = document.getElementById('display-info');
+        div.classList.remove('animate-pulse');
+        div.innerHTML = `<div class="animate-fadeIn">
+            <h3 class="text-3xl font-extrabold mb-4 ${info[key].color}">${info[key].title}</h3>
+            <p class="text-slate-700 text-lg leading-relaxed">${info[key].text}</p>
+        </div>`;
+    }
+
+    // Quiz Gamificado
+    const questions = [
+        { q: "¿Cómo se identifica una COLUMNA en Excel?", a: ["Números", "Letras", "Símbolos"], c: 1 },
+        { q: "¿Cuál es el nombre correcto de una celda?", a: ["1A", "Celda-5", "A1"], c: 2 },
+        { q: "Si escribo 'Hola Mundo', ¿qué tipo de dato es?", a: ["Número", "Texto", "Fecha"], c: 1 },
+        { q: "¿Para qué sirve el botón 'Dar formato como tabla'?", a: ["Para borrar todo", "Para poner colores y filtros", "Para apagar el PC"], c: 1 }
+    ];
+
+    const quizContainer = document.getElementById('quiz-container');
+    questions.forEach((item, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = "p-6 rounded-2xl border-2 border-slate-100 space-y-4 shadow-sm hover:border-blue-200 transition-all";
+        qDiv.innerHTML = `
+            <p class="font-bold text-xl">${index + 1}. ${item.q}</p>
+            <div class="grid grid-cols-1 gap-3">
+                ${item.a.map((opt, i) => `
+                    <button onclick="checkAnswer(this, ${index}, ${i})" class="text-left p-3 rounded-xl bg-slate-50 border border-slate-200 hover:bg-blue-50 transition-all font-medium">
+                        ${opt}
+                    </button>
+                `).join('')}
+            </div>
+        `;
+        quizContainer.appendChild(qDiv);
+    });
+
+    let correctCount = 0;
+    function checkAnswer(btn, qIndex, optIndex) {
+        const buttons = btn.parentElement.querySelectorAll('button');
+        buttons.forEach(b => b.disabled = true);
+        
+        if(optIndex === questions[qIndex].c) {
+            btn.classList.replace('bg-slate-50', 'bg-green-500');
+            btn.classList.add('text-white');
+            correctCount++;
+        } else {
+            btn.classList.replace('bg-slate-50', 'bg-rose-500');
+            btn.classList.add('text-white');
+            buttons[questions[qIndex].c].classList.replace('bg-slate-50', 'bg-green-500');
+            buttons[questions[qIndex].c].classList.add('text-white');
+        }
+
+        if(document.querySelectorAll('button:disabled').length === questions.length * 3) {
+            const res = document.getElementById('quiz-result');
+            res.classList.remove('hidden');
+            res.classList.add(correctCount >= 3 ? 'bg-green-100' : 'bg-rose-100');
+            res.classList.add(correctCount >= 3 ? 'text-green-700' : 'text-rose-700');
+            res.innerHTML = `¡Quiz Terminado! Puntaje: ${correctCount}/${questions.length} ${correctCount >= 3 ? '🚀 ¡Eres un PRO!' : '👨‍🏫 ¡Sigue practicando!'}`;
+        }
+    }
+
+    // Funciones Obligatorias
+    function copiarEnlace(){
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            const t = document.getElementById('toastCopiado');
+            t.classList.remove('hidden');
+            setTimeout(()=> t.classList.add('hidden'), 2000);
+        });
+    }
+
+    function copiarTextoPrompt() {
+        const text = document.getElementById('promptText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Prompt copiado. ¡Ahora ve a la IA y pégalo!");
+        });
+    }
+</script>
+</body>
+</html>
