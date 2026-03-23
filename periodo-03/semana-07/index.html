@@ -1,1 +1,368 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 7° - Superpoderes de Excel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .excel-green {
+            color: #107c41;
+        }
+        .bg-excel-green {
+            background-color: #107c41;
+        }
+        .hover-excel:hover {
+            background-color: #185c37;
+        }
+        
+        /* Flip Card Styles para la Zona de Analogías */
+        .flip-card {
+            perspective: 1000px;
+            height: 150px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            padding: 1rem;
+        }
+        .flip-card-front {
+            background: rgba(16, 124, 65, 0.2);
+            border: 1px solid rgba(16, 124, 65, 0.4);
+        }
+        .flip-card-back {
+            background: rgba(16, 124, 65, 0.8);
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto flex justify-end gap-3 mb-8 mt-4">
+        <a href="../../../index.html"
+           class="bg-slate-800/70 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 backdrop-blur flex items-center gap-2">
+           <i class="fas fa-home"></i> Inicio (Grado)
+        </a>
+
+        <a href="../../index.html"
+           class="bg-purple-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 flex items-center gap-2">
+           <i class="fas fa-folder-open"></i> Menú del Periodo
+        </a>
+
+        <button type="button" onclick="copiarEnlace()"
+           class="bg-emerald-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 flex items-center gap-2">
+           <i class="fas fa-link"></i> Copiar enlace
+        </button>
+    </div>
+
+    <div id="toastCopiado" class="fixed top-6 right-6 hidden bg-black/80 text-white px-4 py-3 rounded-xl shadow-lg backdrop-blur z-50 border border-emerald-500">
+        <i class="fas fa-check-circle text-emerald-400 mr-2"></i> Enlace copiado ✅
+    </div>
+
+    <div class="max-w-5xl mx-auto space-y-8">
+
+        <header class="glass-card rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-2 text-emerald-400 font-semibold tracking-wider text-sm uppercase">
+                    <i class="fas fa-school"></i> Colegio Santa Mariana de Jesús | Prof. William Fdo Bernal
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                    ¡Los Superpoderes de <span class="text-emerald-400">Excel!</span> 🦸‍♂️📊
+                </h1>
+                <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 inline-block">
+                    <p class="text-slate-300">
+                        <i class="fas fa-bullseye text-purple-400 mr-2"></i>
+                        <strong>Objetivo:</strong> Comprender la lógica detrás de las fórmulas y funciones de Excel, utilizándolas para automatizar cálculos y transformar datos sin procesar en información útil.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <section class="glass-card rounded-3xl p-8 shadow-xl">
+            <div class="mb-4 inline-block px-3 py-1 bg-blue-600/30 text-blue-300 rounded-full text-xs font-bold border border-blue-500/30 uppercase tracking-wide">
+                <i class="fas fa-book mr-1"></i> [📝 COPIAR AL CUADERNO]
+            </div>
+            <h2 class="text-2xl font-bold mb-4 text-emerald-300">De celdas estáticas a datos inteligentes</h2>
+            <div class="text-slate-300 space-y-4">
+                <p><strong>Tema Anterior:</strong> <em>¡Haciendo que Excel trabaje por nosotros!</em> Aprendimos a movernos en la interfaz. Ahora, le daremos instrucciones exactas.</p>
+                <p>En el mundo profesional, no calculamos manualmente; delegamos la tarea a la computadora mediante <strong>Funciones</strong> (algoritmos preprogramados) y <strong>Fórmulas</strong> (expresiones matemáticas personalizadas).</p>
+                <div class="bg-slate-900/50 p-4 rounded-xl border-l-4 border-emerald-500">
+                    <p class="font-bold text-white mb-2">Sintaxis Universal:</p>
+                    <code class="text-emerald-400 text-lg">=NOMBRE_FUNCION(Rango_de_Celdas)</code>
+                    <ul class="list-disc pl-5 mt-2 space-y-1 text-sm">
+                        <li><strong>=</strong> : Despierta el motor de cálculo.</li>
+                        <li><strong>SUMA, PROMEDIO, MAX, MIN</strong> : Analizan datos básicos.</li>
+                        <li><strong>CONTAR.SI, PROMEDIO.SI</strong> : Añaden "inteligencia condicional" (solo calculan si se cumple una regla).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card rounded-3xl p-8 shadow-xl">
+            <div class="mb-4 inline-block px-3 py-1 bg-purple-600/30 text-purple-300 rounded-full text-xs font-bold border border-purple-500/30 uppercase tracking-wide">
+                <i class="fas fa-laptop-code mr-1"></i> [💻 INTERACTUAR EN EL PC]
+            </div>
+            <h2 class="text-2xl font-bold mb-6">Simulador de Funciones: DataLab</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-1 bg-slate-800/50 rounded-xl p-4 border border-slate-600 text-center">
+                    <h3 class="font-bold text-slate-400 mb-3 uppercase text-sm tracking-wider">Conjunto de Datos</h3>
+                    <div class="flex flex-col gap-2 font-mono text-xl" id="dataset-display">
+                        <div class="bg-slate-700 py-2 rounded border border-slate-500 data-cell">45</div>
+                        <div class="bg-slate-700 py-2 rounded border border-slate-500 data-cell">80</div>
+                        <div class="bg-slate-700 py-2 rounded border border-slate-500 data-cell">25</div>
+                        <div class="bg-slate-700 py-2 rounded border border-slate-500 data-cell">90</div>
+                        <div class="bg-slate-700 py-2 rounded border border-slate-500 data-cell">10</div>
+                    </div>
+                </div>
+
+                <div class="col-span-1 flex flex-col justify-center gap-3">
+                    <button onclick="ejecutarFuncion('SUMA')" class="bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-500/30 font-bold">=SUMA()</button>
+                    <button onclick="ejecutarFuncion('PROMEDIO')" class="bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-purple-500/30 font-bold">=PROMEDIO()</button>
+                    <button onclick="ejecutarFuncion('MAX')" class="bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/30 font-bold">=MAX()</button>
+                    <button onclick="ejecutarFuncion('MIN')" class="bg-orange-600 hover:bg-orange-500 text-white py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-orange-500/30 font-bold">=MIN()</button>
+                    <button onclick="ejecutarFuncion('CONTAR.SI')" class="bg-pink-600 hover:bg-pink-500 text-white py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-pink-500/30 font-bold text-sm">=CONTAR.SI(>40)</button>
+                </div>
+
+                <div class="col-span-1 bg-slate-900 rounded-xl p-6 border border-slate-700 flex flex-col items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent"></div>
+                    <h3 class="font-bold text-slate-400 mb-2 uppercase text-sm tracking-wider z-10">Resultado del Motor</h3>
+                    <div id="resultado-funcion" class="text-6xl font-bold text-white z-10 transition-all duration-500 transform scale-100">?</div>
+                    <p id="explicacion-funcion" class="text-slate-400 text-sm mt-4 text-center z-10 h-10">Haz clic en una función para analizar los datos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card rounded-3xl p-8 shadow-xl border-t-4 border-t-emerald-500">
+            <div class="mb-4 inline-block px-3 py-1 bg-emerald-600/30 text-emerald-300 rounded-full text-xs font-bold border border-emerald-500/30 uppercase tracking-wide">
+                <i class="fas fa-desktop mr-1"></i> [🖥️ TRABAJO EN LA SALA]
+            </div>
+            <h2 class="text-2xl font-bold mb-4">Misión Profesional: Inteligencia Artificial + Formato</h2>
+            <p class="text-slate-300 mb-6">Un verdadero experto en tecnología sabe usar la IA como asistente. Tu misión es generar datos de prueba usando IA y luego estructurarlos como un profesional en Excel.</p>
+            
+            <div class="space-y-4 text-slate-200">
+                <div class="flex items-start gap-4">
+                    <div class="bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 mt-1">1</div>
+                    <div>
+                        <p class="font-semibold text-lg text-emerald-300">Genera la Data con IA</p>
+                        <p class="text-sm text-slate-400 mb-2">Abre ChatGPT, Gemini o Copilot y copia exactamente este prompt:</p>
+                        <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 font-mono text-sm relative group cursor-pointer" onclick="copiarPrompt()">
+                            <p id="prompt-ia">"Actúa como un profesor. Créame una tabla en formato de texto plano (separado por tabulaciones) con 10 estudiantes inventados. Columnas: Nombre, Edad, Nota Matemáticas, Nota Ciencias, Nota Tecnología. Los datos deben ser variados."</p>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i class="fas fa-copy text-slate-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 mt-1">2</div>
+                    <div>
+                        <p class="font-semibold text-lg text-emerald-300">Migración a Excel</p>
+                        <p class="text-sm text-slate-400">Copia la tabla que te dio la IA y pégala en la celda A1 de un libro nuevo de Excel.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 mt-1">3</div>
+                    <div>
+                        <p class="font-semibold text-lg text-emerald-300">Auditoría Visual (Dar Formato)</p>
+                        <p class="text-sm text-slate-400 mb-2">Aplica las siguientes reglas de diseño corporativo a tu tabla:</p>
+                        <ul class="list-disc pl-5 text-sm space-y-1 text-slate-300">
+                            <li><strong>Ajuste:</strong> Doble clic entre las columnas para auto-ajustar el tamaño.</li>
+                            <li><strong>Tipografía:</strong> Cambia la letra a 'Arial' o 'Segoe UI', tamaño 11.</li>
+                            <li><strong>Encabezados:</strong> Fila 1 en <strong>Negrita</strong>, color de fondo azul oscuro, y texto blanco.</li>
+                            <li><strong>Bordes:</strong> Selecciona toda la tabla y aplica "Todos los bordes".</li>
+                            <li><strong>Fórmulas:</strong> Al final de la columna de Tecnología, usa `=PROMEDIO(...)` para sacar la nota general de la clase.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section class="glass-card rounded-3xl p-8 shadow-xl">
+                <h2 class="text-xl font-bold mb-4 text-orange-400"><i class="fas fa-gamepad mr-2"></i> Trivia Express</h2>
+                <div id="quiz-container" class="space-y-4">
+                    <p class="text-slate-300 font-semibold" id="pregunta-texto">¿Qué símbolo debe ir siempre al inicio de una fórmula en Excel?</p>
+                    <div class="grid grid-cols-2 gap-3" id="opciones-quiz">
+                        <button onclick="verificarRespuesta(this, false)" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg transition-all">El signo +</button>
+                        <button onclick="verificarRespuesta(this, true)" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg transition-all">El signo =</button>
+                        <button onclick="verificarRespuesta(this, false)" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg transition-all">La letra F</button>
+                        <button onclick="verificarRespuesta(this, false)" class="bg-slate-700 hover:bg-slate-600 p-3 rounded-lg transition-all">Un asterisco *</button>
+                    </div>
+                    <div id="feedback-quiz" class="hidden font-bold text-center mt-4 p-2 rounded-lg"></div>
+                </div>
+            </section>
+
+            <div class="space-y-8">
+                <section class="glass-card rounded-3xl p-6 border-l-4 border-yellow-500">
+                    <div class="mb-2 inline-block px-3 py-1 bg-yellow-600/30 text-yellow-300 rounded-full text-xs font-bold uppercase">
+                        <i class="fas fa-search mr-1"></i> [🔍 INVESTIGACIÓN]
+                    </div>
+                    <p class="text-slate-300 text-sm mt-2">Abre Google y busca: <em>"¿Para qué sirve la función BUSCARV en Excel?"</em>. Solo léelo e intenta imaginar cómo funciona. Lo veremos más adelante.</p>
+                </section>
+
+                <section class="glass-card rounded-3xl p-6 border-l-4 border-slate-500 opacity-80">
+                    <div class="mb-2 inline-block px-3 py-1 bg-slate-600/30 text-slate-300 rounded-full text-xs font-bold uppercase">
+                        <i class="fas fa-file-alt mr-1"></i> [📄 TAREA EN HOJA SUELTA]
+                    </div>
+                    <p class="text-emerald-400 font-bold mt-2 text-center text-lg animate-pulse">¡Carga completada! Esta semana NO hay tarea para entregar.</p>
+                </section>
+            </div>
+        </div>
+
+        <footer class="mt-12 mb-4 text-center">
+            <div class="bg-slate-900/80 backdrop-blur inline-block px-8 py-3 rounded-full border border-slate-700/50">
+                <p class="text-slate-400 text-sm font-medium">© 2026 | Prof. William Fdo Bernal - Área de Tecnología e Informática</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // F) FUNCIÓN JS OBLIGATORIA (DEBE FUNCIONAR EN CHROME)
+        function copiarEnlace(){
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const t = document.getElementById('toastCopiado');
+                if(t){
+                    t.innerHTML = '<i class="fas fa-check-circle text-emerald-400 mr-2"></i> Enlace copiado ✅';
+                    t.classList.remove('hidden');
+                    setTimeout(()=> t.classList.add('hidden'), 2000);
+                } else {
+                    alert("Enlace copiado ✅");
+                }
+            }).catch(() => {
+                alert("No se pudo copiar automáticamente. Copia el enlace manualmente desde la barra del navegador.");
+            });
+        }
+
+        function copiarPrompt() {
+            const texto = document.getElementById('prompt-ia').innerText;
+            navigator.clipboard.writeText(texto).then(() => {
+                const t = document.getElementById('toastCopiado');
+                t.innerHTML = '<i class="fas fa-robot text-purple-400 mr-2"></i> Prompt Copiado ✅';
+                t.classList.remove('hidden');
+                setTimeout(()=> t.classList.add('hidden'), 2000);
+            });
+        }
+
+        // LÓGICA DEL SIMULADOR DATALAB
+        const datos = [45, 80, 25, 90, 10];
+        
+        function ejecutarFuncion(tipo) {
+            const resDiv = document.getElementById('resultado-funcion');
+            const expDiv = document.getElementById('explicacion-funcion');
+            const celdas = document.querySelectorAll('.data-cell');
+            
+            // Animación celdas
+            celdas.forEach(celda => {
+                celda.classList.add('bg-emerald-600', 'scale-105', 'transition-all');
+                setTimeout(() => {
+                    celda.classList.remove('bg-emerald-600', 'scale-105');
+                }, 400);
+            });
+
+            // Animación resultado
+            resDiv.classList.remove('scale-100');
+            resDiv.classList.add('scale-50', 'opacity-0');
+
+            setTimeout(() => {
+                let resultado = 0;
+                let explicacion = "";
+
+                switch(tipo) {
+                    case 'SUMA':
+                        resultado = datos.reduce((a, b) => a + b, 0);
+                        explicacion = "Suma total de todos los valores del array.";
+                        resDiv.className = "text-6xl font-bold text-blue-400 z-10 transition-all duration-500 transform scale-100 opacity-100";
+                        break;
+                    case 'PROMEDIO':
+                        resultado = datos.reduce((a, b) => a + b, 0) / datos.length;
+                        explicacion = "El valor medio repartido equitativamente.";
+                        resDiv.className = "text-6xl font-bold text-purple-400 z-10 transition-all duration-500 transform scale-100 opacity-100";
+                        break;
+                    case 'MAX':
+                        resultado = Math.max(...datos);
+                        explicacion = "Extrae el valor más alto (ganador).";
+                        resDiv.className = "text-6xl font-bold text-emerald-400 z-10 transition-all duration-500 transform scale-100 opacity-100";
+                        break;
+                    case 'MIN':
+                        resultado = Math.min(...datos);
+                        explicacion = "Extrae el valor más pequeño.";
+                        resDiv.className = "text-6xl font-bold text-orange-400 z-10 transition-all duration-500 transform scale-100 opacity-100";
+                        break;
+                    case 'CONTAR.SI':
+                        resultado = datos.filter(d => d > 40).length;
+                        explicacion = "Cuenta solo las celdas mayores a 40 (45, 80, 90).";
+                        resDiv.className = "text-6xl font-bold text-pink-400 z-10 transition-all duration-500 transform scale-100 opacity-100";
+                        break;
+                }
+
+                resDiv.innerText = resultado;
+                expDiv.innerText = explicacion;
+            }, 300);
+        }
+
+        // LÓGICA DEL MICRO-QUIZ
+        function verificarRespuesta(btn, esCorrecta) {
+            const botones = document.getElementById('opciones-quiz').children;
+            const feedback = document.getElementById('feedback-quiz');
+            
+            // Desactivar botones
+            for(let b of botones) {
+                b.disabled = true;
+                b.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            if(esCorrecta) {
+                btn.classList.remove('bg-slate-700', 'opacity-50');
+                btn.classList.add('bg-emerald-600', 'text-white', 'opacity-100', 'scale-105');
+                feedback.innerHTML = "¡Excelente! Toda fórmula empieza con '='.";
+                feedback.classList.remove('hidden', 'bg-red-500/20', 'text-red-400');
+                feedback.classList.add('block', 'bg-emerald-500/20', 'text-emerald-400');
+            } else {
+                btn.classList.remove('bg-slate-700', 'opacity-50');
+                btn.classList.add('bg-red-600', 'text-white', 'opacity-100', 'animate-pulse');
+                feedback.innerHTML = "Error. ¡Recuerda la regla de oro, es el '='!";
+                feedback.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-400');
+                feedback.classList.add('block', 'bg-red-500/20', 'text-red-400');
+            }
+        }
+    </script>
+</body>
+</html>
