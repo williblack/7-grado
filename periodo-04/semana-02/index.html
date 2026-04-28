@@ -1,1 +1,559 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Interactiva 7° - Mecanismos y Excel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animaciones y utilidades 3D */
+        .perspective { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        
+        /* Efecto Glassmorphism Avanzado */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(51, 65, 85, 0.6), rgba(15, 23, 42, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Flip Cards Hover */
+        .flip-card-group:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Scrollbar personalizado Chrome */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 min-h-screen text-slate-200 font-sans selection:bg-emerald-500 selection:text-white pb-10">
+
+    <div class="max-w-6xl mx-auto flex justify-end gap-3 mb-4 mt-6 px-4">
+        <a href="../../../index.html"
+           class="bg-slate-800/70 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 backdrop-blur border border-white/10 flex items-center gap-2">
+           <span>⬅</span> Inicio (Grado)
+        </a>
+      
+        <a href="../../index.html"
+           class="bg-purple-600/90 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 hover:bg-purple-500 transition-all duration-300 flex items-center gap-2 border border-purple-400/30">
+           <span>⬅</span> Menú del Periodo
+        </a>
+      
+        <button type="button" onclick="copiarEnlace()"
+           class="bg-emerald-600/90 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 hover:bg-emerald-500 transition-all duration-300 flex items-center gap-2 border border-emerald-400/30">
+           <span>🔗</span> Copiar enlace
+        </button>
+    </div>
+      
+    <div id="toastCopiado" class="fixed top-6 right-6 hidden bg-emerald-500/90 text-white px-6 py-3 rounded-xl shadow-2xl backdrop-blur font-bold border border-white/20 z-50 transform transition-all duration-300">
+        ¡Enlace copiado al portapapeles! ✅
+    </div>
+
+    <header class="max-w-6xl mx-auto px-4 mb-12 relative">
+        <div class="absolute -top-20 -left-20 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute -top-20 -right-20 w-64 h-64 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        
+        <div class="glass-panel rounded-3xl p-10 text-center relative overflow-hidden">
+            <h2 class="text-emerald-400 font-bold tracking-widest uppercase mb-2 text-sm">Colegio Santa Mariana de Jesús | Grado 7°</h2>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mb-4 drop-shadow-md">
+                Mecanismos vs. Máquinas<br>& Entorno Excel
+            </h1>
+            <p class="text-xl text-slate-300 mb-6 font-light">
+                Descubre cómo la energía transforma piezas simples en herramientas complejas, y cómo tabular datos con inteligencia artificial.
+            </p>
+            <div class="inline-block bg-slate-800/80 border border-slate-600 rounded-full px-6 py-2 text-sm text-slate-300 shadow-inner">
+                👨‍🏫 <span class="font-semibold text-white">Prof. William Fdo Bernal</span> | Área de Tecnología e Informática
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 space-y-12">
+
+        <section class="glass-panel rounded-3xl p-8 relative">
+            <span class="absolute -top-4 left-8 bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg border border-blue-400/50">
+                📝 COPIAR AL CUADERNO
+            </span>
+            
+            <div class="mt-4 grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4 border-b border-cyan-800 pb-2">Conexión: Semana 1 a Hoy</h3>
+                    <p class="text-slate-300 mb-4 leading-relaxed">
+                        La semana pasada vimos conceptos básicos de estructuras. Hoy damos el salto: <strong>¿Por qué se mueve el mundo?</strong> A menudo usamos "mecanismo" y "máquina" como sinónimos, pero técnicamente son distintos:
+                    </p>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-1">⚙️</span>
+                            <p><strong>Mecanismo:</strong> Conjunto de piezas móviles que transmiten o transforman movimiento (Ej: Engranajes, palancas). No generan su propia energía.</p>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-1">🤖</span>
+                            <p><strong>Máquina:</strong> Sistema complejo de mecanismos que utiliza <em>energía</em> (eléctrica, térmica, humana) para realizar un trabajo útil (Ej: Licuadora, automóvil).</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                    <h3 class="text-xl font-bold text-purple-300 mb-3 flex items-center gap-2">
+                        <span>📊</span> Conceptos Core en Excel
+                    </h3>
+                    <p class="text-sm text-slate-400 mb-4">La informática nos ayuda a organizar el mundo físico mediante datos estructurados.</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between bg-slate-900/50 p-2 rounded">
+                            <span class="font-bold text-slate-200">Celda</span>
+                            <span class="text-slate-400">Intersección de Columna (A) y Fila (1). Ej: A1</span>
+                        </div>
+                        <div class="flex justify-between bg-slate-900/50 p-2 rounded">
+                            <span class="font-bold text-slate-200">Editar / Borrar</span>
+                            <span class="text-slate-400">Clic > Escribir > Enter. Borrar con [Supr].</span>
+                        </div>
+                        <div class="flex justify-between bg-slate-900/50 p-2 rounded">
+                            <span class="font-bold text-slate-200">Fórmulas</span>
+                            <span class="text-slate-400">Siempre inician con el signo = (Ej: =A1+B1)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel rounded-3xl p-8 relative">
+            <span class="absolute -top-4 left-8 bg-emerald-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg border border-emerald-400/50">
+                💻 INTERACTUAR EN EL PC
+            </span>
+
+            <div class="mt-4">
+                <h3 class="text-3xl font-bold text-center text-white mb-8">Simulador Conceptual: El Laboratorio Virtual</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <h4 class="text-xl font-semibold text-cyan-300 flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                            Pase el cursor para revelar la estructura
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4 perspective">
+                            <div class="flip-card-group h-40 cursor-pointer relative transform-style-3d transition-all duration-500">
+                                <div class="flip-card-inner absolute inset-0 w-full h-full transform-style-3d transition-transform duration-700">
+                                    <div class="absolute inset-0 backface-hidden bg-slate-800 rounded-2xl flex flex-col items-center justify-center border border-slate-600 shadow-lg">
+                                        <span class="text-4xl mb-2">✂️</span>
+                                        <span class="font-bold">Tijeras</span>
+                                    </div>
+                                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-2xl flex flex-col items-center justify-center p-4 text-center shadow-lg border border-cyan-400">
+                                        <span class="font-bold text-lg">Mecanismo</span>
+                                        <span class="text-xs mt-1">Usa la fuerza de tu mano (palanca) para transmitir movimiento.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flip-card-group h-40 cursor-pointer relative transform-style-3d transition-all duration-500">
+                                <div class="flip-card-inner absolute inset-0 w-full h-full transform-style-3d transition-transform duration-700">
+                                    <div class="absolute inset-0 backface-hidden bg-slate-800 rounded-2xl flex flex-col items-center justify-center border border-slate-600 shadow-lg">
+                                        <span class="text-4xl mb-2">🚗</span>
+                                        <span class="font-bold">Motor V8</span>
+                                    </div>
+                                    <div class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex flex-col items-center justify-center p-4 text-center shadow-lg border border-purple-400">
+                                        <span class="font-bold text-lg">Máquina</span>
+                                        <span class="text-xs mt-1">Quema combustible (energía) para mover cilindros y ejes.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 bg-blue-500 text-xs font-bold px-3 py-1 rounded-bl-lg">Simulador de Celda</div>
+                        <h4 class="text-xl font-semibold text-white mb-4">Explorador de Celdas Activas</h4>
+                        <p class="text-sm text-slate-300 mb-4">Haz clic en la cuadrícula para ver cómo el sistema identifica las coordenadas (Columnas x Filas).</p>
+                        
+                        <div class="bg-white text-slate-900 rounded-lg overflow-hidden border border-slate-300">
+                            <div class="flex bg-slate-200 border-b border-slate-300 text-xs font-bold text-center">
+                                <div class="w-8 border-r border-slate-300 bg-slate-300"></div>
+                                <div class="flex-1 border-r border-slate-300 py-1">A</div>
+                                <div class="flex-1 border-r border-slate-300 py-1">B</div>
+                                <div class="flex-1 py-1">C</div>
+                            </div>
+                            <div id="excelGrid" class="text-sm">
+                                </div>
+                        </div>
+
+                        <div class="mt-4 bg-slate-900 rounded-xl p-4 border border-cyan-500/30 flex items-center gap-4">
+                            <div class="bg-cyan-900 text-cyan-300 font-mono px-3 py-1 rounded border border-cyan-700" id="activeCellDisplay">A1</div>
+                            <div class="flex-1">
+                                <input type="text" id="formulaInput" placeholder="Haz clic en una celda y escribe aquí..." class="w-full bg-slate-800 text-white rounded px-3 py-1 border border-slate-600 focus:outline-none focus:border-cyan-400 transition-colors" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-panel rounded-3xl p-8 relative border-t-4 border-t-purple-500">
+            <span class="absolute -top-4 left-8 bg-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg border border-purple-400/50">
+                🖥️ TRABAJO EN LA SALA
+            </span>
+            
+            <div class="mt-4">
+                <h3 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                    ⚙️ Calculadora de Inventos
+                </h3>
+                <div class="flex gap-4 text-sm text-purple-300 font-semibold mb-6">
+                    <span class="bg-purple-900/50 px-3 py-1 rounded-full">⏱ Duración: 50 min</span>
+                    <span class="bg-purple-900/50 px-3 py-1 rounded-full">🛠 Herramientas: Chat IA + Excel</span>
+                </div>
+                
+                <p class="text-slate-300 mb-6 border-l-4 border-purple-500 pl-4 bg-purple-900/10 py-2 rounded-r-lg">
+                    <strong>Objetivo:</strong> Diferenciar mecanismo y máquina, practicar edición básica en Excel y aplicar operaciones aritméticas con datos generados por IA.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700 hover:border-purple-500/50 transition-colors">
+                        <h4 class="text-xl font-bold text-cyan-300 mb-2">1️⃣ Explora con IA (10 min)</h4>
+                        <p class="text-slate-300 mb-3">Copia y pega la siguiente consulta (prompt) en tu herramienta de IA favorita:</p>
+                        <div class="bg-black/50 p-4 rounded-lg font-mono text-emerald-400 text-sm border border-slate-700 relative group">
+                            "Soy de grado 7. Explícame en palabras sencillas: ¿qué es un mecanismo y qué es una máquina? Dame 5 ejemplos de objetos cotidianos que usen mecanismos (como tijeras, bicicleta, sacapuntas) y dime qué operación matemática representa su función (sumar, restar, multiplicar o dividir)."
+                            <button onclick="copiarTextoIA()" class="absolute top-2 right-2 bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Copiar</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700 hover:border-purple-500/50 transition-colors">
+                        <h4 class="text-xl font-bold text-cyan-300 mb-2">2️⃣ Crea tu tabla en Excel (15 min)</h4>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>Abre Excel → Nueva hoja en blanco.</li>
+                            <li>En la fila 1 (encabezados) escribe: <code class="bg-slate-900 px-2 py-0.5 rounded text-pink-400">Objeto | ¿Mecanismo o Máquina? | Partes principales | Operación | Valor 1 | Valor 2 | Resultado</code></li>
+                            <li>Registra los 5 objetos que te dio la IA. Ejemplo en fila 2: <code class="bg-slate-900 px-2 py-0.5 rounded text-pink-400">Tijeras | Mecanismo | Dos palancas + tornillo | Restar | 10 | 4 |</code> (deja la columna Resultado vacía).</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700 hover:border-purple-500/50 transition-colors">
+                            <h4 class="text-xl font-bold text-cyan-300 mb-2">3️⃣ Práctica de Edición</h4>
+                            <ul class="text-slate-300 space-y-1 text-sm">
+                                <li>👉 <strong>Seleccionar:</strong> Clic en celda → Escribe → Enter.</li>
+                                <li>👉 <strong>Borrar:</strong> Selecciona celda → Tecla Supr.</li>
+                                <li>👉 <strong>Guardar:</strong> Pulsa <kbd class="bg-slate-700 px-1 rounded">Ctrl + G</kbd> o ve a Archivo > Guardar.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700 hover:border-purple-500/50 transition-colors">
+                            <h4 class="text-xl font-bold text-cyan-300 mb-2">4️⃣ Aplica las 4 Operaciones</h4>
+                            <p class="text-sm text-slate-300 mb-2">En la columna <code>Resultado</code>, escribe fórmulas. Inicia siempre con <code>=</code></p>
+                            <ul class="font-mono text-xs text-yellow-300 space-y-1">
+                                <li>Fila 2 (Restar): =E2-F2</li>
+                                <li>Fila 3 (Sumar): =E3+F3</li>
+                                <li>Fila 4 (Multiplicar): =E4*F4</li>
+                                <li>Fila 5 (Dividir): =E5/F5</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 rounded-xl p-5 border border-emerald-500/30">
+                        <h4 class="text-xl font-bold text-emerald-300 mb-2">5️⃣ Valida, Decora y Entrega</h4>
+                        <p class="text-slate-200 mb-3 text-sm">Aplica "Formato como tabla". En la celda A9 escribe tu reflexión: <em>"Un mecanismo ___, una máquina ___."</em></p>
+                        
+                        <div class="bg-black/40 p-3 rounded border border-emerald-500/50 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs text-emerald-400 font-bold uppercase mb-1">Nomenclatura Obligatoria del Archivo:</p>
+                                <p class="font-mono text-white text-sm">grado_tema_fecha(ddmmaa)_nombre.xlsx</p>
+                                <p class="text-xs text-slate-400 mt-1">✅ Ejemplo: 7_mecanismos_excel_251124_SofiaLopez.xlsx</p>
+                            </div>
+                            <span class="text-3xl">📤</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <span class="inline-block bg-pink-600/20 border border-pink-500 text-pink-300 text-sm px-4 py-2 rounded-full font-medium">
+                            ✨ <strong>Reto divertido:</strong> Pídele a la IA "Inventa un objeto nuevo que combine dos mecanismos" y agrégalo en la fila 6 con su operación matemática.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <section class="glass-panel rounded-3xl p-8 relative">
+                <span class="absolute -top-4 left-8 bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg border border-amber-300/50">
+                    🔍 INVESTIGACIÓN
+                </span>
+                <div class="mt-4">
+                    <h3 class="text-xl font-bold text-amber-300 mb-3 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Búsqueda en la Web
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Utiliza Google para investigar y responder en tu cuaderno las siguientes preguntas clave que conectan la historia de las máquinas y la informática:
+                    </p>
+                    <ul class="space-y-3 bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-sm text-slate-200">
+                        <li><strong>1.</strong> ¿Qué es la "Ventaja Mecánica" y cómo se aplica en una palanca simple?</li>
+                        <li><strong>2.</strong> Antes de Microsoft Excel, ¿Cuál fue la primera hoja de cálculo de la historia y en qué año se inventó?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="glass-panel rounded-3xl p-8 relative">
+                <span class="absolute -top-4 left-8 bg-rose-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wide shadow-lg border border-rose-300/50">
+                    📄 TAREA EN HOJA SUELTA
+                </span>
+                <div class="mt-4 flex flex-col h-full justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-rose-300 mb-3 flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            Entregable Físico
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Debes entregar las respuestas de tu investigación en una hoja de bloc blanca o cuadriculada.
+                        </p>
+                    </div>
+                    <div class="bg-rose-900/20 border border-rose-500/30 p-4 rounded-xl mt-4">
+                        <h4 class="text-rose-400 font-bold text-sm mb-2">Requisitos de Marcación:</h4>
+                        <ul class="text-xs text-slate-300 space-y-1 font-mono">
+                            <li>[ Nombres y Apellidos Completos ]</li>
+                            <li>[ Grado 7° ]</li>
+                            <li>[ Fecha de entrega ]</li>
+                            <li>[ Tema: Mecanismos y Excel ]</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="glass-panel rounded-3xl p-8 border border-indigo-500/30">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold text-indigo-400">⚡ Test de Conocimiento Flash</h3>
+                <p class="text-slate-400 text-sm mt-2">Comprueba lo aprendido antes de cerrar la clase.</p>
+            </div>
+
+            <div id="quiz-container" class="max-w-2xl mx-auto space-y-6">
+                </div>
+            
+            <div id="quiz-results" class="hidden max-w-2xl mx-auto mt-6 text-center bg-indigo-900/50 p-6 rounded-xl border border-indigo-500 transition-all duration-500">
+                <h4 class="text-2xl font-bold text-white mb-2">¡Completado! 🎉</h4>
+                <p class="text-indigo-200" id="quiz-score"></p>
+                <button onclick="resetQuiz()" class="mt-4 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-full transition-colors shadow-lg">Intentar de nuevo</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-16 bg-slate-950 border-t border-slate-800 py-8 text-center relative z-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-slate-400 font-medium">
+                © 2026 | <span class="text-emerald-400">Prof. William Fdo Bernal</span> - Área de Tecnología e Informática
+            </p>
+            <p class="text-slate-600 text-sm mt-2">Framework Bernal-Interactivo v2.0 | Colegio Santa Mariana de Jesús</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. FUNCIÓN OBLIGATORIA: Copiar Enlace ---
+        function copiarEnlace() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const t = document.getElementById('toastCopiado');
+                if (t) {
+                    t.classList.remove('hidden');
+                    setTimeout(() => t.classList.add('hidden'), 2500);
+                } else {
+                    alert("Enlace copiado ✅");
+                }
+            }).catch(() => {
+                alert("No se pudo copiar automáticamente. Copia el enlace manualmente desde la barra del navegador.");
+            });
+        }
+
+        function copiarTextoIA() {
+            const texto = "Soy de grado 7. Explícame en palabras sencillas: ¿qué es un mecanismo y qué es una máquina? Dame 5 ejemplos de objetos cotidianos que usen mecanismos (como tijeras, bicicleta, sacapuntas) y dime qué operación matemática representa su función (sumar, restar, multiplicar o dividir).";
+            navigator.clipboard.writeText(texto).then(() => {
+                const t = document.getElementById('toastCopiado');
+                t.innerText = "Prompt copiado para la IA 🤖";
+                t.classList.remove('hidden');
+                setTimeout(() => {
+                    t.classList.add('hidden');
+                    t.innerText = "¡Enlace copiado al portapapeles! ✅"; // Reset
+                }, 2500);
+            });
+        }
+
+        // --- 2. SIMULADOR DE EXCEL (MOD-E) ---
+        const gridContainer = document.getElementById('excelGrid');
+        const activeCellDisplay = document.getElementById('activeCellDisplay');
+        const formulaInput = document.getElementById('formulaInput');
+        let activeCellId = null;
+
+        function initExcelGrid() {
+            const rows = 3;
+            const cols = ['A', 'B', 'C'];
+            
+            for (let r = 1; r <= rows; r++) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = "flex border-b border-slate-300 last:border-b-0";
+                
+                // Número de fila
+                const rowNum = document.createElement('div');
+                rowNum.className = "w-8 border-r border-slate-300 bg-slate-200 text-center py-2 font-bold text-xs text-slate-600 flex items-center justify-center";
+                rowNum.innerText = r;
+                rowDiv.appendChild(rowNum);
+
+                // Celdas
+                cols.forEach(c => {
+                    const cellId = `${c}${r}`;
+                    const cell = document.createElement('div');
+                    cell.className = "flex-1 border-r border-slate-300 last:border-r-0 py-2 px-2 cursor-pointer hover:bg-emerald-50 transition-colors text-slate-700 h-9 relative";
+                    cell.id = `cell-${cellId}`;
+                    
+                    cell.addEventListener('click', () => {
+                        // Reset previous
+                        if(activeCellId) {
+                            const prev = document.getElementById(`cell-${activeCellId}`);
+                            if(prev) {
+                                prev.classList.remove('ring-2', 'ring-inset', 'ring-emerald-500', 'bg-emerald-100');
+                            }
+                        }
+                        
+                        // Set new active
+                        activeCellId = cellId;
+                        cell.classList.add('ring-2', 'ring-inset', 'ring-emerald-500', 'bg-emerald-100');
+                        activeCellDisplay.innerText = cellId;
+                        formulaInput.disabled = false;
+                        formulaInput.value = cell.innerText;
+                        formulaInput.focus();
+                    });
+
+                    rowDiv.appendChild(cell);
+                });
+                gridContainer.appendChild(rowDiv);
+            }
+
+            // Sync input con la celda activa
+            formulaInput.addEventListener('input', (e) => {
+                if(activeCellId) {
+                    document.getElementById(`cell-${activeCellId}`).innerText = e.target.value;
+                }
+            });
+        }
+
+        // --- 3. SISTEMA DE GAMIFICACIÓN (QUIZ) ---
+        const questions = [
+            {
+                q: "¿Cuál es la principal diferencia entre una máquina y un mecanismo?",
+                options: [
+                    "Los mecanismos usan electricidad, las máquinas no.",
+                    "El mecanismo transmite movimiento; la máquina usa energía para hacer trabajo.",
+                    "Son exactamente lo mismo, solo cambia el tamaño."
+                ],
+                correct: 1
+            },
+            {
+                q: "En Excel, la intersección de la columna C y la fila 5 se nombra como:",
+                options: ["5C", "Celda 5", "C5"],
+                correct: 2
+            },
+            {
+                q: "¿Qué tecla se utiliza comúnmente para borrar el contenido de una celda seleccionada?",
+                options: ["Enter", "Suprimir (Supr)", "Ctrl + G"],
+                correct: 1
+            }
+        ];
+
+        let score = 0;
+        let answered = 0;
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            questions.forEach((qObj, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = "bg-slate-800/60 p-6 rounded-xl border border-slate-700/50 shadow-md";
+                
+                const questionText = document.createElement('h5');
+                questionText.className = "text-lg font-semibold text-white mb-4";
+                questionText.innerText = `${index + 1}. ${qObj.q}`;
+                qDiv.appendChild(questionText);
+                
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = "grid gap-3";
+                
+                qObj.options.forEach((opt, optIndex) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-slate-300 hover:bg-slate-700 hover:border-indigo-400 transition-all duration-300 quiz-btn-" + index;
+                    btn.innerText = opt;
+                    
+                    btn.onclick = () => handleAnswer(index, optIndex, btn, qObj.correct);
+                    optionsGrid.appendChild(btn);
+                });
+                
+                qDiv.appendChild(optionsGrid);
+                container.appendChild(qDiv);
+            });
+        }
+
+        function handleAnswer(qIndex, selectedIndex, btnElement, correctIndex) {
+            // Disable all buttons for this question
+            const buttons = document.querySelectorAll('.quiz-btn-' + qIndex);
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-slate-700', 'hover:border-indigo-400', 'cursor-pointer');
+                b.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+
+            // Check answer
+            if (selectedIndex === correctIndex) {
+                btnElement.classList.replace('bg-slate-900', 'bg-emerald-900/80');
+                btnElement.classList.replace('border-slate-600', 'border-emerald-500');
+                btnElement.classList.replace('text-slate-300', 'text-emerald-300');
+                btnElement.classList.add('transform', 'scale-[1.02]');
+                score++;
+            } else {
+                btnElement.classList.replace('bg-slate-900', 'bg-red-900/80');
+                btnElement.classList.replace('border-slate-600', 'border-red-500');
+                btnElement.classList.replace('text-slate-300', 'text-red-300');
+                
+                // Highlight correct one
+                buttons[correctIndex].classList.replace('bg-slate-900', 'bg-emerald-900/40');
+                buttons[correctIndex].classList.replace('border-slate-600', 'border-emerald-500/50');
+                buttons[correctIndex].classList.replace('opacity-50', 'opacity-100');
+            }
+
+            answered++;
+            if (answered === questions.length) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const resultsDiv = document.getElementById('quiz-results');
+            const scoreText = document.getElementById('quiz-score');
+            
+            resultsDiv.classList.remove('hidden');
+            scoreText.innerHTML = `Has acertado <strong class="text-emerald-400 text-xl">${score}</strong> de <strong class="text-white text-xl">${questions.length}</strong> preguntas.`;
+            
+            // Auto scroll to results
+            setTimeout(() => {
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+        }
+
+        function resetQuiz() {
+            score = 0;
+            answered = 0;
+            document.getElementById('quiz-results').classList.add('hidden');
+            renderQuiz();
+        }
+
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initExcelGrid();
+            renderQuiz();
+        });
+
+    </script>
+</body>
+</html>
