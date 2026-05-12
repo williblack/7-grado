@@ -1,1 +1,845 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 4 - Mecanismos de Transmisión y Formato de Celdas | Grado 7°</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            secondary: '#8b5cf6',
+            accent: '#06b6d4',
+            dark: '#1e293b',
+            light: '#f8fafc'
+          },
+          animation: {
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .glass-card-dark {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .flip-card {
+      perspective: 1000px;
+      height: 200px;
+    }
+    
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    
+    .flip-card-front {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+    }
+    
+    .flip-card-back {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      color: white;
+      transform: rotateY(180deg);
+    }
+    
+    .canvas-container {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .badge-cuaderno { background: #fef3c7; color: #92400e; }
+    .badge-pc { background: #dbeafe; color: #1e40af; }
+    .badge-sala { background: #dcfce7; color: #166534; }
+    .badge-investigacion { background: #f3e8ff; color: #6b21a8; }
+    .badge-tarea { background: #fee2e2; color: #991b1b; }
+    
+    .quiz-option {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .quiz-option:hover {
+      transform: translateX(4px);
+      background: rgba(99, 102, 241, 0.1);
+    }
+    
+    .quiz-option.correct {
+      background: rgba(34, 197, 94, 0.2);
+      border-left: 4px solid #22c55e;
+      animation: pulse 0.3s ease;
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(239, 68, 68, 0.2);
+      border-left: 4px solid #ef4444;
+      animation: shake 0.3s ease;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+    
+    .step-number {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 200px;
+      background: #1e293b;
+      color: #fff;
+      text-align: center;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.875rem;
+      pointer-events: none;
+    }
+    
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-indigo-50 to-cyan-50 min-h-screen">
+
+  <!-- 🔗 BARRA DE NAVEGACIÓN OBLIGATORIA -->
+  <div class="max-w-6xl mx-auto flex justify-end gap-3 mb-4 px-4 pt-4">
+    <a href="../../../index.html"
+       class="bg-slate-800/70 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 backdrop-blur text-sm font-medium">
+       ⬅ Inicio (Grado)
+    </a>
+
+    <a href="../../index.html"
+       class="bg-purple-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 text-sm font-medium">
+       ⬅ Menú del Periodo
+    </a>
+
+    <button type="button" onclick="copiarEnlace()"
+       class="bg-emerald-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-all duration-300 text-sm font-medium">
+       🔗 Copiar enlace
+    </button>
+  </div>
+
+  <div id="toastCopiado" class="fixed top-6 right-6 hidden bg-black/80 text-white px-4 py-3 rounded-xl shadow-lg backdrop-blur z-50">
+    Enlace copiado ✅
+  </div>
+
+  <!-- 🎯 SECCIÓN 1: HERO -->
+  <header class="relative overflow-hidden mb-8">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10"></div>
+    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 bg-accent/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s"></div>
+    
+    <div class="relative max-w-6xl mx-auto px-4 py-8">
+      <div class="text-center mb-6">
+        <span class="inline-block px-4 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-3">
+          📅 Semana 4 • Grado 7° • Periodo 4
+        </span>
+        <h1 class="text-3xl md:text-4xl font-bold text-dark mb-2">
+          ⚙️ Mecanismos de Transmisión <span class="text-primary">&</span> 📊 Formato de Celdas
+        </h1>
+        <p class="text-slate-600 text-lg">Colegio Santa Mariana de Jesús • Prof. William Fdo Bernal</p>
+      </div>
+      
+      <div class="glass-card rounded-2xl p-6 max-w-3xl mx-auto border-l-4 border-primary">
+        <h3 class="font-bold text-dark mb-2 flex items-center gap-2">
+          🎯 Objetivo de Aprendizaje
+        </h3>
+        <p class="text-slate-700 leading-relaxed">
+          Reconocer <strong>poleas, correas y ruedas</strong> en máquinas sencillas, y aplicar <strong>formato profesional a celdas</strong> en Excel para organizar datos técnicos con claridad y precisión.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- 📚 SECCIÓN 2: MÓDULOS DE APRENDIZAJE -->
+  <main class="max-w-6xl mx-auto px-4 space-y-8 pb-12">
+
+    <!-- [📝 COPIAR AL CUADERNO] -->
+    <section class="glass-card rounded-2xl p-6 border-l-4 border-amber-500">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="badge badge-cuaderno">📝 Copiar al Cuaderno</span>
+        <span class="text-xs text-slate-500">Conecta con: Semana 3 - Mecanismos de Movimiento</span>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-bold text-dark mb-3 flex items-center gap-2">
+            ⚙️ Mecanismos de Transmisión
+          </h4>
+          <ul class="space-y-2 text-sm text-slate-700">
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">•</span>
+              <span><strong>Polea:</strong> Rueda con surco que guía cuerdas/correas para cambiar dirección o fuerza del movimiento.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">•</span>
+              <span><strong>Correa:</strong> Banda flexible que transmite movimiento entre poleas sin contacto directo.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">•</span>
+              <span><strong>Rueda/Engranaje:</strong> Pieza dentada que transmite movimiento rotacional con precisión.</span>
+            </li>
+          </ul>
+          <div class="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-200">
+            <p class="text-xs text-amber-800">
+              💡 <strong>Ejemplo:</strong> En una bicicleta, la cadena (correa) une el pedal (polea) con la rueda trasera (engranaje). ¡Al pedalear, transmites movimiento!
+            </p>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-dark mb-3 flex items-center gap-2">
+            📊 Formato de Celdas en Excel
+          </h4>
+          <ul class="space-y-2 text-sm text-slate-700">
+            <li class="flex items-start gap-2">
+              <span class="text-accent font-bold">•</span>
+              <span><strong>Seleccionar:</strong> Haz clic y arrastra para elegir celdas.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent font-bold">•</span>
+              <span><strong>Formato:</strong> Cambia fuente, tamaño, color, bordes y alineación desde la cinta de opciones.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-accent font-bold">•</span>
+              <span><strong>Fórmulas:</strong> Usa <code class="bg-slate-200 px-1 rounded">=D2*E2</code> para multiplicar cantidad × costo.</span>
+            </li>
+          </ul>
+          <div class="mt-4 p-3 bg-cyan-50 rounded-lg border border-cyan-200">
+            <p class="text-xs text-cyan-800">
+              📁 <strong>Nomenclatura:</strong> <code>7_mecanismos_transmision_120526_tu_nombre.xlsx</code>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [💻 INTERACTUAR EN EL PC] - Simulador Canvas -->
+    <section class="glass-card rounded-2xl p-6 border-l-4 border-blue-500">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="badge badge-pc">💻 Interactuar en el PC</span>
+        <span class="text-xs text-slate-500">Simulador de Poleas y Correas</span>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="canvas-container p-4">
+          <canvas id="pulleyCanvas" class="w-full h-64 rounded-lg"></canvas>
+        </div>
+        
+        <div class="space-y-4">
+          <h4 class="font-bold text-dark">🎮 Controles del Simulador</h4>
+          
+          <div class="space-y-3">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">
+                Velocidad de rotación: <span id="speedValue" class="text-primary font-bold">50</span>%
+              </label>
+              <input type="range" id="speedSlider" min="10" max="100" value="50" 
+                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-primary">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">
+                Tipo de transmisión:
+              </label>
+              <select id="transmissionType" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                <option value="directa">🔄 Directa (misma dirección)</option>
+                <option value="cruzada">✖️ Cruzada (dirección opuesta)</option>
+                <option value="engranaje">⚙️ Engranajes (precisión)</option>
+              </select>
+            </div>
+            
+            <div class="flex gap-3">
+              <button id="startBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                ▶️ Iniciar
+              </button>
+              <button id="stopBtn" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                ⏹ Detener
+              </button>
+            </div>
+          </div>
+          
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+            <h5 class="font-semibold text-sm text-dark mb-2">📊 Datos en tiempo real:</h5>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="flex justify-between"><span>Polea A:</span> <span id="pulleyA" class="font-mono">0 RPM</span></div>
+              <div class="flex justify-between"><span>Polea B:</span> <span id="pulleyB" class="font-mono">0 RPM</span></div>
+              <div class="flex justify-between"><span>Relación:</span> <span id="ratio" class="font-mono">1:1</span></div>
+              <div class="flex justify-between"><span>Estado:</span> <span id="status" class="font-mono text-amber-600">Detenido</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [🖥️ TRABAJO EN LA SALA] - Pasos numerados -->
+    <section class="glass-card rounded-2xl p-6 border-l-4 border-emerald-500">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="badge badge-sala">🖥️ Trabajo en la Sala</span>
+        <span class="text-xs text-slate-500">Reto: Tabla con IA + Formato Excel</span>
+      </div>
+      
+      <div class="space-y-4">
+        <div class="flex gap-4">
+          <div class="step-number">1</div>
+          <div>
+            <h5 class="font-semibold text-dark mb-1">Generar tabla con IA</h5>
+            <p class="text-sm text-slate-700 mb-2">Copia este prompt exacto en tu asistente de IA:</p>
+            <div class="bg-slate-900 text-emerald-400 p-3 rounded-lg text-xs font-mono overflow-x-auto">
+              "Crea una tabla sobre elementos básicos de mecanismos de transmisión para grado 7. La tabla debe tener exactamente 5 columnas con estos encabezados exactos: Maquina, Mecanismo, Elemento, Cantidad, Costo (COP). Incluye ejemplos realistas de máquinas sencillas que usen poleas, correas o ruedas. Entrega SOLO la tabla en formato TSV con exactamente 10 filas de datos más 1 fila de encabezados, sin explicaciones, sin markdown, sin código, sin comillas. Usa tabulaciones reales como separador."
+            </div>
+            <p class="text-xs text-slate-500 mt-1">⚠️ Si la IA no usa tabulaciones, pídele nuevamente formato TSV real.</p>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="step-number">2</div>
+          <div>
+            <h5 class="font-semibold text-dark mb-1">Pegar y formatear en Excel</h5>
+            <ul class="text-sm text-slate-700 space-y-1">
+              <li>• Pega los datos en <strong>A1</strong> (se separarán automáticamente)</li>
+              <li>• Selecciona <strong>A1:E11</strong> → Aplica <strong>negrita</strong> a fila 1 (<code>Ctrl+N</code>)</li>
+              <li>• Fuente: Arial/Calibri | Tamaño: 12 (encabezados) / 11 (datos)</li>
+              <li>• Color de relleno amarillo claro para encabezados</li>
+              <li>• Bordes completos a toda la tabla</li>
+              <li>• Alineación: Centro (Mecanismo, Elemento, Cantidad) | Derecha (Costo)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="step-number">3</div>
+          <div>
+            <h5 class="font-semibold text-dark mb-1">Fórmulas y cálculos</h5>
+            <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-sm">
+              <p class="font-mono text-emerald-800 mb-1">F2: <code>=D2*E2</code> → Copiar hasta F11</p>
+              <p class="font-mono text-emerald-800 mb-1">E13: <code>=D2+D3+...+D11</code> → Cantidad total</p>
+              <p class="font-mono text-emerald-800 mb-1">E14: <code>=F2+F3+...+F11</code> → Costo total</p>
+              <p class="font-mono text-emerald-800">E15: <code>=E2-E3</code> → Diferencia de costos</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex gap-4">
+          <div class="step-number">4</div>
+          <div>
+            <h5 class="font-semibold text-dark mb-1">Guardar correctamente</h5>
+            <p class="text-sm text-slate-700">
+              Nomenclatura: <code class="bg-slate-200 px-1 rounded">7_mecanismos_transmision_120526_tu_nombre.xlsx</code><br>
+              🔒 Sin espacios, tildes ni caracteres especiales.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [🔍 INVESTIGACIÓN] + [📄 TAREA] -->
+    <section class="grid md:grid-cols-2 gap-6">
+      <!-- Investigación -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-purple-500">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge badge-investigacion">🔍 Investigación</span>
+        </div>
+        <h4 class="font-bold text-dark mb-3">Pregunta para Google:</h4>
+        <p class="text-slate-700 mb-4">
+          "¿Qué máquinas de mi entorno cotidiano usan poleas, correas o engranajes para funcionar?"
+        </p>
+        <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+          <p class="text-xs text-purple-800">
+            ✍️ <strong>En tu cuaderno:</strong> Escribe 3 ejemplos encontrados, dibuja uno y señala el mecanismo de transmisión que usa.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Tarea en hoja suelta -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-red-500 relative">
+        <div class="absolute -left-3 top-1/2 transform -translate-y-1/2">
+          <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge badge-tarea">📄 Tarea en Hoja Suelta</span>
+        </div>
+        <h4 class="font-bold text-dark mb-3">Entrega de Investigación:</h4>
+        <ul class="text-sm text-slate-700 space-y-2">
+          <li>• Usa una hoja blanca tamaño carta</li>
+          <li>• Escribe tu <strong>nombre completo</strong> y <strong>grado 7°</strong> en la esquina superior derecha</li>
+          <li>• Transcribe los 3 ejemplos de máquinas con mecanismos de transmisión</li>
+          <li>• Incluye el dibujo con flechas señalando polea/correa/rueda</li>
+          <li>• Fecha de entrega: Próxima clase de Tecnología</li>
+        </ul>
+        <div class="mt-4 p-3 bg-red-50 rounded-lg border border-red-200">
+          <p class="text-xs text-red-800 font-semibold">
+            📌 Recordatorio: Esta hoja se entrega físicamente, no digital.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🎮 GAMIFICACIÓN: Micro-Quiz -->
+    <section class="glass-card rounded-2xl p-6 border-l-4 border-indigo-500">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="badge bg-indigo-100 text-indigo-800">🎮 Quiz Rápido</span>
+        <span class="text-xs text-slate-500">3 preguntas • Feedback inmediato</span>
+      </div>
+      
+      <div id="quizContainer" class="space-y-4">
+        <!-- Pregunta 1 -->
+        <div class="quiz-question p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <p class="font-medium text-dark mb-3">1. ¿Qué elemento transmite movimiento entre dos poleas sin contacto directo?</p>
+          <div class="space-y-2">
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q1" value="a" class="w-4 h-4 text-primary">
+              <span>A) Engranaje dentado</span>
+            </label>
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q1" value="b" class="w-4 h-4 text-primary">
+              <span>B) Correa flexible ✓</span>
+            </label>
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q1" value="c" class="w-4 h-4 text-primary">
+              <span>C) Eje rígido</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Pregunta 2 -->
+        <div class="quiz-question p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <p class="font-medium text-dark mb-3">2. En Excel, ¿qué combinación de teclas aplica negrita?</p>
+          <div class="space-y-2">
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q2" value="a" class="w-4 h-4 text-primary">
+              <span>A) Ctrl + C</span>
+            </label>
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q2" value="b" class="w-4 h-4 text-primary">
+              <span>B) Ctrl + N ✓</span>
+            </label>
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q2" value="c" class="w-4 h-4 text-primary">
+              <span>C) Ctrl + V</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- Pregunta 3 -->
+        <div class="quiz-question p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <p class="font-medium text-dark mb-3">3. ¿Cómo se llama el archivo según la nomenclatura del colegio?</p>
+          <div class="space-y-2">
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q3" value="a" class="w-4 h-4 text-primary">
+              <span>A) mi_tarea_grado7.xlsx</span>
+            </label>
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q3" value="b" class="w-4 h-4 text-primary">
+              <span>B) 7_mecanismos_transmision_120526_nombre.xlsx ✓</span>
+            </label>
+            <label class="quiz-option flex items-center gap-3 p-3 rounded-lg hover:bg-slate-100 cursor-pointer">
+              <input type="radio" name="q3" value="c" class="w-4 h-4 text-primary">
+              <span>C) semana4_tecnologia.docx</span>
+            </label>
+          </div>
+        </div>
+        
+        <button id="checkQuiz" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-xl font-semibold transition-colors shadow-lg hover:shadow-xl">
+          ✅ Verificar Respuestas
+        </button>
+        
+        <div id="quizResult" class="hidden p-4 rounded-xl text-center font-medium">
+          <!-- Resultado dinámico -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 🏁 RETO FINAL -->
+    <section class="glass-card-dark rounded-2xl p-6 text-center">
+      <h3 class="text-xl font-bold text-white mb-3">🚀 Reto de Consulta</h3>
+      <p class="text-slate-200 mb-4">
+        Investiga: ¿Cómo se usan las poleas en los sistemas de elevación de los ascensores modernos? 
+        Prepara una explicación de 3 líneas para compartir en la próxima clase.
+      </p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white text-sm">
+        <span>💡 Tip:</span>
+        <span>Busca "poleas ascensores ingeniería" en Google Imágenes para ver diagramas</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 🦶 FOOTER -->
+  <footer class="bg-dark text-white py-6 text-center">
+    <p class="text-sm opacity-90">© 2026 | Prof. William Fdo Bernal - Área de Tecnología e Informática</p>
+    <p class="text-xs opacity-60 mt-1">Colegio Santa Mariana de Jesús • Buga, Valle del Cauca</p>
+  </footer>
+
+  <!-- 🧠 JAVASCRIPT: Lógica interactiva -->
+  <script>
+    // 🔗 Función obligatoria: Copiar enlace
+    function copiarEnlace(){
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        const t = document.getElementById('toastCopiado');
+        if(t){
+          t.classList.remove('hidden');
+          setTimeout(()=> t.classList.add('hidden'), 2000);
+        } else {
+          alert("Enlace copiado ✅");
+        }
+      }).catch(() => {
+        alert("No se pudo copiar automáticamente. Copia el enlace manualmente desde la barra del navegador.");
+      });
+    }
+
+    // ⚙️ Simulador de Poleas con Canvas
+    const canvas = document.getElementById('pulleyCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Configurar canvas responsive
+    function resizeCanvas() {
+      const container = canvas.parentElement;
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      drawPulleys();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Variables del simulador
+    let animationId = null;
+    let angleA = 0;
+    let angleB = 0;
+    let isRunning = false;
+    let speed = 50;
+    let transmissionType = 'directa';
+    
+    // Elementos del DOM
+    const speedSlider = document.getElementById('speedSlider');
+    const speedValue = document.getElementById('speedValue');
+    const transmissionSelect = document.getElementById('transmissionType');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const pulleyAEl = document.getElementById('pulleyA');
+    const pulleyBEl = document.getElementById('pulleyB');
+    const ratioEl = document.getElementById('ratio');
+    const statusEl = document.getElementById('status');
+    
+    // Event listeners
+    speedSlider.addEventListener('input', (e) => {
+      speed = parseInt(e.target.value);
+      speedValue.textContent = speed;
+    });
+    
+    transmissionSelect.addEventListener('change', (e) => {
+      transmissionType = e.target.value;
+      drawPulleys();
+    });
+    
+    startBtn.addEventListener('click', () => {
+      if (!isRunning) {
+        isRunning = true;
+        statusEl.textContent = 'En movimiento';
+        statusEl.className = 'font-mono text-green-600';
+        animate();
+      }
+    });
+    
+    stopBtn.addEventListener('click', () => {
+      isRunning = false;
+      statusEl.textContent = 'Detenido';
+      statusEl.className = 'font-mono text-amber-600';
+      if (animationId) cancelAnimationFrame(animationId);
+    });
+    
+    // Dibujar poleas
+    function drawPulleys() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = 40;
+      const beltWidth = 8;
+      
+      // Dibujar polea A (izquierda)
+      ctx.save();
+      ctx.translate(centerX - 80, centerY);
+      ctx.rotate(angleA);
+      
+      // Cuerpo de la polea
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#6366f1';
+      ctx.fill();
+      ctx.strokeStyle = '#4338ca';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      // Surco para correa
+      ctx.beginPath();
+      ctx.arc(0, 0, radius - 5, 0, Math.PI * 2);
+      ctx.strokeStyle = '#818cf8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Radio indicador
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(radius, 0);
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.restore();
+      
+      // Dibujar polea B (derecha)
+      ctx.save();
+      ctx.translate(centerX + 80, centerY);
+      ctx.rotate(angleB);
+      
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2);
+      ctx.fillStyle = transmissionType === 'engranaje' ? '#06b6d4' : '#6366f1';
+      ctx.fill();
+      ctx.strokeStyle = transmissionType === 'engranaje' ? '#0891b2' : '#4338ca';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(0, 0, radius - 5, 0, Math.PI * 2);
+      ctx.strokeStyle = transmissionType === 'engranaje' ? '#22d3ee' : '#818cf8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Dientes si es engranaje
+      if (transmissionType === 'engranaje') {
+        for (let i = 0; i < 12; i++) {
+          const toothAngle = (i / 12) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.moveTo(radius * Math.cos(toothAngle), radius * Math.sin(toothAngle));
+          ctx.lineTo((radius + 8) * Math.cos(toothAngle), (radius + 8) * Math.sin(toothAngle));
+          ctx.strokeStyle = '#0891b2';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+      
+      // Radio indicador
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(radius, 0);
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.restore();
+      
+      // Dibujar correa
+      ctx.beginPath();
+      if (transmissionType === 'cruzada') {
+        // Correa cruzada
+        ctx.moveTo(centerX - 80 - radius, centerY - 5);
+        ctx.lineTo(centerX + 80 + radius, centerY + 5);
+        ctx.moveTo(centerX - 80 - radius, centerY + 5);
+        ctx.lineTo(centerX + 80 + radius, centerY - 5);
+      } else {
+        // Correa directa o engranaje
+        ctx.moveTo(centerX - 80, centerY - radius);
+        ctx.lineTo(centerX + 80, centerY - radius);
+        ctx.moveTo(centerX - 80, centerY + radius);
+        ctx.lineTo(centerX + 80, centerY + radius);
+      }
+      ctx.strokeStyle = transmissionType === 'engranaje' ? '#94a3b8' : '#f59e0b';
+      ctx.lineWidth = transmissionType === 'engranaje' ? 1 : beltWidth;
+      ctx.setLineDash(transmissionType === 'engranaje' ? [5, 3] : []);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      
+      // Etiquetas
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 14px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText('Polea A (Entrada)', centerX - 80, centerY + radius + 25);
+      ctx.fillText('Polea B (Salida)', centerX + 80, centerY + radius + 25);
+      
+      // Actualizar datos en tiempo real
+      const rpmA = Math.round(speed * 0.6);
+      const rpmB = transmissionType === 'cruzada' ? -rpmA : rpmA;
+      pulleyAEl.textContent = `${Math.abs(rpmA)} RPM`;
+      pulleyBEl.textContent = `${Math.abs(rpmB)} RPM ${rpmB < 0 ? '↺' : '↻'}`;
+      ratioEl.textContent = transmissionType === 'engranaje' ? '1:1 (preciso)' : '1:1';
+    }
+    
+    // Animación
+    function animate() {
+      if (!isRunning) return;
+      
+      const speedFactor = speed / 1000;
+      angleA += speedFactor;
+      angleB += transmissionType === 'cruzada' ? -speedFactor : speedFactor;
+      
+      drawPulleys();
+      animationId = requestAnimationFrame(animate);
+    }
+    
+    // Inicializar canvas
+    setTimeout(() => {
+      resizeCanvas();
+      drawPulleys();
+    }, 100);
+
+    // 🎮 Lógica del Quiz
+    document.getElementById('checkQuiz').addEventListener('click', () => {
+      const answers = { q1: 'b', q2: 'b', q3: 'b' };
+      let score = 0;
+      let total = 3;
+      
+      // Verificar cada pregunta
+      ['q1', 'q2', 'q3'].forEach(qName => {
+        const selected = document.querySelector(`input[name="${qName}"]:checked`);
+        const questionEl = selected?.closest('.quiz-question');
+        
+        // Resetear estilos
+        document.querySelectorAll(`[name="${qName}"]`).forEach(input => {
+          const label = input.closest('label');
+          label.classList.remove('correct', 'incorrect');
+        });
+        
+        if (selected) {
+          const label = selected.closest('label');
+          if (selected.value === answers[qName]) {
+            label.classList.add('correct');
+            score++;
+          } else {
+            label.classList.add('incorrect');
+            // Mostrar la correcta
+            document.querySelector(`input[name="${qName}"][value="${answers[qName]}"]`)
+              ?.closest('label')?.classList.add('correct');
+          }
+        }
+      });
+      
+      // Mostrar resultado
+      const resultEl = document.getElementById('quizResult');
+      resultEl.classList.remove('hidden');
+      
+      if (score === total) {
+        resultEl.className = 'p-4 rounded-xl text-center font-medium bg-green-100 text-green-800 border border-green-300';
+        resultEl.innerHTML = `🎉 ¡Excelente! ${score}/${total} respuestas correctas. ¡Dominas los conceptos!`;
+      } else if (score >= 2) {
+        resultEl.className = 'p-4 rounded-xl text-center font-medium bg-amber-100 text-amber-800 border border-amber-300';
+        resultEl.innerHTML = `👍 ¡Bien! ${score}/${total} correctas. Repasa los detalles para mejorar.`;
+      } else {
+        resultEl.className = 'p-4 rounded-xl text-center font-medium bg-red-100 text-red-800 border border-red-300';
+        resultEl.innerHTML = `📚 ${score}/${total} correctas. Revisa la sección "Copiar al Cuaderno" y vuelve a intentar.`;
+      }
+      
+      // Scroll suave al resultado
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // ✨ Efecto de entrada para las secciones
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      sections.forEach((section, index) => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        setTimeout(() => {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }, 200 * index);
+      });
+    });
+  </script>
+</body>
+</html>
