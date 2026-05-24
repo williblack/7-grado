@@ -1,1 +1,579 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 6 - Poleas y Excel | Prof. William Fdo Bernal</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                        glassBorder: 'rgba(255, 255, 255, 0.2)',
+                    },
+                    animation: {
+                        'bounce-left': 'bounce-left 1s infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        'bounce-left': {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '50%': { transform: 'translateX(-25%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
+            background-attachment: fixed;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <div class="max-w-6xl w-full mx-auto flex justify-end gap-3 mt-6 mb-4 px-4 relative z-50">
+        <a href="../../../index.html"
+           class="bg-slate-800/70 text-white px-4 py-2 rounded-xl shadow hover:scale-105 hover:bg-slate-700 transition-all duration-300 backdrop-blur border border-white/10 flex items-center gap-2">
+           ⬅ Inicio (Grado)
+        </a>
+      
+        <a href="../../index.html"
+           class="bg-purple-600/90 text-white px-4 py-2 rounded-xl shadow-lg shadow-purple-500/30 hover:scale-105 hover:bg-purple-500 transition-all duration-300 flex items-center gap-2 border border-purple-400/30">
+           ⬅ Menú del Periodo
+        </a>
+      
+        <button type="button" onclick="copiarEnlace()"
+           class="bg-emerald-600/90 text-white px-4 py-2 rounded-xl shadow-lg shadow-emerald-500/30 hover:scale-105 hover:bg-emerald-500 transition-all duration-300 flex items-center gap-2 border border-emerald-400/30">
+           🔗 Copiar enlace
+        </button>
+    </div>
+      
+    <div id="toastCopiado" class="fixed top-6 right-6 hidden bg-black/80 text-emerald-400 px-6 py-4 rounded-xl shadow-2xl backdrop-blur border border-emerald-500/30 z-50 font-bold tracking-wide">
+        Enlace copiado correctamente ✅
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 pb-12 flex-grow space-y-12">
+
+        <header class="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow" style="animation-delay: 1.5s;"></div>
+            
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <div>
+                        <h2 class="text-indigo-300 font-semibold tracking-wider uppercase text-sm mb-1">Colegio Santa Mariana de Jesús</h2>
+                        <h3 class="text-slate-400 text-sm">Prof. William Fdo Bernal</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="bg-indigo-600/30 border border-indigo-400/50 text-indigo-200 text-xs font-bold px-3 py-1.5 rounded-full">Grado 7°</span>
+                        <span class="bg-pink-600/30 border border-pink-400/50 text-pink-200 text-xs font-bold px-3 py-1.5 rounded-full">Semana 6</span>
+                    </div>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-pink-400 mb-6 drop-shadow-lg">
+                    Tren de Poleas y Magia en Excel
+                </h1>
+
+                <div class="bg-white/10 border border-white/20 p-5 rounded-2xl inline-block shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
+                    <p class="text-lg text-slate-200">
+                        <strong class="text-cyan-300">🎯 Objetivo:</strong> Analizar las aplicaciones del tren de poleas en la vida real y utilizar la Inteligencia Artificial junto con fórmulas de Excel para calcular su ventaja mecánica.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <div class="glass-card rounded-3xl p-8 shadow-xl hover:shadow-cyan-500/10 transition-shadow duration-300">
+                <span class="bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full mb-6 inline-block tracking-wide uppercase shadow-sm">
+                    [📝 COPIAR AL CUADERNO]
+                </span>
+                
+                <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                    🔌 Conectando Saberes
+                </h3>
+                <p class="text-slate-300 mb-4 leading-relaxed">
+                    La <strong>semana pasada (Semana 5)</strong> descubrimos cómo el <span class="text-cyan-300 font-semibold">tren de poleas</span> nos da "súper fuerza". Hoy veremos cómo esas poleas están en nuestra vida diaria y cómo usar <strong>Excel</strong> para calcular matemáticamente cuánta fuerza nos ahorran.
+                </p>
+                
+                <div class="bg-black/30 rounded-xl p-5 border-l-4 border-cyan-400">
+                    <h4 class="text-cyan-400 font-bold mb-2">Fórmulas Clave (Referencias de Celda)</h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-pink-400">►</span>
+                            <span><strong>Relación de Transmisión:</strong> Excel calcula cuántas veces se multiplica nuestra fuerza usando la división: <code class="bg-slate-800 text-cyan-300 px-2 py-0.5 rounded border border-slate-700">=C2/B2</code> (Diámetro Grande ÷ Diámetro Pequeño).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-pink-400">►</span>
+                            <span><strong>Fuerza Resultante:</strong> Es la fuerza real amplificada. En Excel usamos la multiplicación con el asterisco: <code class="bg-slate-800 text-pink-300 px-2 py-0.5 rounded border border-slate-700">=D2*E2</code>.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 shadow-xl">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    🏗️ Aplicaciones en la Vida Real
+                </h3>
+                
+                <div class="space-y-4">
+                    
+                    <div class="group bg-slate-800/50 border border-slate-700 hover:border-indigo-400 p-4 rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-indigo-300 text-lg">🏢 Ascensores y Montacargas</h4>
+                            <span class="text-2xl group-hover:scale-125 transition-transform">⚙️</span>
+                        </div>
+                        <p class="text-slate-400 mt-2 text-sm">Utilizan motores acoplados a trenes de poleas para subir toneladas de peso (personas o carga) con un esfuerzo mínimo del motor, garantizando seguridad y eficiencia.</p>
+                    </div>
+
+                    <div class="group bg-slate-800/50 border border-slate-700 hover:border-pink-400 p-4 rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-pink-300 text-lg">🏋️ Gimnasio y Máquinas</h4>
+                            <span class="text-2xl group-hover:scale-125 transition-transform">💪</span>
+                        </div>
+                        <p class="text-slate-400 mt-2 text-sm">Las máquinas de pesas redirigen la fuerza y usan relaciones de transmisión para que el usuario pueda levantar bloques de hierro controlando el impacto muscular.</p>
+                    </div>
+
+                    <div class="group bg-slate-800/50 border border-slate-700 hover:border-cyan-400 p-4 rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-cyan-300 text-lg">🏗️ Grúas de Construcción</h4>
+                            <span class="text-2xl group-hover:scale-125 transition-transform">🏙️</span>
+                        </div>
+                        <p class="text-slate-400 mt-2 text-sm">Usan sistemas de poleas móviles y fijas para elevar vigas de acero a cientos de metros de altura. Sin poleas, los cables se romperían bajo la inmensa tensión.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="glass-card rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+            <span class="bg-blue-500/20 border border-blue-400/50 text-blue-300 text-xs font-bold px-3 py-1 rounded-full mb-6 inline-block tracking-wide uppercase shadow-sm relative z-10">
+                [💻 INTERACTUAR EN EL PC]
+            </span>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 relative z-10 gap-4">
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-2">Data Lab: Visualizador de Ventaja Mecánica</h3>
+                    <p class="text-slate-300">Observa cómo la relación de la polea multiplica la fuerza inicial aplicada (N). ¡Esto es lo que calcularás en Excel!</p>
+                </div>
+                <div class="flex gap-3">
+                    <button id="btnDataset1" onclick="updateChart(0)" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl shadow-lg transition-all duration-300 font-semibold border border-indigo-400/50 hover:-translate-y-1">
+                        Simulación A (Grúa)
+                    </button>
+                    <button id="btnDataset2" onclick="updateChart(1)" class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-xl shadow-lg transition-all duration-300 font-semibold border border-slate-500/50 hover:-translate-y-1">
+                        Simulación B (Bici)
+                    </button>
+                </div>
+            </div>
+
+            <div class="w-full h-[400px] relative z-10 bg-black/20 rounded-2xl p-4 border border-white/5">
+                <canvas id="poleasChart"></canvas>
+            </div>
+            
+            <div id="chartInsight" class="mt-6 p-4 bg-cyan-900/30 border border-cyan-500/30 rounded-xl text-cyan-100 text-center text-lg relative z-10 transition-all duration-500">
+                En una grúa, una pequeña fuerza aplicada se multiplica enormemente gracias a una alta relación de transmisión (Diámetro Grande / Diámetro Pequeño).
+            </div>
+        </section>
+
+        <section class="glass-card rounded-3xl p-8 shadow-xl border-t-4 border-t-pink-500">
+            <span class="bg-pink-500/20 border border-pink-400/50 text-pink-300 text-xs font-bold px-3 py-1 rounded-full mb-6 inline-block tracking-wide uppercase shadow-sm">
+                [🖥️ TRABAJO EN LA SALA]
+            </span>
+            
+            <h3 class="text-3xl font-bold text-white mb-8">Mi Solución con IA y Excel 🚀</h3>
+
+            <div class="space-y-8">
+                
+                <div class="flex flex-col md:flex-row gap-6 items-start group">
+                    <div class="bg-pink-600/80 text-white w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">1</div>
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 w-full hover:border-pink-500/50 transition-colors">
+                        <h4 class="text-xl font-bold text-white mb-2 flex items-center gap-2">🤖 Generar datos de poleas con IA</h4>
+                        <p class="text-slate-300 mb-4">Abre ChatGPT, Copilot o Gemini y pide que genere una tabla. Copia y pega este prompt exacto:</p>
+                        <div class="relative">
+                            <button onclick="copiarPrompt()" class="absolute top-2 right-2 bg-slate-700 hover:bg-slate-600 text-xs text-white px-2 py-1 rounded shadow transition-colors">Copiar Prompt</button>
+                            <pre id="aiPrompt" class="bg-black/50 p-4 rounded-xl text-cyan-300 text-sm overflow-x-auto border border-cyan-900/50">"Genera una tabla de 4 columnas (Aplicación, Diametro_pequeño_cm, Diametro_grande_cm, Fuerza_aplicada_N) con 10 filas de datos. Aplicación: nombre de una máquina real (ej. 'Montacargas'). Diametro_pequeño_cm: número entre 5 y 30. Diametro_grande_cm: número entre 20 y 100 (siempre mayor que el pequeño). Fuerza_aplicada_N: número entre 10 y 500 (newtons). Entrega SOLO la tabla en formato TSV con exactamente 10 filas de datos más 1 fila de encabezados, sin markdown. Usa tabulaciones."</pre>
+                        </div>
+                        <p class="text-slate-400 text-sm mt-3">💡 <strong class="text-slate-200">Nota:</strong> Pégalo en la celda A1 de Excel. Si la IA falla, repite el prompt exigiendo formato TSV puro.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 items-start group">
+                    <div class="bg-indigo-600/80 text-white w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">2</div>
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 w-full hover:border-indigo-500/50 transition-colors">
+                        <h4 class="text-xl font-bold text-white mb-2 flex items-center gap-2">📊 Dar formato a la tabla</h4>
+                        <ul class="list-disc list-inside space-y-2 text-slate-300 ml-2">
+                            <li>Selecciona el rango <code class="bg-slate-900 text-indigo-300 px-1 rounded">A1:D11</code>. Aplica <strong>Negrita</strong> y fondo <span class="text-blue-300">azul claro</span> a los encabezados (fila 1).</li>
+                            <li>Para los datos numéricos (B2:D11), aplica un fondo <span class="text-yellow-200">amarillo pálido</span>.</li>
+                            <li>Ajusta el ancho de columnas dando doble clic en los bordes de las letras.</li>
+                            <li>Aplica <strong>Todos los bordes</strong> a la tabla completa.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 items-start group">
+                    <div class="bg-emerald-600/80 text-white w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">3</div>
+                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 w-full hover:border-emerald-500/50 transition-colors">
+                        <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-2">⚙️ Calcular con Fórmulas (Referencias de Celda)</h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-black/30 p-4 rounded-xl border border-slate-600">
+                                <h5 class="text-emerald-400 font-bold mb-2">a) Relación de Transmisión</h5>
+                                <p class="text-sm text-slate-300 mb-2">En E1 escribe <code class="text-white">Relacion</code>. En E2 escribe:</p>
+                                <div class="bg-slate-900 p-2 rounded text-center text-lg font-mono text-cyan-300 border border-slate-700 mb-2">=C2/B2</div>
+                                <p class="text-xs text-slate-400">Arrastra hacia abajo hasta E11. <em>(Diámetro grande ÷ pequeño)</em>.</p>
+                            </div>
+                            
+                            <div class="bg-black/30 p-4 rounded-xl border border-slate-600">
+                                <h5 class="text-emerald-400 font-bold mb-2">b) Fuerza Resultante</h5>
+                                <p class="text-sm text-slate-300 mb-2">En F1 escribe <code class="text-white">Fuerza_resultante_N</code>. En F2:</p>
+                                <div class="bg-slate-900 p-2 rounded text-center text-lg font-mono text-pink-300 border border-slate-700 mb-2">=D2*E2</div>
+                                <p class="text-xs text-slate-400">Arrastra hacia abajo hasta F11. <em>(Fuerza aplicada × Relación)</em>.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-red-900/20 border border-red-500/30 rounded-lg text-sm text-red-200">
+                            ⚠️ <strong>Tip de Error:</strong> Si sale <code class="bg-black/50 px-1 rounded">#¡DIV/0!</code> la celda B2 está vacía. Si sale <code class="bg-black/50 px-1 rounded">#¡VALOR!</code> revisa que sean números y no letras.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-indigo-900/50 to-purple-900/50 p-6 rounded-2xl border border-purple-500/30 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 text-4xl opacity-20">🏆</div>
+                    <h4 class="text-xl font-bold text-white mb-2 flex items-center gap-2">✨ Reto Avanzado y Entrega</h4>
+                    <p class="text-slate-300 mb-2">
+                        Crea la columna G: <code class="text-indigo-300">Ahorro_de_fuerza</code>. Usa la fórmula <code class="bg-black/50 text-white px-2 py-0.5 rounded">=F2-D2</code> y cópiala hacia abajo.<br>
+                        Calcula promedios y sumas al final de las columnas usando <code class="bg-black/50 text-white px-2 py-0.5 rounded">=PROMEDIO(F2:F11)</code> y <code class="bg-black/50 text-white px-2 py-0.5 rounded">=SUMA(D2:D11)</code>.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-purple-500/30 flex items-center gap-3">
+                        <span class="text-2xl">💾</span>
+                        <p class="text-slate-200 font-mono text-sm">
+                            Guarda tu archivo como:<br>
+                            <span class="text-emerald-400 font-bold bg-black/40 px-3 py-1 rounded block mt-1 w-fit">7_poleas_excel_140425_tu_apellido.xlsx</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            
+            <div class="glass-card p-8 rounded-3xl border-l-4 border-l-cyan-500 shadow-xl relative group hover:-translate-y-2 transition-all duration-300">
+                <span class="bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block tracking-wide uppercase">
+                    [🔍 INVESTIGACIÓN]
+                </span>
+                <div class="absolute top-6 right-6 text-4xl opacity-20 group-hover:opacity-100 transition-opacity">🔎</div>
+                <h4 class="text-2xl font-bold text-white mb-4">Para tu cuaderno</h4>
+                <p class="text-slate-300 text-lg leading-relaxed">
+                    Busca en Google o con IA: <br>
+                    <strong class="text-cyan-300">"¿Cómo se llama el sistema de poleas que usan los ascensores modernos y cuántas poleas suelen tener como mínimo para ser seguros?"</strong><br><br>
+                    Anota la respuesta breve y dibuja un esquema sencillo del ascensor y sus cables en tu cuaderno.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl border-r-4 border-r-pink-500 shadow-xl flex flex-col justify-center relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                <div class="absolute inset-0 bg-gradient-to-l from-pink-500/5 to-transparent"></div>
+                
+                <span class="bg-pink-500/20 border border-pink-400/50 text-pink-300 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block tracking-wide uppercase w-fit relative z-10">
+                    [📄 TAREA EN HOJA SUELTA]
+                </span>
+                
+                <div class="flex items-center gap-6 mt-2 relative z-10">
+                    <div class="text-6xl animate-bounce-left text-pink-400 drop-shadow-lg">
+                        ⬅️
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-bold text-white mb-2">¡Tu Entregable!</h4>
+                        <p class="text-slate-300 text-lg">
+                            La tarea que debes entregar la próxima clase es la <strong>Investigación de la izquierda</strong>.<br>
+                            <span class="text-pink-300 font-semibold">¡Hazla bien presentada en una hoja suelta con tu nombre!</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="glass-card rounded-3xl p-8 shadow-2xl mt-8 border border-slate-700/50">
+            <h3 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-6 flex items-center gap-3">
+                🎮 Micro-Quiz: Demuestra tu Poder
+            </h3>
+            
+            <div id="quiz-container" class="space-y-6">
+                <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700 quiz-card transition-all duration-300">
+                    <p class="text-lg text-white font-semibold mb-4">1. En Excel, ¿qué símbolo matemático DEBES escribir primero para iniciar una fórmula?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">El signo de suma (+)</button>
+                        <button onclick="checkAnswer(this, true)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">El signo igual (=)</button>
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">El asterisco (*)</button>
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">La barra de división (/)</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700 quiz-card transition-all duration-300">
+                    <p class="text-lg text-white font-semibold mb-4">2. Si tienes un Diámetro Grande en C2 y uno Pequeño en B2, ¿cómo calculas la relación de transmisión?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">=C2*B2</button>
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">=B2/C2</button>
+                        <button onclick="checkAnswer(this, true)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">=C2/B2</button>
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">=C2-B2</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/60 p-5 rounded-2xl border border-slate-700 quiz-card transition-all duration-300">
+                    <p class="text-lg text-white font-semibold mb-4">3. ¿Qué ventaja principal nos da un tren de poleas en maquinarias como grúas o ascensores?</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">Hacer que el objeto pese más.</button>
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">Generar electricidad rápidamente.</button>
+                        <button onclick="checkAnswer(this, true)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">Multiplicar la fuerza y reducir el esfuerzo necesario.</button>
+                        <button onclick="checkAnswer(this, false)" class="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-xl transition-all border border-slate-600">Cambiar el color del cable de tracción.</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quiz-result" class="hidden mt-6 text-center bg-emerald-900/40 border border-emerald-500/50 p-6 rounded-2xl">
+                <h4 class="text-2xl font-bold text-emerald-400 mb-2">¡Excelente Trabajo! 🎉</h4>
+                <p class="text-slate-200">Has comprendido cómo unir la física de las poleas con la lógica matemática de Excel.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-black/80 border-t border-white/10 py-8 mt-auto backdrop-blur-md relative z-50">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <p class="text-slate-400 font-medium tracking-wider text-sm md:text-base">
+                © 2026 | Prof. William Fdo Bernal - Área de Tecnología e Informática
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ------------------------------------
+        // 1. FUNCIÓN OBLIGATORIA: COPIAR ENLACE
+        // ------------------------------------
+        function copiarEnlace(){
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const t = document.getElementById('toastCopiado');
+                if(t){
+                    t.classList.remove('hidden');
+                    t.classList.add('animate-bounce');
+                    setTimeout(()=> {
+                        t.classList.remove('animate-bounce');
+                        t.classList.add('hidden');
+                    }, 2500);
+                } else {
+                    alert("Enlace copiado ✅");
+                }
+            }).catch(() => {
+                alert("No se pudo copiar automáticamente. Copia el enlace manualmente desde la barra del navegador.");
+            });
+        }
+
+        // Copiar Prompt de IA
+        function copiarPrompt() {
+            const text = document.getElementById('aiPrompt').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Prompt copiado. ¡Pégalo en tu IA favorita!");
+            });
+        }
+
+        // ------------------------------------
+        // 2. LÓGICA DEL CHART.JS (DATA LAB)
+        // ------------------------------------
+        const ctx = document.getElementById('poleasChart').getContext('2d');
+        
+        // Setup gradients
+        const gradientBlue = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientBlue.addColorStop(0, 'rgba(56, 189, 248, 0.8)'); // cyan-400
+        gradientBlue.addColorStop(1, 'rgba(56, 189, 248, 0.2)');
+
+        const gradientPink = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientPink.addColorStop(0, 'rgba(244, 114, 182, 0.8)'); // pink-400
+        gradientPink.addColorStop(1, 'rgba(244, 114, 182, 0.2)');
+
+        // Datasets preconfigurados
+        const dataSets = [
+            { // Caso A: Grúa (Alta relación)
+                labels: ['Polea 1', 'Polea 2', 'Polea 3', 'Polea 4', 'Polea 5'],
+                aplicada: [50, 50, 50, 50, 50],
+                resultante: [150, 200, 250, 300, 400], // Multiplicada masivamente
+                insight: "🏗️ En una grúa de construcción, una fuerza inicial de 50N puede multiplicarse enormemente (ej. 400N) usando diámetros muy diferentes (Alta Relación)."
+            },
+            { // Caso B: Bicicleta / Uso doméstico (Baja relación)
+                labels: ['Polea 1', 'Polea 2', 'Polea 3', 'Polea 4', 'Polea 5'],
+                aplicada: [20, 30, 40, 50, 60],
+                resultante: [25, 45, 55, 75, 80], // Poca multiplicación
+                insight: "🚲 En sistemas más pequeños, la relación (Diámetro Grande / Pequeño) es menor, por lo que la Fuerza Resultante no se amplifica de forma tan exagerada."
+            }
+        ];
+
+        let myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dataSets[0].labels,
+                datasets: [
+                    {
+                        label: 'Fuerza Aplicada (N)',
+                        data: dataSets[0].aplicada,
+                        backgroundColor: 'rgba(148, 163, 184, 0.6)', // slate-400
+                        borderColor: 'rgba(148, 163, 184, 1)',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Fuerza Resultante (N) [Excel: =D2*E2]',
+                        data: dataSets[0].resultante,
+                        backgroundColor: gradientBlue,
+                        borderColor: 'rgba(56, 189, 248, 1)',
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 1000, easing: 'easeOutQuart' },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { family: "'Segoe UI', sans-serif", size: 14 } } },
+                    tooltip: { 
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)', 
+                        titleColor: '#38bdf8', 
+                        bodyColor: '#f1f5f9',
+                        borderColor: 'rgba(56, 189, 248, 0.3)',
+                        borderWidth: 1,
+                        padding: 12
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8' },
+                        title: { display: true, text: 'Fuerza en Newtons (N)', color: '#cbd5e1' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+
+        function updateChart(index) {
+            // Actualizar datos
+            myChart.data.labels = dataSets[index].labels;
+            myChart.data.datasets[0].data = dataSets[index].aplicada;
+            myChart.data.datasets[1].data = dataSets[index].resultante;
+            
+            // Cambiar color para diferenciar
+            myChart.data.datasets[1].backgroundColor = index === 0 ? gradientBlue : gradientPink;
+            myChart.data.datasets[1].borderColor = index === 0 ? 'rgba(56, 189, 248, 1)' : 'rgba(244, 114, 182, 1)';
+            
+            myChart.update();
+
+            // Actualizar texto insight
+            const insightBox = document.getElementById('chartInsight');
+            insightBox.style.opacity = 0;
+            setTimeout(() => {
+                insightBox.innerText = dataSets[index].insight;
+                // Ajustar colores del cuadro insight
+                if(index === 0) {
+                    insightBox.className = "mt-6 p-4 bg-cyan-900/30 border border-cyan-500/30 rounded-xl text-cyan-100 text-center text-lg relative z-10 transition-all duration-500";
+                } else {
+                    insightBox.className = "mt-6 p-4 bg-pink-900/30 border border-pink-500/30 rounded-xl text-pink-100 text-center text-lg relative z-10 transition-all duration-500";
+                }
+                insightBox.style.opacity = 1;
+            }, 300);
+
+            // Efecto en botones
+            document.getElementById('btnDataset1').classList.toggle('ring-4', index === 0);
+            document.getElementById('btnDataset1').classList.toggle('ring-indigo-400', index === 0);
+            document.getElementById('btnDataset2').classList.toggle('ring-4', index === 1);
+            document.getElementById('btnDataset2').classList.toggle('ring-slate-400', index === 1);
+        }
+        
+        // Init state btn
+        document.getElementById('btnDataset1').classList.add('ring-4', 'ring-indigo-400');
+
+        // ------------------------------------
+        // 3. LÓGICA GAMIFICACIÓN (QUIZ)
+        // ------------------------------------
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+
+        function checkAnswer(btn, isCorrect) {
+            const card = btn.closest('.quiz-card');
+            const cardIndex = Array.from(card.parentNode.children).indexOf(card);
+
+            if (answeredQuestions.has(cardIndex)) return; // Ya respondida
+
+            const buttons = card.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+
+            btn.classList.remove('opacity-50', 'bg-slate-700', 'hover:bg-slate-600');
+            
+            if (isCorrect) {
+                btn.classList.add('bg-emerald-600', 'border-emerald-400', 'shadow-[0_0_15px_rgba(16,185,129,0.5)]', 'scale-105');
+                card.classList.add('border-emerald-500/50', 'bg-emerald-900/20');
+                correctAnswers++;
+            } else {
+                btn.classList.add('bg-red-600', 'border-red-400', 'animate-pulse');
+                card.classList.add('border-red-500/50', 'bg-red-900/20');
+                // Resaltar la correcta
+                buttons.forEach(b => {
+                    if(b.getAttribute('onclick').includes('true')){
+                        b.classList.remove('opacity-50', 'bg-slate-700');
+                        b.classList.add('bg-emerald-600/50', 'border-emerald-400/50');
+                    }
+                });
+            }
+
+            answeredQuestions.add(cardIndex);
+
+            if (answeredQuestions.size === 3) {
+                setTimeout(() => {
+                    const resBox = document.getElementById('quiz-result');
+                    resBox.classList.remove('hidden');
+                    resBox.classList.add('animate-bounce-left'); // Reutilizamos animación para llamar atención
+                    setTimeout(()=> resBox.classList.remove('animate-bounce-left'), 1000);
+                    
+                    if(correctAnswers < 2) {
+                        resBox.className = "mt-6 text-center bg-orange-900/40 border border-orange-500/50 p-6 rounded-2xl block";
+                        resBox.innerHTML = `<h4 class="text-2xl font-bold text-orange-400 mb-2">¡Buen intento! 💡</h4><p class="text-slate-200">Repasa las fórmulas de Excel en la sección de trabajo en sala.</p>`;
+                    }
+                }, 800);
+            }
+        }
+    </script>
+</body>
+</html>
