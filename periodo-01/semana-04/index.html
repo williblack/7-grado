@@ -1,1 +1,472 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 4 - Estilos, títulos y estructura del documento | Prof. William Fdo Bernal</title>
+    
+    <!-- Tailwind CSS (Full Power) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js para el Módulo Interactivo -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #0f172a);
+            background-size: 200% 200%;
+            animation: gradientMove 15s ease infinite;
+            color: #e2e8f0;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        /* Animación para la flecha de la tarea hacia la izquierda */
+        @keyframes bounce-left {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+        }
+        .animate-bounce-left {
+            display: inline-block;
+            animation: bounce-left 1.5s infinite ease-in-out;
+        }
+
+        /* Ocultar barra de scroll para estética */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        
+        .quiz-option.selected {
+            background-color: rgba(59, 130, 246, 0.8) !important;
+            border-color: #93c5fd !important;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col pt-4 pb-8 overflow-x-hidden">
+
+    <!-- ========================================== -->
+    <!-- BARRA DE BOTONES (RUTAS OBLIGATORIAS)      -->
+    <!-- ========================================== -->
+    <div class="max-w-5xl mx-auto w-full flex justify-end gap-3 mb-8 px-6 relative z-50">
+        <a href="../../../index.html"
+           class="bg-slate-800/70 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 hover:bg-slate-700 transition-all duration-300 backdrop-blur border border-slate-600">
+           ⬅ Inicio (Grado)
+        </a>
+
+        <a href="../../index.html"
+           class="bg-purple-600/90 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 hover:bg-purple-500 transition-all duration-300 backdrop-blur border border-purple-400">
+           ⬅ Menú del Periodo
+        </a>
+
+        <button type="button" onclick="copiarEnlace()"
+           class="bg-emerald-600/90 text-white px-4 py-2 rounded-xl shadow-lg hover:scale-105 hover:bg-emerald-500 transition-all duration-300 backdrop-blur border border-emerald-400 cursor-pointer">
+           🔗 Copiar enlace
+        </button>
+    </div>
+
+    <!-- TOAST DE COPIA -->
+    <div id="toastCopiado" class="fixed top-6 right-6 hidden z-50 bg-black/90 text-emerald-400 px-6 py-3 rounded-xl shadow-2xl backdrop-blur border border-emerald-500 font-bold text-lg transition-all duration-300">
+        Enlace copiado ✅
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN 1: HERO IMPACTANTE                 -->
+    <!-- ========================================== -->
+    <header class="max-w-5xl mx-auto px-6 mb-12 text-center w-full">
+        <div class="inline-block px-4 py-1 rounded-full bg-slate-800/60 border border-slate-500 text-sky-300 text-sm font-bold tracking-widest mb-4 uppercase shadow-lg backdrop-blur">
+            Colegio Santa Mariana de Jesús | Prof. William Fdo Bernal
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-300 mb-6 drop-shadow-lg filter drop-shadow-[0_0_15px_rgba(56,189,248,0.5)]">
+            Estilos, títulos y la estructura del documento 📄
+        </h1>
+        
+        <div class="glass-card p-6 max-w-3xl mx-auto border-l-4 border-l-sky-400 text-left">
+            <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                <span>🎯</span> Objetivo de Aprendizaje
+            </h3>
+            <p class="text-slate-200 text-lg leading-relaxed">
+                Aprender a estructurar documentos de forma profesional utilizando estilos jerárquicos (Título, Título 1, Título 2 y Texto normal) que faciliten su lectura, organización y modificación automática.
+            </p>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-5xl mx-auto w-full px-6 space-y-10">
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 2: COPIAR AL CUADERNO              -->
+        <!-- ========================================== -->
+        <section class="glass-card p-8 border-t-4 border-t-blue-500 relative overflow-hidden group">
+            <div class="absolute top-4 right-4">
+                <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md shadow-blue-500/50">
+                    📝 COPIAR AL CUADERNO
+                </span>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-blue-400 mb-4">El Esqueleto del Documento 📐</h2>
+            <div class="text-slate-300 space-y-4 text-lg">
+                <p class="italic text-yellow-300 mb-4">"Conectando con la clase anterior: Ya conocemos la introducción a los procesadores de texto y formato académico. Hoy daremos el salto profesional aprendiendo a estructurar la información con estilos."</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700">
+                        <h3 class="text-xl font-bold text-white mb-2 text-blue-300">1. Formato Manual vs. Estilos 🎨</h3>
+                        <p class="mb-2"><strong>Formato manual:</strong> Cambiar el color, tamaño y tipo de fuente palabra por palabra o título por título. ¡Toma mucho tiempo!</p>
+                        <p><strong>Estilos:</strong> Plantillas inteligentes. Si cambias un estilo, ¡todo el documento que lo usa se actualiza solo en un segundo!</p>
+                    </div>
+
+                    <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-700">
+                        <h3 class="text-xl font-bold text-white mb-2 text-blue-300">2. Organización Jerárquica 🦴</h3>
+                        <ul class="space-y-1 text-sm">
+                            <li>👑 <strong class="text-white">Título:</strong> El nombre principal del trabajo.</li>
+                            <li>🥇 <strong class="text-white">Título 1:</strong> Capítulos o temas principales.</li>
+                            <li>🥈 <strong class="text-white">Título 2:</strong> Subtemas dentro de los capítulos.</li>
+                            <li>📝 <strong class="text-white">Texto Normal:</strong> Párrafos explicativos comunes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-900/30 p-5 rounded-xl border-l-4 border-blue-400 mt-6">
+                    <h3 class="text-xl font-bold text-white mb-2">3. ¿Por qué usarlos? 🏗️</h3>
+                    <p>Permiten crear tablas de contenido (índices automáticos), facilitan la lectura visual y evitan errores de diseño en trabajos largos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 3: INTERACTUAR EN EL PC            -->
+        <!-- ========================================== -->
+        <section class="glass-card p-8 border-t-4 border-t-indigo-500 relative group">
+            <div class="absolute top-4 right-4">
+                <span class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md shadow-indigo-500/50">
+                    💻 INTERACTUAR EN EL PC
+                </span>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-indigo-400 mb-2">Data Lab: Eficiencia del Tiempo en Documentos ⏱️</h2>
+            <p class="text-slate-300 mb-6 text-lg">Compara en la gráfica el tiempo (en minutos) que toma aplicar formato manual frente a usar estilos en un trabajo largo de 50 páginas con 30 títulos.</p>
+
+            <div class="bg-black/40 p-4 rounded-xl border border-white/10 w-full h-80 relative shadow-inner">
+                <canvas id="estilosChart"></canvas>
+            </div>
+            <p class="text-center text-indigo-300 text-sm mt-4 font-bold">¡Usar estilos reduce drásticamente el esfuerzo y evita errores humanos al formatear!</p>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 4: TRABAJO EN LA SALA              -->
+        <!-- ========================================== -->
+        <section class="glass-card p-8 border-t-4 border-t-purple-500 relative group">
+            <div class="absolute top-4 right-4">
+                <span class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md shadow-purple-500/50">
+                    🖥️ TRABAJO EN LA SALA
+                </span>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-purple-400 mb-4">Reto en Sala: Mi solución con IA 🤖</h2>
+            
+            <div class="space-y-6 text-slate-200">
+                <p class="text-lg">Vamos a entrenar nuestra mente en la jerarquía de la información clasificando los elementos de un documento real.</p>
+
+                <div class="flex gap-4 items-start bg-slate-800/40 p-5 rounded-xl border border-slate-600 hover:bg-slate-800/60 transition-all">
+                    <div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shrink-0">1</div>
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold text-white mb-2">Instrucción para la IA (Prompt)</h3>
+                        <p>Usa la Inteligencia Artificial para verificar la jerarquía de un documento sobre "Los Videojuegos". Pídele que te organice el siguiente contenido:</p>
+                        <div class="bg-black/60 p-4 rounded text-purple-300 font-mono text-sm shadow-inner relative mt-3 border border-slate-700">
+                            "Actúa como profesor de tecnología de grado 7°. Ayúdame a ordenar la jerarquía para un trabajo sobre 'Los Videojuegos' clasificando los siguientes textos en: Título, Título 1, Título 2 o Texto normal:
+                            1. Historia de las consolas
+                            2. Los videojuegos en el mundo
+                            3. Nintendo
+                            4. Los videojuegos son programas interactivos..."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 items-start bg-slate-800/40 p-5 rounded-xl border border-slate-600 hover:bg-slate-800/60 transition-all">
+                    <div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shrink-0">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Clasifica en tu cuaderno / Excel</h3>
+                        <p>Escribe en tu cuaderno o en una tabla de Excel la clasificación correcta de cada elemento según su nivel de importancia en el documento.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 5: INVESTIGACIÓN & HOJA SUELTA     -->
+        <!-- ========================================== -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- INVESTIGACIÓN -->
+            <section class="glass-card p-6 border-t-4 border-t-pink-500 relative">
+                <div class="absolute top-4 right-4">
+                    <span class="bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">
+                        🔍 INVESTIGACIÓN
+                    </span>
+                </div>
+                <h2 class="text-2xl font-bold text-pink-400 mb-4 mt-6">Análisis de Documentos</h2>
+                <div class="bg-slate-800/50 p-5 rounded-lg border border-pink-500/30 h-full">
+                    <p class="text-slate-200 text-lg mb-3">Reflexiona y responde en tu cuaderno:</p>
+                    <p class="text-xl font-bold text-white bg-black/40 p-4 rounded border-l-4 border-pink-500 shadow-inner">
+                        "Imagina que tienes un documento de 50 páginas. ¿Por qué es mejor usar 'Estilos' en lugar de aplicarle 'Formato manual' a cada uno de los 20 títulos que tiene el trabajo?"
+                    </p>
+                    <p class="mt-4 text-sm text-pink-300">Pista: Piensa en qué pasaría si te piden cambiar el color de todos los títulos a última hora.</p>
+                </div>
+            </section>
+
+            <!-- TAREA HOJA SUELTA (TEXTO EXACTO CON FLECHA A LA IZQUIERDA) -->
+            <section class="glass-card p-6 border-t-4 border-t-yellow-500 relative overflow-visible flex items-center">
+                <div class="absolute top-4 right-4">
+                    <span class="bg-yellow-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">
+                        📄 TAREA EN HOJA SUELTA
+                    </span>
+                </div>
+                
+                <div class="w-full flex items-center gap-4 bg-slate-900/70 p-5 rounded-xl border border-yellow-500/50 shadow-lg mt-8">
+                    
+                    <!-- FLECHA ANIMADA HACIA LA IZQUIERDA -->
+                    <div class="text-6xl animate-bounce-left text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)] shrink-0">
+                        ⬅️
+                    </div>
+
+                    <div class="flex-1 text-slate-200 text-sm space-y-4 font-medium">
+                        <p class="font-bold text-white border-b border-slate-600 pb-2 text-lg text-yellow-400">Entregable para el profesor:</p>
+                        
+                        <div class="bg-black/40 p-4 rounded border border-slate-700">
+                            <strong class="text-yellow-300 block mb-2">¡A dibujar!</strong>
+                            Dibuja cómo se vería el "esqueleto" (la estructura) de un documento ordenado usando rectángulos de diferentes tamaños para representar el Título principal, los Títulos 1, los Títulos 2 y los párrafos de Texto normal.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SECCIÓN 6: GAMIFICACIÓN                    -->
+        <!-- ========================================== -->
+        <section class="glass-card p-8 border-t-4 border-t-emerald-500">
+            <h2 class="text-3xl font-bold text-emerald-400 mb-6 text-center">🎮 Micro-Quiz: Arquitecto de Estilos</h2>
+            <div id="quiz-container" class="max-w-2xl mx-auto">
+                
+                <!-- Pregunta 1 -->
+                <div class="quiz-question mb-6 transition-all duration-300" id="q1">
+                    <p class="text-xl font-bold text-white mb-4">1. ¿Cuál es la principal ventaja de utilizar "Estilos" en lugar de "Formato manual"?</p>
+                    <div class="grid grid-cols-1 gap-3">
+                        <button class="quiz-option bg-slate-800 p-4 rounded-lg border border-slate-600 hover:bg-slate-700 transition text-left text-lg" onclick="selectAnswer(1, this, false)">A. Permite cambiar el color de una sola letra a la vez.</button>
+                        <button class="quiz-option bg-slate-800 p-4 rounded-lg border border-slate-600 hover:bg-slate-700 transition text-left text-lg" onclick="selectAnswer(1, this, true)">B. Actualiza automáticamente todo el documento si modificas el estilo.</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="quiz-question mb-6 hidden transition-all duration-300" id="q2">
+                    <p class="text-xl font-bold text-white mb-4">2. Si estás escribiendo un trabajo y necesitas crear un capítulo principal, ¿qué estilo debes usar?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <button class="quiz-option bg-slate-800 p-4 rounded-lg border border-slate-600 hover:bg-slate-700 transition text-left text-lg" onclick="selectAnswer(2, this, true)">A. Título 1 🥇</button>
+                        <button class="quiz-option bg-slate-800 p-4 rounded-lg border border-slate-600 hover:bg-slate-700 transition text-left text-lg" onclick="selectAnswer(2, this, false)">B. Texto normal 📝</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="quiz-question mb-6 hidden transition-all duration-300" id="q3">
+                    <p class="text-xl font-bold text-white mb-4">3. ¿Para qué sirve principalmente estructurar un documento con niveles de títulos?</p>
+                    <div class="grid grid-cols-1 gap-3">
+                        <button class="quiz-option bg-slate-800 p-4 rounded-lg border border-slate-600 hover:bg-slate-700 transition text-left text-lg" onclick="selectAnswer(3, this, false)">A. Para hacer que el archivo pese más megabytes.</button>
+                        <button class="quiz-option bg-slate-800 p-4 rounded-lg border border-slate-600 hover:bg-slate-700 transition text-left text-lg" onclick="selectAnswer(3, this, true)">B. Para organizar la lectura y generar índices automáticos fácilmente.</button>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="next-btn" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3 rounded-full font-bold shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-all hover:scale-105" onclick="nextQuestion()">Siguiente Pregunta</button>
+                    <div id="quiz-result" class="hidden text-2xl font-bold text-sky-400 mt-4 p-6 bg-sky-900/30 rounded-xl border border-sky-500 shadow-lg"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- FOOTER REGLA DE ORO                        -->
+    <!-- ========================================== -->
+    <footer class="mt-16 py-8 bg-black/80 border-t border-slate-800 text-center backdrop-blur-md w-full shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+        <p class="text-slate-400 font-semibold tracking-widest uppercase text-sm">
+            © 2026 | Prof. William Fdo Bernal - Área de Tecnología e Informática
+        </p>
+    </footer>
+
+    <!-- LÓGICA JS INTEGRADA -->
+    <script>
+        // ==========================================
+        // 1. REGLA OBLIGATORIA: Copiar Enlace
+        // ==========================================
+        function copiarEnlace() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const toast = document.getElementById('toastCopiado');
+                if (toast) {
+                    toast.classList.remove('hidden');
+                    toast.animate([
+                        { opacity: 0, transform: 'translateY(-20px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ], { duration: 300, fill: 'forwards' });
+                    
+                    setTimeout(() => {
+                        toast.animate([
+                            { opacity: 1, transform: 'translateY(0)' },
+                            { opacity: 0, transform: 'translateY(-20px)' }
+                        ], { duration: 300, fill: 'forwards' }).onfinish = () => toast.classList.add('hidden');
+                    }, 2500);
+                } else {
+                    alert("Enlace copiado ✅");
+                }
+            }).catch(() => {
+                alert("No se pudo copiar automáticamente. Copia el enlace manualmente desde la barra del navegador.");
+            });
+        }
+
+        // ==========================================
+        // 2. MÓDULO INTERACTIVO: Data Lab (Chart.js)
+        // ==========================================
+        const ctx = document.getElementById('estilosChart').getContext('2d');
+        
+        // Simulación: Tiempo dedicado a formatear 20 títulos y subtítulos
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Aplicar Negrita/Color Manual', 'Cambiar Tamaño Título por Título', 'Usar Estilos Automáticos'],
+                datasets: [
+                    {
+                        label: 'Tiempo invertido (Minutos)',
+                        data: [25, 30, 2],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.7)',  // Red
+                            'rgba(245, 158, 11, 0.7)', // Amber
+                            'rgba(16, 185, 129, 0.8)'  // Emerald (¡Mucho más rápido!)
+                        ],
+                        borderColor: [
+                            '#ef4444',
+                            '#f59e0b',
+                            '#10b981'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                color: '#e2e8f0',
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Minutos necesarios', color: '#93c5fd' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { size: 11 } }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0', font: { size: 14 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { size: 16 },
+                        bodyFont: { size: 14 }
+                    }
+                }
+            }
+        });
+
+        // ==========================================
+        // 3. GAMIFICACIÓN: Lógica del Micro-Quiz
+        // ==========================================
+        let currentQuestion = 1;
+        let score = 0;
+        let answeredCurrent = false;
+
+        function selectAnswer(qNum, btn, isCorrect) {
+            if (answeredCurrent) return;
+            
+            answeredCurrent = true;
+            const siblings = btn.parentElement.children;
+            for(let el of siblings) {
+                el.classList.remove('selected', 'border-emerald-500', 'border-red-500');
+            }
+
+            btn.classList.add('selected');
+
+            if (isCorrect) {
+                score++;
+                btn.style.backgroundColor = 'rgba(16, 185, 129, 0.4)'; 
+                btn.style.borderColor = '#34d399';
+                btn.animate([{transform:'scale(1)'},{transform:'scale(1.03)'},{transform:'scale(1)'}], 300);
+            } else {
+                btn.style.backgroundColor = 'rgba(239, 68, 68, 0.4)'; 
+                btn.style.borderColor = '#f87171';
+                btn.animate([{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}], 300);
+            }
+
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            document.getElementById(`q${currentQuestion}`).classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+            answeredCurrent = false;
+            
+            currentQuestion++;
+            
+            if (currentQuestion <= 3) {
+                document.getElementById(`q${currentQuestion}`).classList.remove('hidden');
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function mostrarResultado() {
+            const resDiv = document.getElementById('quiz-result');
+            resDiv.classList.remove('hidden');
+            
+            if (score === 3) {
+                resDiv.innerHTML = "¡Excelente! 🏆 Eres un Maestro de los Estilos y la Estructura Documental.";
+            } else if (score === 2) {
+                resDiv.innerHTML = "¡Muy bien! 🥈 Has comprendido muy bien la jerarquía de los textos.";
+                resDiv.classList.replace('text-sky-400', 'text-yellow-400');
+                resDiv.classList.replace('bg-sky-900/30', 'bg-yellow-900/30');
+                resDiv.classList.replace('border-sky-500', 'border-yellow-500');
+            } else {
+                resDiv.innerHTML = "¡Buen intento! 💪 Repasa la diferencia entre formato manual y estilos en la sección superior.";
+                resDiv.classList.replace('text-sky-400', 'text-orange-400');
+                resDiv.classList.replace('bg-sky-900/30', 'bg-orange-900/30');
+                resDiv.classList.replace('border-sky-500', 'border-orange-500');
+            }
+        }
+    </script>
+</body>
+</html>
