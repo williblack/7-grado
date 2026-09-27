@@ -1,1 +1,257 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listas con viñetas, numeración y esquema multinivel | Grado 7°</title>
+</head>
+<body>
+<script>
+const CLASE = {
+  grado: 7,
+  edad: 12,
+  periodo: 1,
+  semana: 5,
+  tema: "Listas con viñetas, numeración y esquema multinivel",
+  temaAnterior: "Estilos, títulos y la estructura del documento",
+  video: "",
+  estilo: "cuaderno",
+  emoji: "📑",
+  objetivo: "Organizar la información de forma clara y jerárquica mediante listas con viñetas, numeraciones y esquemas multinivel en procesadores de texto, además de vincular estructuras de datos tabulares hacia hojas de cálculo como Excel.",
+  competencia: "Aplica conceptos de jerarquización textual y estructuración de información multinivel en procesadores de texto y herramientas digitales de organización de datos.",
+  preguntaGancho: "¿Cómo podemos organizar el inventario de una tienda en Buga o el temario de una materia para que cualquier persona entienda qué depende de qué a simple vista?",
+  agenda: [
+    { min: 5, titulo: "Conexión y Propósito", texto: "Recordamos cómo los títulos estructuran un documento y presentamos las listas como herramientas de orden visual." },
+    { min: 15, titulo: "Teoría en el Cuaderno", texto: "Explicación de listas con viñetas, listas numeradas, sangrías y esquemas multinivel con teclas de acceso rápido (TAB y Shift+TAB)." },
+    { min: 15, titulo: "Reto Práctico con IA y Excel", texto: "Generación de datos estructurados con un prompt de IA y transferencia limpia mediante tabulaciones a Microsoft Excel." },
+    { min: 10, titulo: "Síntesis y Trabajo Individual", texto: "Resolución de la hoja de trabajo digital, revisión de conceptos clave y asignación de la tarea entregable." }
+  ],
+  cuaderno: {
+    conexion: "En la semana anterior aprendimos a usar estilos y títulos para darle estructura jerárquica a un documento. Hoy daremos el siguiente paso: cómo organizar el texto interno en listas y esquemas multinivel que mantengan ese mismo orden visual impecable.",
+    bloques: [
+      {
+        icono: "📌",
+        titulo: "1. Tipos de Listas Básicas: Viñetas y Numeración",
+        puntos: [
+          { icono: "🔹", termino: "Listas con Viñetas", texto: "Se utilizan cuando los elementos no requieren un orden secuencial específico o jerárquico (ejemplo: útiles escolares o características de un equipo)." },
+          { icono: "🔢", termino: "Listas Numeradas", texto: "Ideales para procedimientos, pasos secuenciales, recetas o clasificaciones con orden de prioridad donde el orden sí importa." }
+        ],
+        ampliacion: "Las listas son recursos gráficos fundamentales en cualquier documento técnico o administrativo. Cuando redactamos un informe sobre los sitios turísticos de Buga, usar viñetas permite enumerar lugares sin jerarquizar cuál es más importante. En cambio, si explicamos el procedimiento paso a paso para encender un computador o configurar una red en la sala de sistemas, la lista numerada es indispensable porque **el orden de los factores sí altera el resultado final**. El uso correcto de estos formatos mejora sustancialmente la legibilidad y comprensión del lector."
+      },
+      {
+        icono: "🌳",
+        titulo: "2. Esquemas Multinivel y Sangría",
+        puntos: [
+          { icono: "📶", termino: "Esquema Multinivel", texto: "Organiza la información en subniveles de dependencia (capítulos, secciones, subtemas y detalles)." },
+          { icono: "📐", termino: "Sangría de Texto", texto: "El espacio o margen que desplaza el texto hacia la derecha para indicar visualmente que pertenece a un nivel inferior." }
+        ],
+        ampliacion: "El esquema multinivel combina números, letras o viñetas en diferentes sangrías para reflejar cómo las ideas secundarias se desprenden de un tema principal. Por ejemplo, al organizar los contenidos académicos del Colegio Santa Mariana de Jesús, el nivel 1 representa la asignatura, el nivel 1.1 el periodo académico, y el nivel 1.1.1 la semana de clase. **La sangría es el elemento visual clave que establece la jerarquía**, permitiendo estructurar documentos complejos como índices de libros, manuales de convivencia o guías de estudio."
+      },
+      {
+        icono: "⌨️",
+        titulo: "3. Control del Teclado para Niveles Jerárquicos",
+        puntos: [
+          { icono: "➡️", termino: "Tecla TAB", texto: "Aumenta la sangría, desplazando el elemento hacia la derecha para bajarlo a un subnivel inferior." },
+          { icono: "⬅️", termino: "Shift + TAB", texto: "Disminuye la sangría, desplazando el elemento hacia la izquierda para promoverlo a un nivel superior." }
+        ],
+        ampliacion: "Para trabajar eficientemente en procesadores de texto como Microsoft Word o Google Docs no es necesario buscar constantemente los botones en la barra de herramientas. Al presionar la **tecla TAB** al inicio de una línea con numeración, el programa automáticamente convierte esa entrada en un subnivel (por ejemplo, transforma «2.» en «2.1.»). Si cometemos un error o queremos regresar a un nivel principal, presionamos simultáneamente **Shift + TAB**. Dominar este atajo agiliza notablemente la creación de resúmenes y esquemas de estudio."
+      }
+    ]
+  },
+  glosario: [
+    { termino: "Sangría", definicion: "Distancia o espacio libre entre el margen de la página y el inicio de una línea de texto." },
+    { termino: "Jerarquía", definicion: "Organización de elementos en orden de importancia, dependencia o categoría." },
+    { termino: "Tabulación", definicion: "Carácter de control invisible que desplaza el cursor a una posición de columna predeterminada." },
+    { termino: "Esquema", definicion: "Representación estructurada y sintetizada de los conceptos principales y secundarios de un tema." }
+  ],
+  sabiasQue: [
+    "El estándar de numeración multinivel más usado en el mundo académico y legal se llama numeración decimal indexada (1., 1.1., 1.1.1.).",
+    "Al copiar tablas generadas por Inteligencia Artificial, las tabulaciones invisibles entre columnas son las que permiten a Microsoft Excel separar automáticamente los datos en casillas individuales.",
+    "La tecla TAB debe su nombre a «Tabulador», un mecanismo físico de las antiguas máquinas de escribir creado para agilizar la elaboración de tablas y columnas."
+  ],
+  modulos: {
+    tarjetas: {
+      titulo: "Conceptos y Analogías de Estructuración",
+      items: [
+        { icono: "📂", frente: "Carpeta y Subcarpetas", reverso: "Un esquema multinivel funciona igual que las carpetas en tu computador: un tema principal contiene subtemas, tal como una carpeta contiene subcarpetas." },
+        { icono: "🛒", frente: "Lista de Compras", reverso: "Es un ejemplo de lista con viñetas: no importa si compras primero el arroz o la leche, lo importante es tener todos los productos." },
+        { icono: "👨‍🍳", frente: "Receta de Cocina", reverso: "Es un ejemplo de lista numerada: debes batir los huevos antes de hornear el pastel; el orden estricto garantiza el éxito del resultado." },
+        { icono: "🪜", frente: "Escalera Jerárquica", reverso: "Aumentar la sangría (TAB) es como bajar un peldaño hacia un detalle específico; disminuir la sangría (Shift+TAB) es subir hacia el tema general." }
+      ]
+    },
+    explorador: {
+      titulo: "Niveles Jerárquicos en Documentos Técnicos",
+      items: [
+        {
+          icono: "📌",
+          nombre: "Nivel 1 — Tema Principal",
+          secciones: [
+            { titulo: "Definición y Función", items: ["Es el título general del capítulo o área de conocimiento.", "Representa la categoría superior sin sangría.", "Ejemplo: 1. Hardware de Computadores"] }
+          ]
+        },
+        {
+          icono: "🌿",
+          nombre: "Nivel 2 — Subtema Directo",
+          secciones: [
+            { titulo: "Definición y Función", items: ["Desglosa una categoría específica contenida en el Tema Principal.", "Aplica un nivel de sangría hacia la derecha (TAB).", "Ejemplo: 1.1. Dispositivos de Entrada"] }
+          ]
+        },
+        {
+          icono: "🍃",
+          nombre: "Nivel 3 — Detalle o Componente",
+          secciones: [
+            { titulo: "Definición y Función", items: ["Especifica un concepto o elemento individual perteneciente al subtema.", "Aplica dos niveles de sangría hacia la derecha.", "Ejemplo: 1.1.1. Teclado Alfanumérico"] }
+          ]
+        }
+      ]
+    },
+    clasificador: {
+      titulo: "Clasifica el Tipo de Formato Adecuado",
+      categorias: ["Lista con Viñetas", "Lista Numerada", "Esquema Multinivel"],
+      items: [
+        { texto: "Listar las características técnicas de un monitor", categoria: 0 },
+        { texto: "Pasos cronológicos para reiniciar un enrutador de internet", categoria: 1 },
+        { texto: "Índice general de un libro de texto de Tecnología de 7°", categoria: 2 },
+        { texto: "Ingredientes necesarios para preparar una receta de cocina", categoria: 0 },
+        { texto: "Instrucciones de evacuación en caso de un simulacro escolar", categoria: 1 },
+        { texto: "Organigrama de áreas, departamentos y cargos del colegio", categoria: 2 },
+        { texto: "Ventajas de utilizar software libre en las instituciones", categoria: 0 },
+        { texto: "Ranking de los mejores atletas en los juegos interclases", categoria: 1 }
+      ]
+    }
+  },
+  reto: {
+    titulo: "Generación de Tablas con IA e Importación Limpia en Excel",
+    descripcion: "Aprenderás a solicitar información estructurada a una Inteligencia Artificial para luego trasladarla a Microsoft Excel, garantizando que los datos respeten las filas y columnas mediante tabulaciones.",
+    pasos: [
+      "Paso 1 — Prompt para la IA: Ingresa a la herramienta de Inteligencia Artificial disponible y copia la instrucción provista abajo.",
+      "Paso 2 — Copiado del Resultado: Genera la tabla con la IA y copia todo el texto resultante en el portapapeles (Ctrl + C).",
+      "Paso 3 — Inserción en Excel: Abre Microsoft Excel, crea una hoja en blanco y haz clic directamente en la casilla A1.",
+      "Paso 4 — Pegado Limpio: Pega la información presionando Ctrl + V.",
+      "Paso 5 — Verificación de Columnas: Comprueba que cada dato o concepto haya quedado en su propia casilla independiente sin amontonarse en la primera fila.",
+      "Paso 6 — Formato Final: Selecciona el encabezado, aplica un color de relleno a la primera fila y activa los bordes de la tabla."
+    ],
+    prompt: "Genera una tabla simple de 4 filas y 3 columnas sobre componentes de hardware. Columna 1: Nombre del Componente, Columna 2: Tipo (Entrada/Salida/Procesamiento), Columna 3: Función principal. No agregues texto adicional, solo la tabla separada por tabulaciones.",
+    herramientas: [
+      { nombre: "Google Gemini", url: "https://gemini.google.com" },
+      { nombre: "Microsoft Copilot", url: "https://copilot.microsoft.com" }
+    ],
+    requisitos: [
+      "La tabla en Excel debe contar con exactamente 3 columnas visibles y bien delimitadas.",
+      "No deben quedar datos amontonados o comprimidos dentro de la columna A.",
+      "El encabezado debe tener un formato diferenciado (negrita, relleno de color y bordes activos).",
+      "Cada fila debe representar un componente de hardware correcto con su tipo y función asignada."
+    ]
+  },
+  quiz: [
+    {
+      pregunta: "¿En cuál de los siguientes casos es más recomendable utilizar una lista con viñetas?",
+      opciones: [
+        "Al explicar los pasos cronológicos para ensamblar un computador",
+        "Al listar las herramientas y materiales necesarios para la clase de sistemas",
+        "Al estructurar los capítulos y subcapítulos de un libro de texto",
+        "Al ordenar las posiciones finales de un campeonato deportivo"
+      ],
+      correcta: 1,
+      explicacion: "Las viñetas se usan cuando los elementos listados no requieren una secuencia o jerarquía obligatoria."
+    },
+    {
+      pregunta: "¿Qué tecla se debe presionar para aumentar la sangría y crear un subnivel en un esquema?",
+      opciones: [
+        "Barra Espaciadora",
+        "Tecla TAB (Tabulador)",
+        "Tecla Enter",
+        "Tecla Bloq Mayús"
+      ],
+      correcta: 1,
+      explicacion: "La tecla TAB desplaza la numeración hacia la derecha, convirtiéndola en un subnivel dentro de la jerarquía."
+    },
+    {
+      pregunta: "Si te encuentras en un subnivel (ej: 1.1.1.) y deseas regresar al nivel superior (ej: 1.2.), ¿qué combinación presionas?",
+      opciones: [
+        "Ctrl + Z",
+        "Shift + TAB",
+        "Alt + F4",
+        "Ctrl + TAB"
+      ],
+      correcta: 1,
+      explicacion: "La combinación Shift + TAB reduce la sangría del texto, promoviéndolo a un nivel jerárquico superior."
+    },
+    {
+      pregunta: "¿Cuál es la característica principal de un esquema multinivel?",
+      opciones: [
+        "Usa únicamente colores para separar los párrafos de texto",
+        "Organiza la información en diferentes niveles jerárquicos de dependencia",
+        "Obliga a que todo el texto esté alineado estrictamente al margen izquierdo",
+        "Elimina los números y deja solo palabras en negrita"
+      ],
+      correcta: 1,
+      explicacion: "El esquema multinivel refleja la relación de dependencia entre temas principales, subtemas y detalles."
+    },
+    {
+      pregunta: "¿Por qué al pegar en Excel una tabla generada por la IA con tabulaciones los datos no quedan amontonados en la misma celda?",
+      opciones: [
+        "Porque Excel interpreta los caracteres de tabulación como separadores entre columnas",
+        "Porque la Inteligencia Artificial borra automáticamente el formato de Excel",
+        "Porque Excel convierte el texto en una imagen fija",
+        "Porque las tabulaciones obligan a cambiar de hoja de cálculo"
+      ],
+      correcta: 0,
+      explicacion: "Las tabulaciones actúan como delimitadores invisibles que señalan el cambio de una columna a otra en Excel."
+    },
+    {
+      pregunta: "En la jerarquía «1. Software -> 1.1. Sistemas Operativos -> 1.1.1. Windows», ¿qué nivel representa «Windows»?",
+      opciones: [
+        "Nivel 1 (Tema Principal)",
+        "Nivel 2 (Categoría General)",
+        "Nivel 3 (Elemento o Ejemplo Específico)",
+        "Nivel 0 (Encabezado general)"
+      ],
+      correcta: 2,
+      explicacion: "Windows es un ejemplo específico dentro de la categoría Sistemas Operativos, por lo que ocupa el Nivel 3."
+    }
+  ],
+  investigacion: {
+    titulo: "Investigación sobre Organización de Datos y Excel",
+    instruccion: "Responde las siguientes dos preguntas en tu cuaderno de Tecnología e Informática:",
+    preguntas: [
+      "¿Cuál es la ventaja de utilizar un esquema multinivel en lugar de escribir todo el texto de corrido en un párrafo?",
+      "Averigua qué función cumple el botón «Texto en columnas» en la pestaña Datos de Microsoft Excel cuando pegamos texto generado por una IA o desde un bloc de notas."
+    ],
+    fuentes: [
+      "Soporte oficial de Microsoft Office: Estructuración y separación de datos en columnas.",
+      "Manual de redacción técnica y formato documental digital."
+    ]
+  },
+  tarea: {
+    titulo: "CONSULTA DE CONCEPTOS — ESTRUCTURACIÓN JERÁRQUICA",
+    instruccion: "A continuación encontrará una lista desordenada de conceptos informáticos. Organícelos en un esquema multinivel numerado con tres niveles jerárquicos (1., 1.1., 1.1.1.). Escriba su respuesta en el espacio asignado de la hoja suelta.",
+    renglones: 8,
+    indicacion: "Escríbela en la HOJA SUELTA que entregarás al docente. Lista de conceptos: Sistemas Operativos | Software de Aplicación | Windows | Procesadores de Texto | Hojas de Cálculo | Linux | Microsoft Word | Microsoft Excel | Google Docs | Google Sheets",
+    criterios: [
+      "Jerarquía lógica y correcta de los 3 niveles (4.0 pts)",
+      "Ubicación correcta de los 10 conceptos (4.0 pts)",
+      "Numeración adecuada: 1., 1.1., 1.1.1. (2.0 pts)"
+    ],
+    entrega: "Próxima clase de Tecnología"
+  },
+  hoja: {
+    preguntas: [
+      { id: "r1", texto: "Explica con tus palabras en qué se diferencia una lista con viñetas de una lista numerada y da un ejemplo de la vida diaria para cada una.", lineas: 3 },
+      { id: "r2", texto: "Describe la función de la tecla TAB y de la combinación Shift + TAB al momento de construir un esquema multinivel en el procesador de texto.", lineas: 2 },
+      { id: "r3", texto: "¿Qué ocurrió al pegar en Excel la tabla generada por la IA durante el reto en sala? ¿Por qué es importante que esté separada por tabulaciones?", lineas: 3 },
+      { id: "r4", texto: "Si tuvieras que organizar las asignaturas de tu colegio en un esquema multinivel, ¿cuáles serían tus temas de Nivel 1, Nivel 2 y Nivel 3?", lineas: 3 },
+      { id: "r5", texto: "¿Qué aprendí hoy sobre la organización visual de la información y cómo facilita la lectura de documentos largos?", lineas: 2 }
+    ]
+  },
+  notasDocente: [
+    "Verificar que los estudiantes en la sala de sistemas identifiquen físicamente la tecla TAB y la combinación Shift+TAB en sus teclados antes de iniciar el ejercicio práctico.",
+    "Monitorear el uso correcto de las herramientas de IA, asegurando que utilicen el prompt exacto para que el pegado en Excel sea impecable.",
+    "Supervisar que al pegar en Excel no hagan doble clic dentro de la celda A1 antes de presionar Ctrl+V, ya que eso amontonaría todo el texto dentro de una sola celda.",
+    "Recordar la recolección de las hojas sueltas correspondientes a la Tarea Entregable para la evaluación del Periodo 1."
+  ]
+};
+</script>
+<script src="../../motor-bernal-v5.js"></script>
+</body>
+</html>
