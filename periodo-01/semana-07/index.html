@@ -1,1 +1,392 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encabezados, pies de página y referencias cruzadas | Grado 7°</title>
+</head>
+<body>
+<script>
+const CLASE = {
+  // ========== ✏️ DATOS RÁPIDOS (lo único que podrías querer cambiar) ==========
+  grado: 7,
+  edad: 12,
+  periodo: 1,
+  semana: 7,
+  tema: "Encabezados, pies de página y referencias cruzadas",
+  temaAnterior: "Tabla de Contenido Automática",
+  video: "",            // ← enlace de YouTube, Vimeo, Drive o Canva (opcional)
+  estilo: "circuito",
+
+  // ========== 🤖 CONTENIDO GENERADO POR LA IA (no hace falta tocarlo) ==========
+  "emoji": "📄🔗",
+  "objetivo": "Organizar la estructura de un documento formal y conectar sus elementos de forma automática.",
+  "competencia": "Configura elementos repetitivos y enlaces internos en procesadores de texto para optimizar la estructura de documentos académicos extensos.",
+  "preguntaGancho": "¿Alguna vez has visto que los libros tienen el título o el autor escrito arriba en todas las páginas sin falta? ¿Crees que lo escribieron hoja por hoja?",
+  "agenda": [
+    {
+      "min": 5,
+      "titulo": "Introducción",
+      "texto": "Conexión con el tema anterior y explicación de la meta de hoy."
+    },
+    {
+      "min": 15,
+      "titulo": "Estructura en el cuaderno",
+      "texto": "Definición de zonas de página y enlaces inteligentes."
+    },
+    {
+      "min": 15,
+      "titulo": "Reto IA + Excel",
+      "texto": "Generación de tablas estructuradas usando prompts precisos."
+    },
+    {
+      "min": 5,
+      "titulo": "Quiz de repaso",
+      "texto": "Validación rápida de los conceptos."
+    },
+    {
+      "min": 5,
+      "titulo": "Cierre",
+      "texto": "Indicaciones para la investigación en casa y preguntas de reflexión."
+    }
+  ],
+  "cuaderno": {
+    "conexion": "La semana pasada aprendimos a crear una tabla de contenido automática para organizar el inicio de nuestros trabajos. Hoy aprenderemos a organizar cada página individual y a conectar partes del texto sin perdernos usando referencias cruzadas.",
+    "bloques": [
+      {
+        "icono": "🖼️",
+        "titulo": "1. El marco del documento",
+        "puntos": [
+          {
+            "icono": "⬆️",
+            "termino": "Encabezado (Zona superior)",
+            "texto": "Información que se repite automáticamente en la parte de arriba de todas las páginas (Ej: Nombre del colegio)."
+          },
+          {
+            "icono": "⬇️",
+            "termino": "Pie de página (Zona inferior)",
+            "texto": "Datos de control y ubicación en la parte de abajo (Ej: Tu nombre y número de página)."
+          }
+        ],
+        "ampliacion": "Piensa que tu documento es como el uniforme del Colegio Santa Mariana de Jesús. El encabezado es el **escudo** en la camiseta que siempre está visible arriba, y el pie de página es como la **marquilla** con tu nombre. ¡Lo configuras una sola vez y aparece en todas las páginas automáticamente!"
+      },
+      {
+        "icono": "🔗",
+        "titulo": "2. Referencias Cruzadas (El enlace interno)",
+        "puntos": [
+          {
+            "icono": "🧠",
+            "termino": "¿Qué es?",
+            "texto": "Un enlace inteligente que conecta una palabra de tu texto con un Título, una Imagen o una Tabla dentro del mismo archivo."
+          },
+          {
+            "icono": "🔄",
+            "termino": "¿Para qué sirve?",
+            "texto": "Si la tabla o la imagen se mueven de página al escribir más, el número en la referencia se actualiza solo."
+          }
+        ],
+        "ampliacion": "Si estás escribiendo un trabajo sobre el turismo en Buga y dices 'ver foto de la Basílica en la página 5', pero luego agregas más texto y la foto baja a la página 6, la **referencia cruzada** cambia ese número sola para que nunca le des un dato falso a tu profesor."
+      },
+      {
+        "icono": "⚙️",
+        "titulo": "3. Pasos rápidos en Word o Docs",
+        "puntos": [
+          {
+            "icono": "🖱️",
+            "termino": "Encabezado y Pie",
+            "texto": "Menú Insertar ➔ Opción Encabezado o Pie de página."
+          },
+          {
+            "icono": "🔢",
+            "termino": "Número de página",
+            "texto": "Menú Insertar ➔ Número de página ➔ Elegir posición."
+          },
+          {
+            "icono": "📌",
+            "termino": "Referencia Cruzada",
+            "texto": "Primero aplicar un Estilo (Título 1) o Leyenda. Luego, Menú Referencias ➔ Referencia cruzada."
+          }
+        ],
+        "ampliacion": "Recuerden la **regla de oro**: la referencia cruzada no funciona por arte de magia ni adivina tus pensamientos. Primero tienes que decirle a la computadora 'esto es un Título' o 'esto es una Imagen' usando las herramientas correctas."
+      }
+    ]
+  },
+  "glosario": [
+    {
+      "termino": "Encabezado",
+      "definicion": "Área superior de una página donde se pone información que se repite."
+    },
+    {
+      "termino": "Pie de página",
+      "definicion": "Área inferior de una página, ideal para numeración o notas cortas."
+    },
+    {
+      "termino": "Referencia cruzada",
+      "definicion": "Enlace interno que conecta una parte del texto con un elemento específico del documento."
+    },
+    {
+      "termino": "Leyenda",
+      "definicion": "Título corto o descripción que se le asigna a una imagen, tabla o gráfico en Word."
+    }
+  ],
+  "sabiasQue": [
+    "¿Sabías que los primeros libros impresos no tenían números de página? Los impresores ponían la primera palabra de la página siguiente al final de la página actual para que el encuadernador supiera el orden.",
+    "¿Sabías que un documento legal de una empresa o juzgado puede ser rechazado por completo si sus páginas no están correctamente numeradas y con su respectivo encabezado oficial?"
+  ],
+  "modulos": {
+    "tarjetas": {
+      "titulo": "Analogías Documentales",
+      "items": [
+        {
+          "icono": "🏫",
+          "frente": "Encabezado",
+          "reverso": "El letrero grande del colegio en la entrada (siempre visible arriba de todo)."
+        },
+        {
+          "icono": "👟",
+          "frente": "Pie de página",
+          "reverso": "La firma marcada en la suela del zapato (siempre abajo, identifica de quién es)."
+        },
+        {
+          "icono": "📍",
+          "frente": "Número de página",
+          "reverso": "El GPS del documento (te dice exactamente dónde estás ubicado)."
+        },
+        {
+          "icono": "🌀",
+          "frente": "Referencia cruzada",
+          "reverso": "Un portal de teletransportación (te lleva de tu párrafo directo a la imagen sin buscar)."
+        }
+      ]
+    },
+    "explorador": {
+      "titulo": "Anatomía de la Página",
+      "items": [
+        {
+          "icono": "🔝",
+          "nombre": "Zona Superior",
+          "secciones": [
+            {
+              "titulo": "Encabezado",
+              "items": [
+                "Se usa para logotipos institucionales.",
+                "Nombre del colegio o empresa.",
+                "Título general del trabajo o investigación."
+              ]
+            }
+          ]
+        },
+        {
+          "icono": "⬇️",
+          "nombre": "Zona Inferior",
+          "secciones": [
+            {
+              "titulo": "Pie de página",
+              "items": [
+                "Numeración consecutiva de páginas.",
+                "Fecha de impresión.",
+                "Nombre del autor o estudiante."
+              ]
+            }
+          ]
+        },
+        {
+          "icono": "↔️",
+          "nombre": "Cuerpo del texto",
+          "secciones": [
+            {
+              "titulo": "Conexiones (Referencias)",
+              "items": [
+                "Conecta párrafos con tablas ('Ver tabla 3').",
+                "Conecta texto con imágenes ('Como muestra la figura 1').",
+                "Se actualizan solas si el documento crece."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "clasificador": {
+      "titulo": "Clasifica los elementos",
+      "categorias": [
+        "Zonas Fijas de la Página",
+        "Herramientas de Enlace"
+      ],
+      "items": [
+        {
+          "texto": "Encabezado",
+          "categoria": 0
+        },
+        {
+          "texto": "Pie de página",
+          "categoria": 0
+        },
+        {
+          "texto": "Número de página",
+          "categoria": 0
+        },
+        {
+          "texto": "Referencia cruzada",
+          "categoria": 1
+        },
+        {
+          "texto": "Hipervínculo a YouTube",
+          "categoria": 1
+        },
+        {
+          "texto": "Tabla de contenido",
+          "categoria": 1
+        }
+      ]
+    }
+  },
+  "reto": {
+    "titulo": "Estructurando Datos con IA",
+    "descripcion": "Usar Inteligencia Artificial para generar un resumen conceptual estructurado y pegarlo directamente en Microsoft Excel sin que se descuadren las filas y columnas.",
+    "pasos": [
+      "Abre el asistente de IA (ChatGPT o Gemini) usando los enlaces de herramientas.",
+      "Copia el prompt exacto que está en la caja de abajo y pégalo en el chat de la IA.",
+      "Haz clic en el botón de copiar texto o selecciona cuidadosamente la tabla generada por la IA.",
+      "Abre un libro en blanco en Microsoft Excel, haz clic en la celda A1 y presiona Ctrl + V.",
+      "Haz doble clic en la intersección entre las columnas (A y B) para autoajustar el ancho del texto.",
+      "Aplica negrita y color de relleno a la fila 1 (los encabezados). Selecciona los datos y activa Inicio ➔ Bordes ➔ Todos los bordes.",
+      "Muestra el resultado final en pantalla al docente."
+    ],
+    "prompt": "Actúa como profesor de tecnología. Genera una tabla de 2 columnas y 4 filas sobre documentos digitales. Columna 1: 'Elemento' (Encabezado, Pie de página, Número de página, Referencia cruzada). Columna 2: 'Función principal' (máximo 12 palabras por definición). Entrégame la respuesta formateada estrictamente como tabla simple para copiar y pegar en Excel respetando filas y columnas.",
+    "herramientas": [
+      {
+        "nombre": "ChatGPT",
+        "url": "https://chatgpt.com/"
+      },
+      {
+        "nombre": "Gemini",
+        "url": "https://gemini.google.com/"
+      }
+    ],
+    "requisitos": [
+      "La tabla fue pegada empezando en la celda A1.",
+      "Las columnas A y B están ajustadas y el texto no se corta.",
+      "La fila 1 tiene negrita y color de fondo.",
+      "Toda la tabla tiene los bordes aplicados."
+    ]
+  },
+  "quiz": [
+    {
+      "pregunta": "¿Dónde se ubica el encabezado de un documento?",
+      "opciones": [
+        "En la zona superior",
+        "En la zona inferior",
+        "En el centro de la hoja",
+        "En la margen derecha"
+      ],
+      "correcta": 0,
+      "explicacion": "El encabezado, como su nombre indica, va a la cabeza o parte superior del documento."
+    },
+    {
+      "pregunta": "Si escribes tu nombre en el pie de página de la hoja 1, ¿qué pasa en la hoja 2?",
+      "opciones": [
+        "Queda vacía",
+        "Aparece tu nombre automáticamente",
+        "Da un error",
+        "Se borra el texto principal"
+      ],
+      "correcta": 1,
+      "explicacion": "Todo lo que pones en el pie de página se repite automáticamente en el resto de las hojas."
+    },
+    {
+      "pregunta": "¿Qué es una referencia cruzada?",
+      "opciones": [
+        "Una cruz roja en el texto",
+        "Un enlace inteligente interno",
+        "Una tabla matemática",
+        "Un tipo de letra"
+      ],
+      "correcta": 1,
+      "explicacion": "Es un enlace que conecta una parte del texto con otra dentro del mismo documento."
+    },
+    {
+      "pregunta": "Para que una referencia cruzada funcione hacia un título, ¿qué debe tener primero ese texto?",
+      "opciones": [
+        "Letra color rojo",
+        "Tamaño 20 o superior",
+        "Un Estilo de Título aplicado",
+        "Negrita cursiva"
+      ],
+      "correcta": 2,
+      "explicacion": "El procesador de texto necesita que apliques un Estilo (como Título 1) para reconocerlo."
+    },
+    {
+      "pregunta": "¿Por qué es mejor usar una referencia cruzada que simplemente escribir 'ver página 5'?",
+      "opciones": [
+        "Porque gasta menos tinta",
+        "Porque si el texto se mueve, el número de página se actualiza solo",
+        "Porque el profesor lo exige",
+        "Porque se ve más bonito"
+      ],
+      "correcta": 1,
+      "explicacion": "Su mayor ventaja es la actualización automática, evitando errores si agregas más contenido."
+    },
+    {
+      "pregunta": "¿En qué menú principal insertamos el Número de página en Word?",
+      "opciones": [
+        "Insertar",
+        "Archivo",
+        "Dibujar",
+        "Vista"
+      ],
+      "correcta": 0,
+      "explicacion": "Las opciones de Encabezado, Pie de página y Número de página siempre están en la pestaña Insertar."
+    }
+  ],
+  "investigacion": {
+    "titulo": "Profundizando en los documentos",
+    "instruccion": "Copia y responde brevemente las siguientes 3 preguntas en tu cuaderno de tecnología:",
+    "preguntas": [
+      "¿Cuál es la diferencia entre una Nota al pie (al final de una página específica) y un Pie de página (repetido en todo el documento)?",
+      "¿Por qué es obligatorio aplicar estilos de texto (Título 1, Título 2) antes de poder crear una referencia cruzada?",
+      "En Microsoft Word, ¿qué tecla de acceso rápido o comando te permite actualizar todas las referencias cruzadas de un documento si cambiaste cosas de lugar?"
+    ],
+    "fuentes": [
+      "Microsoft Office Support",
+      "Google (búsqueda: actualizar referencias cruzadas atajo Word)"
+    ]
+  },
+  "hoja": {
+    "preguntas": [
+      {
+        "id": "r1",
+        "texto": "¿Por qué crees que los documentos formales de empresas o de la alcaldía siempre usan encabezados institucionales?",
+        "lineas": 3
+      },
+      {
+        "id": "r2",
+        "texto": "Imagina que entregaste un trabajo impreso de 20 páginas y olvidaste numerarlas. Si se caen al piso y se desordenan, ¿qué problema tendrías?",
+        "lineas": 3
+      },
+      {
+        "id": "r3",
+        "texto": "En el reto con Excel, ¿por qué fue importante darle la instrucción a la IA de 'formateada estrictamente como tabla simple'?",
+        "lineas": 3
+      },
+      {
+        "id": "r4",
+        "texto": "¿Qué crees que pasaría con una referencia cruzada en tu documento si borras por accidente la imagen a la que estaba conectada?",
+        "lineas": 2
+      },
+      {
+        "id": "r5",
+        "texto": "¿Qué te pareció más útil de la clase de hoy para aplicar en tus trabajos escolares futuros?",
+        "lineas": 3
+      }
+    ]
+  },
+  "notasDocente": [
+    "Supervisar el copy/paste desde la IA hacia Excel: a veces los estudiantes pegan el formato de código markdown (el recuadro negro). Indícales usar 'Pegar coincidiendo con el formato de destino' si Excel no respeta las celdas.",
+    "Es muy efectivo hacer una demostración rápida proyectada: mostrar cómo al agregar un 'Salto de página' que mueva un gráfico a la siguiente hoja, la referencia cruzada actualiza su número 'mágicamente'. Esto les ayuda a entender el 'porqué'.",
+    "Validar que no confundan 'Nota al pie' con 'Pie de página', es un error conceptual frecuente a esta edad."
+  ]
+};
+</script>
+<script src="../../motor-bernal-v5.js"></script>
+</body>
+</html>
