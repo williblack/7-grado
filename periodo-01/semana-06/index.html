@@ -1,1 +1,210 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabla de Contenido Automática | Grado 7°</title>
+</head>
+<body>
+<script>
+const CLASE = {
+  grado: 7,
+  edad: 12,
+  periodo: 1,
+  semana: 6,
+  tema: "Tabla de Contenido Automática",
+  temaAnterior: "Listas con viñetas, numeración y esquema multinivel",
+  video: "",
+  estilo: "cuaderno",
+  emoji: "📖",
+  objetivo: "Crear y actualizar tablas de contenido automáticas para facilitar la ubicación de la información en documentos extensos.",
+  competencia: "Organiza estructuras jerárquicas de texto aplicando estilos predefinidos y herramientas de automatización en procesadores de texto.",
+  preguntaGancho: "¿Te imaginas escribir un trabajo de 50 páginas y tener que buscar a mano en qué hoja está cada título para hacer el índice?",
+  agenda: [
+    { min: 5, titulo: "Reflexión Inicial", texto: "El problema de los puntitos manuales al hacer un índice." },
+    { min: 15, titulo: "Cuaderno y Conceptos", texto: "Estructura, niveles de título y pasos para insertar la tabla." },
+    { min: 15, titulo: "Reto Práctico con IA", texto: "Generar estructura jerárquica con IA y organizarla en Excel." },
+    { min: 10, titulo: "Quiz y Evaluación", texto: "Responder preguntas de la hoja digital y quiz interactivo." }
+  ],
+  cuaderno: {
+    conexion: "La semana pasada organizamos ideas usando listas y esquemas multinivel. Ahora llevaremos esa organización al documento completo usando los «Estilos» para que el programa construya el índice por nosotros.",
+    bloques: [
+      {
+        icono: "⚙️",
+        titulo: "1. ¿Qué es una Tabla de Contenido (TDC) Automática?",
+        puntos: [
+          { icono: "📄", termino: "Resumen Estructurado", texto: "Es una lista al inicio del documento que muestra los títulos principales, subtemas y la página de ubicación." },
+          { icono: "🪄", termino: "Automatización", texto: "Si agregas texto o cambias páginas, la tabla se actualiza con un clic sin escribir a mano." }
+        ],
+        ampliacion: "Imagina que presentas un proyecto sobre los lugares turísticos de Buga. Si el profesor te pide agregar una página extra al principio, una tabla automática reajustará todas las páginas de tu trabajo al instante, evitando que tengas que borrar y escribir **todo de nuevo**."
+      },
+      {
+        icono: "🔑",
+        titulo: "2. La clave secreta: Los Estilos de Título",
+        puntos: [
+          { icono: "👑", termino: "Título 1 (Principal)", texto: "Se usa para capítulos o temas globales. Ejemplo: 1. La Célula." },
+          { icono: "🥈", termino: "Título 2 (Subtema)", texto: "Divisiones dentro de un tema principal. Ejemplo: 1.1 Partes de la célula." },
+          { icono: "🥉", termino: "Título 3 (Detalle)", texto: "Subdivisión de un subtema. Ejemplo: 1.1.1 El Núcleo." }
+        ],
+        ampliacion: "La computadora no entiende de letras bonitas. **Regla de oro:** Si usas texto normal y solo le aplicas negrita y tamaño grande a tu título, el programa NO creará la tabla. Debes usar los botones de Estilos en la cinta de opciones superior."
+      },
+      {
+        icono: "🚀",
+        titulo: "3. Pasos de Inserción y Actualización",
+        puntos: [
+          { icono: "🎯", termino: "A. Inserción", texto: "Aplica estilos de Título, ve a la pestaña Referencias y selecciona Tabla de Contenido." },
+          { icono: "🔄", termino: "B. Actualización", texto: "Haz clic derecho sobre la tabla para 'Actualizar solo los números de página' o 'Actualizar toda la tabla'." }
+        ],
+        ampliacion: "Es fundamental saber cuándo usar cada actualización. Si solo corregiste un error de ortografía y el texto se movió una línea, actualizas **solo números**. Si agregaste un nuevo subtítulo sobre el clima de Colombia, debes actualizar **toda la tabla**."
+      }
+    ]
+  },
+  glosario: [
+    { termino: "Tabla de Contenido", definicion: "Bloque de texto dinámico que lista los apartados de un documento y sus páginas." },
+    { termino: "Estilos", definicion: "Conjuntos de formatos predefinidos (fuente, tamaño, color) que informan al programa el nivel jerárquico del texto." },
+    { termino: "Texto Plano", definicion: "Texto sin ningún tipo de formato (sin negritas, colores ni tablas visibles) estructurado mediante espacios o tabulaciones." }
+  ],
+  sabiasQue: [
+    "Las primeras versiones de Word requerían escribir códigos ocultos al lado de cada título para poder generar un índice.",
+    "El estándar internacional para escribir documentos académicos (Normas APA) exige el uso de Tablas de Contenido automáticas para validar trabajos universitarios."
+  ],
+  modulos: {
+    tarjetas: {
+      titulo: "El drama manual vs. La magia automática",
+      items: [
+        { icono: "✍️", frente: "Tabla Manual", reverso: "Pierdes hasta 30 minutos cuadrando los puntitos y los números de página." },
+        { icono: "⚡", frente: "Tabla Automática", reverso: "Se genera en 2 segundos y se organiza perfectamente en el margen derecho." },
+        { icono: "😥", frente: "Cambio de Texto en Manual", reverso: "Si agregas una imagen, todo se rueda y debes buscar página por página dónde quedó cada tema." },
+        { icono: "😎", frente: "Cambio de Texto en Automática", reverso: "Presionas F9 o haces clic en 'Actualizar campo' y el programa corrige todas las páginas por ti." }
+      ]
+    },
+    clasificador: {
+      titulo: "Asignando Jerarquías",
+      categorias: ["Título 1", "Título 2", "Título 3"],
+      items: [
+        { texto: "Historia de los Computadores", categoria: 0 },
+        { texto: "1.2 Computadores Portátiles", categoria: 1 },
+        { texto: "1.2.1 Marcas principales de laptops", categoria: 2 },
+        { texto: "Introducción a la Robótica", categoria: 0 },
+        { texto: "Partes de un Robot", categoria: 1 },
+        { texto: "Tipos de Sensores en Robots", categoria: 2 },
+        { texto: "Conclusiones del Proyecto", categoria: 0 }
+      ]
+    },
+    explorador: {
+      titulo: "Ruta de Navegación",
+      items: [
+        {
+          icono: "🛠️",
+          nombre: "1. Preparar",
+          secciones: [
+            { titulo: "Aplicar Estilos", items: ["Selecciona cada título de tu documento.", "Ve a la pestaña Inicio.", "Haz clic en Título 1, Título 2 o Título 3 según corresponda."] }
+          ]
+        },
+        {
+          icono: "📥",
+          nombre: "2. Insertar",
+          secciones: [
+            { titulo: "Generar Tabla", items: ["Ubica el cursor en una hoja en blanco al principio.", "Ve a la pestaña Referencias.", "Haz clic en 'Tabla de contenido' y elige un diseño automático."] }
+          ]
+        },
+        {
+          icono: "🔄",
+          nombre: "3. Actualizar",
+          secciones: [
+            { titulo: "Mantener al día", items: ["Si modificas tu documento, haz clic sobre la tabla.", "Selecciona 'Actualizar tabla...'.", "Elige si solo actualizarás números o toda la estructura."] }
+          ]
+        }
+      ]
+    }
+  },
+  reto: {
+    titulo: "IA a Excel: Estructura Perfecta",
+    descripcion: "Usar Inteligencia Artificial para generar una estructura jerárquica de un documento y transferirla a Excel manteniendo la estructura de filas y columnas de manera automática.",
+    pasos: [
+      "Abre una Inteligencia Artificial como Gemini, ChatGPT o Copilot.",
+      "Copia el prompt exacto que aparece abajo y pégalo en el chat de la IA.",
+      "Copia SOLO la tabla o el texto resultante que generó la IA (sin el texto introductorio).",
+      "Abre Microsoft Excel y haz clic en la celda A1 de un libro en blanco.",
+      "Presiona Ctrl + V. Observa cómo Excel reconoce las tabulaciones y distribuye los datos en columnas perfectas.",
+      "Aplica el formato final: Encabezados en negrita con fondo azul claro, todos los bordes y ajusta el ancho de las columnas haciendo doble clic en las divisiones (A, B, C, D)."
+    ],
+    prompt: "Actúa como un experto en redacción técnica. Crea una tabla en formato de texto plano separado por tabulaciones sobre los temas de un proyecto escolar titulado «Aparatos Tecnológicos del Siglo XXI». La tabla debe tener 4 columnas: [Nivel de Título], [Nombre del Tema], [Estilo a Aplicar en Word], [Página Sugerida]. Incluye al menos 8 filas con jerarquías de Título 1, Título 2 y Título 3.",
+    herramientas: [
+      { nombre: "Google Gemini", url: "https://gemini.google.com/" },
+      { nombre: "Microsoft Excel Online", url: "https://www.office.com/launch/excel" }
+    ],
+    requisitos: [
+      "La IA debe generar una tabla con tabulaciones.",
+      "El pegado en Excel debe quedar distribuido en 4 columnas, no amontonado en una sola.",
+      "La fila de encabezados tiene negrita y color azul claro.",
+      "Toda la tabla tiene los bordes marcados.",
+      "Las columnas tienen el ancho ajustado para que se lea todo el texto sin cortarse."
+    ]
+  },
+  quiz: [
+    {
+      pregunta: "¿Qué es indispensable aplicar a un texto para que aparezca en la Tabla de Contenido automática?",
+      opciones: ["Subrayado y negrita", "Estilos de título (Título 1, 2, 3)", "Letra tamaño 24 y color rojo", "Viñetas numéricas"],
+      correcta: 1,
+      explicacion: "Los programas de texto identifican la estructura jerárquica exclusivamente a través de los Estilos de título."
+    },
+    {
+      pregunta: "¿En qué pestaña o menú principal de Word se encuentra la herramienta 'Tabla de Contenido'?",
+      opciones: ["Inicio", "Insertar", "Referencias", "Diseño de página"],
+      correcta: 2,
+      explicacion: "La Tabla de Contenido hace parte de las referencias y citas del documento."
+    },
+    {
+      pregunta: "Si agregaste un nuevo capítulo completo a tu trabajo, ¿qué opción de actualización debes elegir?",
+      opciones: ["Actualizar solo los números de página", "Actualizar toda la tabla", "Borrar la tabla y crearla de nuevo", "Cambiar el estilo a Título 2"],
+      correcta: 1,
+      explicacion: "Al agregar nuevos temas (nuevos títulos), es obligatorio actualizar TODA la tabla para que lea los nuevos encabezados."
+    },
+    {
+      pregunta: "Si tienes el tema principal 'La Tierra' y quieres poner un subtema llamado 'Las Montañas', ¿qué estilo usas?",
+      opciones: ["Título 1", "Título 2", "Título 3", "Título Principal"],
+      correcta: 1,
+      explicacion: "El Título 1 es para el tema principal (La Tierra), el Título 2 es para el primer nivel de subtemas (Las Montañas)."
+    },
+    {
+      pregunta: "¿Qué pasa si copias la tabla separada por tabulaciones desde la IA y la pegas en la celda A1 de Excel?",
+      opciones: ["Todo el texto queda atrapado en la celda A1.", "Excel marca error de formato y se cierra.", "Excel distribuye el contenido en varias celdas y columnas.", "Las palabras se borran al pegarlas."],
+      correcta: 2,
+      explicacion: "Excel detecta automáticamente los espacios de tabulación y usa eso como guía para saltar de columna en columna."
+    },
+    {
+      pregunta: "¿Qué error cometió Camila si su tabla de contenido se desconfiguró por completo al agregar una página?",
+      opciones: ["Actualizó los números mal.", "Usó Título 1 en todo el documento.", "No guardó el archivo en PDF.", "Hizo la tabla manualmente escribiendo puntitos."],
+      correcta: 3,
+      explicacion: "Las tablas hechas escribiendo puntos manualmente se descuadran ante cualquier cambio, por eso debemos usar la herramienta automática."
+    }
+  ],
+  investigacion: {
+    titulo: "Explora más sobre Índices",
+    instruccion: "Investiga y responde en tu cuaderno de Tecnología:",
+    preguntas: [
+      "¿Cuál es la diferencia entre una Tabla de Contenido y un Índice Alfabético en un libro? (Escribe máximo 2 líneas explicativas).",
+      "¿En qué parte del menú de Word o Google Docs se encuentra la opción para insertar una 'Tabla de Ilustraciones o Figuras'?"
+    ],
+    fuentes: []
+  },
+  hoja: {
+    preguntas: [
+      { id: "r1", texto: "¿Por qué crees que usar estilos de título te ahorra tiempo al hacer trabajos largos para el colegio?", lineas: 3 },
+      { id: "r2", texto: "En el reto de IA, ¿qué característica del texto (mencionada en el prompt) hizo que Excel pudiera separar las palabras en columnas perfectas al pegar?", lineas: 2 },
+      { id: "r3", texto: "Si mueves de página un tema en tu documento de Word porque insertaste una foto muy grande, ¿qué opción de actualización debes elegir en la tabla y por qué?", lineas: 3 },
+      { id: "r4", texto: "¿Qué le explicarías a un compañero que hizo su tabla de contenido escribiendo los puntitos y los números a mano uno por uno?", lineas: 3 },
+      { id: "r5", texto: "Reflexiona: ¿Cómo te ayuda una Inteligencia Artificial a estructurar un documento antes de que tú empieces a escribir todo el contenido?", lineas: 4 }
+    ]
+  },
+  notasDocente: [
+    "Verificar que todos los estudiantes comprendan la diferencia visual en la cinta de opciones entre cambiar el formato manual y aplicar un 'Estilo'.",
+    "Durante el reto, algunos estudiantes pueden copiar la tabla de la IA con formato de tabla Markdown. Si Excel no lo toma bien, pedir que regeneren aclarando 'texto plano separado por tabulaciones'.",
+    "Recordar a los estudiantes que para hacer el pegado correcto en Excel siempre deben hacer clic primero en la celda A1."
+  ]
+};
+</script>
+<script src="../../motor-bernal-v5.js"></script>
+</body>
+</html>
