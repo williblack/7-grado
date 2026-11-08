@@ -1,1 +1,230 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Máquinas simples y mecanismos de transmisión | Grado 7°</title>
+</head>
+<body>
+<script>
+const CLASE = {
+  grado: 7,
+  edad: 11,
+  periodo: 2,
+  semana: 1,
+  tema: "Máquinas simples y mecanismos de transmisión",
+  temaAnterior: "Encabezados, pies de página y referencias cruzadas",
+  video: "",
+  estilo: "volcan",
+  emoji: "⚙️🚀",
+  objetivo: "Reconocer los mecanismos de transmisión en artefactos tecnológicos y usar IA para organizar información en Excel.",
+  competencia: "Identifico cómo los mecanismos facilitan el trabajo y aplico herramientas de Inteligencia Artificial para estructurar datos en hojas de cálculo.",
+  preguntaGancho: "¿Alguna vez te has preguntado cómo hace tu bicicleta para moverse tan rápido si tú solo empujas los pedales suavemente?",
+  agenda: [
+    { min: 10, titulo: "Exploración teórica", texto: "Diferencia entre máquina y mecanismo." },
+    { min: 15, titulo: "Esquema en el cuaderno", texto: "Clasificación de los mecanismos de transmisión." },
+    { min: 20, titulo: "Reto en Sala con IA", texto: "Generación de tabla con IA y formato en Excel." }
+  ],
+  cuaderno: {
+    conexion: "La clase pasada organizamos documentos largos usando encabezados y referencias cruzadas en el procesador de texto. Hoy pasaremos del mundo de los documentos al mundo físico y de los datos: vamos a descubrir las partes móviles que hacen funcionar las máquinas y usaremos Excel para clasificar esa información.",
+    bloques: [
+      {
+        icono: "🏗️",
+        titulo: "1. ¿Qué es una Máquina y un Mecanismo?",
+        puntos: [
+          { icono: "🚜", termino: "Máquina", texto: "Invento creado por el ser humano para realizar un trabajo con menos esfuerzo y en menos tiempo (ej. una grúa)." },
+          { icono: "⚙️", termino: "Mecanismo", texto: "Son las piezas internas que transmiten o transforman la fuerza y el movimiento dentro de la máquina." },
+          { icono: "⚖️", termino: "Diferencia clave", texto: "La máquina simple hace el trabajo directo (como una rampa). El mecanismo de transmisión pasa el movimiento entre varias piezas conectadas." }
+        ],
+        ampliacion: "Imagina que quieres levantar un bulto de cemento muy pesado para construir una casa en Buga. **La máquina** completa sería una polea gigante, pero **el mecanismo** interno es la rueda dentada que evita que la cuerda se deslice hacia atrás. Los mecanismos son los héroes ocultos que multiplican nuestra fuerza."
+      },
+      {
+        icono: "🔄",
+        titulo: "2. Principales Mecanismos de Transmisión",
+        puntos: [
+          { icono: "🕰️", termino: "Engranajes", texto: "Ruedas con dientes que encajan perfectamente entre sí. Ejemplo: El reloj de manecillas o la caja de cambios." },
+          { icono: "🧵", termino: "Polea con correa", texto: "Dos ruedas lisas separadas pero conectadas por una banda elástica. Ejemplo: El motor de la lavadora." },
+          { icono: "🚲", termino: "Cadena y piñón", texto: "Ruedas dentadas unidas por una cadena metálica. Ejemplo: La bicicleta o la motocicleta." }
+        ],
+        ampliacion: "Estos tres mecanismos tienen algo en común: llevan el movimiento desde un motor (o tus piernas) hasta el lugar donde se necesita el trabajo (la llanta). **Ahorran esfuerzo** porque permiten cambiar la velocidad o la fuerza según el tamaño de las ruedas conectadas."
+      }
+    ]
+  },
+  glosario: [
+    { termino: "Fuerza", definicion: "Capacidad física para realizar un trabajo o un movimiento." },
+    { termino: "Transmisión", definicion: "Acción de pasar el movimiento o la energía de una pieza a otra." },
+    { termino: "Engranaje", definicion: "Rueda dentada que sirve para transmitir movimiento en una máquina." },
+    { termino: "Prompt", definicion: "Instrucción detallada que le damos a una Inteligencia Artificial para que genere un resultado específico." }
+  ],
+  sabiasQue: [
+    "El reloj gigante de la Basílica del Señor de los Milagros en Buga funciona gracias a un complejo sistema de mecanismos de engranajes que se conectan entre sí.",
+    "Las primeras bicicletas no tenían cadena ni piñón; los pedales estaban conectados directamente a la rueda delantera, por eso tenían que hacer la rueda gigante para ir más rápido.",
+    "En una lavadora moderna, una sola correa de caucho es la encargada de transmitir la fuerza del motor eléctrico al tambor para lavar tu ropa."
+  ],
+  modulos: {
+    tarjetas: {
+      titulo: "Analogías Mecánicas",
+      items: [
+        { icono: "🤝", frente: "Engranajes", reverso: "Son como dos personas dándose la mano y girando juntas al mismo ritmo." },
+        { icono: "👕", frente: "Polea con correa", reverso: "Es como los tendederos de ropa con poleas en los patios; tiras de un lado y se mueve el otro." },
+        { icono: "🎢", frente: "Cadena y piñón", reverso: "Como una escalera eléctrica que nunca termina y arrastra los escalones constantemente." },
+        { icono: "🤖", frente: "Prompt para IA", reverso: "Es como darle la receta exacta de cocina a un chef: si eres claro, el plato sale perfecto." }
+      ]
+    },
+    clasificador: {
+      titulo: "Clasifica los Artefactos",
+      categorias: ["Máquina Simple", "Mecanismo de Transmisión"],
+      items: [
+        { texto: "Rampa para silla de ruedas", categoria: 0 },
+        { texto: "Palanca (destapador de botellas)", categoria: 0 },
+        { texto: "Cadena de la motocicleta", categoria: 1 },
+        { texto: "Caja de cambios del carro", categoria: 1 },
+        { texto: "Correa del motor de la lavadora", categoria: 1 },
+        { texto: "Hacha para cortar madera", categoria: 0 },
+        { texto: "Engranajes del reloj de pared", categoria: 1 },
+        { texto: "Tornillo", categoria: 0 }
+      ]
+    },
+    explorador: {
+      titulo: "Mecanismos en la Casa",
+      items: [
+        {
+          icono: "⚙️",
+          nombre: "Engranajes",
+          secciones: [
+            { titulo: "Aparatos", items: ["Batidora de mano", "Reloj analógico", "Juguetes a cuerda"] },
+            { titulo: "Función", items: ["Multiplicar la velocidad de batido", "Mover las agujas lento o rápido"] }
+          ]
+        },
+        {
+          icono: "🧺",
+          nombre: "Poleas y Correas",
+          secciones: [
+            { titulo: "Aparatos", items: ["Lavadora", "Máquina de coser", "Motor de la nevera"] },
+            { titulo: "Función", items: ["Transmitir la fuerza del motor de forma suave y sin ruido"] }
+          ]
+        },
+        {
+          icono: "🚲",
+          nombre: "Cadenas",
+          secciones: [
+            { titulo: "Aparatos", items: ["Bicicleta", "Motocicleta", "Puerta de garaje eléctrica"] },
+            { titulo: "Función", items: ["Soportar mucha fuerza de tracción sin estirarse ni romperse"] }
+          ]
+        }
+      ]
+    }
+  },
+  reto: {
+    titulo: "Datos Estructurados con IA y Excel",
+    descripcion: "Vamos a usar una Inteligencia Artificial para investigar ejemplos de mecanismos y generar una tabla. Luego, llevaremos esos datos a Excel aplicando herramientas de diseño para que se vea profesional.",
+    pasos: [
+      "Abre una pestaña nueva y entra a Gemini o ChatGPT.",
+      "Copia el prompt exacto que está abajo y pégalo en el chat de la IA.",
+      "Espera a que la IA genere la tabla. Selecciónala completamente y presiona Ctrl + C (Copiar).",
+      "Abre Microsoft Excel, haz clic en la celda A1 y presiona Ctrl + V (Pegar). Asegúrate de que cada dato quede en su propia celda.",
+      "Ajusta el ancho de las columnas (haz doble clic en la línea entre las letras de arriba) para que todo el texto se lea bien.",
+      "Selecciona los títulos (Fila 1), ponles color de fondo y pon la letra en negrita.",
+      "Selecciona toda la tabla, ve al menú de bordes y elige 'Todos los bordes'."
+    ],
+    prompt: "Actúa como un profesor de tecnología. Crea una tabla con 4 columnas: 'Nombre del Mecanismo', 'Tipo de movimiento', '¿Para qué sirve?' y 'Ejemplo en casa'. Llena la tabla con 5 ejemplos de mecanismos de transmisión diferentes. Entrega el resultado estrictamente en formato de tabla (sin viñetas) para poder copiarla fácilmente a Excel.",
+    herramientas: [
+      { nombre: "Excel Online", url: "https://www.office.com" },
+      { nombre: "Google Gemini", url: "https://gemini.google.com" }
+    ],
+    requisitos: [
+      "La tabla fue generada con IA y copiada a Excel.",
+      "Tiene exactamente 4 columnas y 6 filas (incluyendo títulos).",
+      "Cada dato está en su celda (no hay información mezclada en una sola columna).",
+      "Las columnas tienen el ancho correcto para poder leer todo el texto.",
+      "Los títulos tienen un color de fondo distinto.",
+      "Toda la tabla tiene los bordes marcados."
+    ]
+  },
+  quiz: [
+    {
+      pregunta: "¿Cuál es el propósito principal de una máquina?",
+      opciones: [
+        "Consumir electricidad y generar ruido.",
+        "Realizar un trabajo con menos esfuerzo y tiempo.",
+        "Ser un adorno tecnológico en el hogar.",
+        "Complicar las tareas humanas."
+      ],
+      correcta: 1,
+      explicacion: "Las máquinas se inventaron exclusivamente para facilitarle el trabajo físico al ser humano."
+    },
+    {
+      pregunta: "¿Qué piezas se encargan de transmitir la fuerza por dentro de una máquina?",
+      opciones: [
+        "Los tornillos",
+        "Los cables de colores",
+        "Los mecanismos de transmisión",
+        "Las carcasas de plástico"
+      ],
+      correcta: 2,
+      explicacion: "Los mecanismos de transmisión son el 'corazón' móvil que lleva la fuerza de un punto a otro."
+    },
+    {
+      pregunta: "¿Qué mecanismo de transmisión usa principalmente una bicicleta?",
+      opciones: [
+        "Polea con correa",
+        "Palanca simple",
+        "Cadena y piñón",
+        "Engranajes de reloj"
+      ],
+      correcta: 2,
+      explicacion: "La bicicleta usa un piñón dentado conectado a los pedales y otro en la llanta, unidos por una cadena metálica."
+    },
+    {
+      pregunta: "¿Por qué un reloj antiguo de manecillas usa engranajes y no poleas?",
+      opciones: [
+        "Porque los dientes del engranaje evitan que se resbale y el tiempo sea exacto.",
+        "Porque las poleas son muy caras.",
+        "Porque el inventor no conocía las poleas.",
+        "Porque los engranajes suenan más bonito."
+      ],
+      correcta: 0,
+      explicacion: "Los engranajes garantizan un movimiento preciso sin deslizamientos, algo vital para medir el tiempo."
+    },
+    {
+      pregunta: "En nuestro reto de sala, ¿Por qué le pedimos a la IA que entregara el texto 'estrictamente en formato de tabla'?",
+      opciones: [
+        "Porque la IA no sabe escribir párrafos.",
+        "Para que al pegar en Excel, respete las columnas y filas automáticamente.",
+        "Porque Excel no abre si pegamos texto normal.",
+        "Para que la profesora no se dé cuenta que usamos IA."
+      ],
+      correcta: 1,
+      explicacion: "Darle a la IA instrucciones precisas sobre el formato nos ahorra trabajo manual al copiar a Excel."
+    },
+    {
+      pregunta: "Si tu lavadora de ropa deja de girar pero el motor sí suena, ¿Qué mecanismo probablemente se dañó?",
+      opciones: [
+        "El engranaje del reloj.",
+        "La cadena de metal.",
+        "La polea con correa.",
+        "La rampa interior."
+      ],
+      correcta: 2,
+      explicacion: "Las lavadoras usan un sistema de polea con correa de goma para transmitir la fuerza del motor al tambor."
+    }
+  ],
+  hoja: {
+    preguntas: [
+      { id: "r1", texto: "¿Cuál crees que es la máquina más importante que hay en tu casa y por qué facilita el trabajo de tu familia?", lineas: 3 },
+      { id: "r2", texto: "De los tres mecanismos vistos (Engranajes, Polea, Cadena), ¿cuál te parece más interesante y en qué otro aparato te gustaría usarlo?", lineas: 3 },
+      { id: "r3", texto: "¿Por qué es importante darle una instrucción (prompt) muy clara y detallada a la Inteligencia Artificial?", lineas: 3 },
+      { id: "r4", texto: "¿Qué fue lo más fácil y lo más difícil de darle formato a la tabla en Excel el día de hoy?", lineas: 3 },
+      { id: "r5", texto: "¿Cómo crees que podrías usar esta habilidad de generar tablas con IA para ayudarte en tareas de otras materias?", lineas: 3 }
+    ]
+  },
+  notasDocente: [
+    "Recuerde a los estudiantes que deben copiar el prompt de IA tal cual está escrito para asegurar que respete las celdas al pegar en Excel.",
+    "Si algunos estudiantes terminan la tabla rápido en Excel, pídales que agreguen filtros a los encabezados o jueguen con estilos de tabla prediseñados.",
+    "Al explicar los mecanismos, haga el gesto físico de los engranajes cruzando los dedos de ambas manos y girándolos para demostrar cómo interactúan los dientes."
+  ]
+};
+</script>
+<script src="../../motor-bernal-v5.js"></script>
+</body>
+</html>
