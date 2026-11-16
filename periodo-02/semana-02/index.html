@@ -1,1 +1,249 @@
-hola
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruedas Dentadas y Engranajes: Transmitiendo Movimiento | Grado 7°</title>
+</head>
+<body>
+<script>
+const CLASE = {
+  grado: 7,
+  edad: 12,
+  periodo: 2,
+  semana: 2,
+  tema: "Ruedas Dentadas y Engranajes: Transmitiendo Movimiento",
+  temaAnterior: "Máquinas simples y mecanismos de transmisión",
+  video: "",
+  estilo: "volcan",
+  emoji: "⚙️",
+  objetivo: "Explicar cómo funcionan las ruedas dentadas y cómo influyen en el sentido, la fuerza y la velocidad del movimiento en máquinas cotidianas.",
+  competencia: "Analiza el funcionamiento de mecanismos de transmisión por engranajes, calculando su relación de transmisión para resolver problemas cotidianos de fuerza y velocidad.",
+  preguntaGancho: "¿Por qué cuando subes una loma empinada en bicicleta cambias a un piñón trasero grande, pero en una avenida plana usas uno pequeño?",
+  agenda: [
+    { min: 5, titulo: "Activación y pregunta gancho", texto: "Conversatorio sobre los cambios de la bicicleta y cómo los dientes de los platos controlan el esfuerzo." },
+    { min: 15, titulo: "Teoría al cuaderno y relación de transmisión", texto: "Explicación de rueda motriz, conducida, sentidos de giro y cálculo práctico de dientes." },
+    { min: 18, titulo: "Reto en sala con Excel e IA", texto: "Simulación de sistemas de engranajes en hoja de cálculo y consulta técnica con Inteligencia Artificial." },
+    { min: 7, titulo: "Quiz y hoja de cierre digital", texto: "Verificación rápida de aprendizajes y registro de conclusiones en el computador." }
+  ],
+  cuaderno: {
+    conexion: "La semana pasada estudiamos las máquinas simples y cómo transmiten energía. Hoy veremos uno de los mecanismos más precisos de la ingeniería: las ruedas dentadas o engranajes, que evitan que la fuerza se resbale gracias a sus dientes.",
+    bloques: [
+      {
+        icono: "⚙️",
+        titulo: "1. ¿Qué es un engranaje y cuáles son sus partes?",
+        puntos: [
+          { icono: "🦷", termino: "Rueda dentada o engranaje", texto: "Mecanismo formado por dos o más ruedas con dientes alrededor que encajan entre sí para transmitir movimiento circular sin resbalar." },
+          { icono: "▶️", termino: "Rueda motriz (conductora)", texto: "Es la rueda que recibe el impulso inicial desde un motor, una manivela o los pedales de una bicicleta." },
+          { icono: "🔄", termino: "Rueda conducida", texto: "Es la rueda que recibe el empuje y el movimiento transmitido por los dientes de la rueda motriz." }
+        ],
+        ampliacion: "A diferencia de las poleas lisas que usan correas y pueden patinar si hacen mucha fuerza, los engranajes tienen dientes tallados con precisión. Cuando una rueda gira, cada diente empuja al diente vecino con exactitud. **La transmisión por engranajes garantiza que no se pierda movimiento por deslizamiento**, razón por la cual se usan en relojes mecánicos, cajas de cambios de carros y motores industriales en los ingenios azucareros del Valle del Cauca."
+      },
+      {
+        icono: "🧭",
+        titulo: "2. Reglas de sentido de giro, velocidad y fuerza",
+        puntos: [
+          { icono: "↔️", termino: "Sentido de giro opuesto", texto: "Dos ruedas dentadas conectadas directamente siempre giran en sentido contrario: si una va en sentido horario, la otra va en sentido antihorario." },
+          { icono: "⚡", termino: "Multiplicador de velocidad", texto: "Si una rueda grande mueve a una rueda pequeña, la pequeña gira mucho más rápido, pero con menor fuerza." },
+          { icono: "💪", termino: "Reductor de velocidad (más fuerza)", texto: "Si una rueda pequeña mueve a una rueda grande, la grande gira más despacio, pero multiplica la fuerza para mover cargas pesadas." }
+        ],
+        ampliacion: "En mecánica existe un intercambio justo: nunca puedes ganar velocidad y fuerza al mismo tiempo con un mismo par de ruedas. Si necesitas subir una pendiente hacia la zona rural de Buga en bicicleta, combinas un plato pequeño adelante con un piñón grande atrás. **Al sacrificar velocidad, multiplicas la fuerza de tus piernas** para vencer la gravedad sin agotarte en los primeros metros."
+      },
+      {
+        icono: "➗",
+        titulo: "3. Fórmula de la Relación de Transmisión (i)",
+        puntos: [
+          { icono: "📐", termino: "Ecuación por número de dientes (Z)", texto: "i = Dientes de la rueda motriz (Z1) dividido entre Dientes de la rueda conducida (Z2)." },
+          { icono: "🚀", termino: "Cuando i es mayor que 1", texto: "El sistema aumenta la velocidad. Por ejemplo, si Z1 = 40 dientes y Z2 = 10 dientes, entonces i = 40 / 10 = 4 (la pequeña da 4 vueltas por cada vuelta de la grande)." },
+          { icono: "🏋️", termino: "Cuando i es menor que 1", texto: "El sistema aumenta la fuerza. Por ejemplo, si Z1 = 10 dientes y Z2 = 40 dientes, entonces i = 10 / 40 = 0,25 (la grande da un cuarto de vuelta, pero cuadruplica la fuerza)." }
+        ],
+        ampliacion: "Calcular la relación de transmisión permite a los ingenieros diseñar máquinas exactas antes de fabricarlas. Si sabes cuántos dientes tiene cada rueda, puedes predecir cuántas vueltas dará el eje final. **Contar los dientes (Z) es el secreto matemático para controlar cualquier máquina**, desde un batidor manual en la cocina de tu casa hasta las enormes turbinas de una central hidroeléctrica."
+      }
+    ]
+  },
+  glosario: [
+    { termino: "Engranaje", definicion: "Sistema de dos o más ruedas dentadas que encajan entre sí para transmitir potencia y movimiento circular." },
+    { termino: "Rueda motriz (Z1)", definicion: "Rueda dentada conectada a la fuente de energía que inicia el movimiento del mecanismo." },
+    { termino: "Rueda conducida (Z2)", definicion: "Rueda dentada que recibe el movimiento de la motriz y lo entrega al eje de salida." },
+    { termino: "Relación de transmisión (i)", definicion: "Número que indica cuántas vueltas da la rueda conducida por cada vuelta completa de la motriz." },
+    { termino: "Rueda loca", definicion: "Engranaje intermedio colocado entre dos ruedas para lograr que ambas giren en el mismo sentido." }
+  ],
+  sabiasQue: [
+    "El mecanismo de Anticitera, hallado en un naufragio griego con más de 2.000 años de antigüedad, contenía al menos 30 engranajes de bronce tallados a mano para predecir eclipses astronómicos.",
+    "En una bicicleta con cadena, el plato delantero y el piñón trasero giran en el mismo sentido porque la cadena actúa como puente, a diferencia de dos engranajes que se tocan directamente.",
+    "Las cajas de cambios automáticas de los automóviles modernos utilizan conjuntos llamados «engranajes planetarios», donde varias ruedas pequeñas giran alrededor de un engranaje central como planetas alrededor del Sol."
+  ],
+  modulos: {
+    tarjetas: {
+      titulo: "Analogías para dominar los engranajes",
+      items: [
+        { icono: "🚲", frente: "Plato grande mueve piñón pequeño", reverso: "Multiplicador de velocidad: ideal para correr rápido en terreno plano como la doble calzada de Buga, pero exige más esfuerzo al arrancar." },
+        { icono: "⛰️", frente: "Plato pequeño mueve piñón grande", reverso: "Reductor de velocidad y multiplicador de fuerza: el eje gira despacio pero con potencia suficiente para subir montañas." },
+        { icono: "🕰️", frente: "Engranajes de un reloj de agujas", reverso: "Tren de engranajes de precisión: reduce miles de vibraciones rápidas hasta convertirlas en el paso exacto de 60 segundos por minuto." },
+        { icono: "🔄", frente: "Dos ruedas dentadas tocándose", reverso: "Inversión de giro: si la rueda izquierda gira como las manecillas del reloj, la derecha girará obligatoriamente al revés." },
+        { icono: "⚙️", frente: "Tres ruedas dentadas en fila", reverso: "La rueda del medio se llama «rueda loca» y hace que la primera y la última rueda giren exactamente hacia el mismo lado." }
+      ]
+    },
+    explorador: {
+      titulo: "Engranajes en la vida real",
+      items: [
+        {
+          icono: "🚲",
+          nombre: "La Bicicleta",
+          secciones: [
+            { titulo: "¿Cómo funciona?", items: ["Usa platos dentados en los pedales (motriz) y piñones en la rueda trasera (conducida).", "A diferencia de los engranajes directos, utiliza una cadena metálica para transmitir la fuerza a distancia."] },
+            { titulo: "Estrategia de uso", items: ["Para arrancar o subir lomas: plato pequeño + piñón grande (máxima fuerza).", "Para alcanzar alta velocidad en plano: plato grande + piñón pequeño (máxima velocidad)."] }
+          ]
+        },
+        {
+          icono: "⌚",
+          nombre: "Reloj Mecánico",
+          secciones: [
+            { titulo: "¿Cómo funciona?", items: ["Un resorte enrollado libera energía lentamente hacia una serie de ruedas dentadas muy pequeñas.", "Cada rueda reduce la velocidad en una proporción exacta para mover el segundero, el minutero y el horario."] },
+            { titulo: "Dato clave", items: ["La rueda del minutero gira exactamente 12 veces más rápido que la rueda de las horas."] }
+          ]
+        },
+        {
+          icono: "🥣",
+          nombre: "Batidora Manual",
+          secciones: [
+            { titulo: "¿Cómo funciona?", items: ["Tiene una rueda dentada grande conectada a la manivela que giras con tu mano.", "Esa rueda grande mueve dos piñones pequeños conectados a las varillas batidoras."] },
+            { titulo: "Resultado mecánico", items: ["Con una sola vuelta lenta de tu mano, las aspas dan muchas vueltas rápidas para batir huevos o mezclas."] }
+          ]
+        },
+        {
+          icono: "🏗️",
+          nombre: "Grúa o Malacate",
+          secciones: [
+            { titulo: "¿Cómo funciona?", items: ["Un motor pequeño gira a altísima velocidad pero con poca fuerza.", "Se conecta un piñón pequeño a una corona dentada gigante en el tambor del cable."] },
+            { titulo: "Resultado mecánico", items: ["Transforma velocidad en una fuerza colosal capaz de levantar toneladas de carga sin que el motor se queme."] }
+          ]
+        }
+      ]
+    },
+    clasificador: {
+      titulo: "¿Aumenta Velocidad o Aumenta Fuerza?",
+      categorias: ["Aumenta Velocidad (Z1 mayor que Z2)", "Aumenta Fuerza (Z1 menor que Z2)"],
+      items: [
+        { texto: "Rueda motriz de 48 dientes mueve rueda conducida de 12 dientes", categoria: 0 },
+        { texto: "Rueda motriz de 12 dientes mueve rueda conducida de 48 dientes", categoria: 1 },
+        { texto: "Manivela grande de una batidora manual moviendo aspas pequeñas", categoria: 0 },
+        { texto: "Motor pequeño moviendo el tambor gigante de una grúa de carga", categoria: 1 },
+        { texto: "Cambio de bicicleta para bajar rápido por una carretera plana", categoria: 0 },
+        { texto: "Cambio de bicicleta para subir una montaña muy empinada", categoria: 1 },
+        { texto: "Engranaje conductor de 60 dientes conectado a uno de 15 dientes", categoria: 0 },
+        { texto: "Piñón de 10 dientes empujando una rueda dentada de 50 dientes", categoria: 1 }
+      ]
+    }
+  },
+  reto: {
+    titulo: "Laboratorio de Engranajes en Excel + Asistente IA",
+    descripcion: "Construye una tabla de cálculo automático en Microsoft Excel para analizar 5 sistemas de engranajes reales, grafica sus relaciones de transmisión y consulta a una IA como ingeniero mecánico.",
+    pasos: [
+      "Abre Microsoft Excel en tu computador y crea un libro en blanco.",
+      "En la fila 1 escribe exactamente estos encabezados desde A1 hasta G1: Sistema | Aplicacion_Real | Dientes_Motriz_Z1 | Dientes_Conducida_Z2 | Sentido_Giro | Relacion_Transmision | Efecto_Mecanico.",
+      "Registra en las filas 2 a 6 estos 5 casos: Sistema A (Bicicleta Plano: Z1=48, Z2=12), Sistema B (Bicicleta Subida: Z1=24, Z2=48), Sistema C (Reloj: Z1=60, Z2=15), Sistema D (Batidora: Z1=15, Z2=45), Sistema E (Molino: Z1=12, Z2=24). Completa el sentido de giro (Contrario) y el efecto.",
+      "En la celda F2 escribe la fórmula =C2/D2 y arrastra el controlador de relleno hasta F6 para que Excel calcule automáticamente la relación de transmisión de los 5 sistemas.",
+      "Selecciona los datos de Aplicacion_Real y Relacion_Transmision e inserta un Gráfico de Columnas con título «Relación de Transmisión por Máquina».",
+      "Copia el prompt de abajo, pégalo en Copilot, ChatGPT o Gemini, lee la explicación y escribe debajo de tu tabla un resumen de 3 líneas con tus propias palabras."
+    ],
+    prompt: "Actúa como ingeniero mecánico explicándole a un estudiante de 12 años en Colombia. Tengo una bicicleta donde el plato delantero (motriz) tiene 48 dientes y el piñón trasero (conducido) tiene 12 dientes. Si doy 10 pedaleadas completas, ¿cuántas vueltas da la rueda trasera y por qué me cuesta más esfuerzo arrancar así?",
+    herramientas: [
+      { nombre: "Microsoft Copilot", url: "https://copilot.microsoft.com" },
+      { nombre: "Google Gemini", url: "https://gemini.google.com" },
+      { nombre: "ChatGPT", url: "https://chatgpt.com" }
+    ],
+    requisitos: [
+      "Tabla organizada con los 7 encabezados exactos y los 5 sistemas completos.",
+      "Columna Relacion_Transmision calculada usando fórmulas reales (=C2/D2) y no escrita a mano.",
+      "Gráfico de columnas insertado correctamente junto a la tabla.",
+      "Resumen de 3 líneas redactado por ti con base en la respuesta de la Inteligencia Artificial."
+    ]
+  },
+  quiz: [
+    {
+      pregunta: "Si dos ruedas dentadas están conectadas directamente y la rueda motriz gira en sentido horario (hacia la derecha), ¿en qué sentido girará la rueda conducida?",
+      opciones: [
+        "En el mismo sentido horario",
+        "En sentido antihorario (contrario)",
+        "No girará a menos que tengan el mismo tamaño",
+        "Girará alternando de izquierda a derecha"
+      ],
+      correcta: 1,
+      explicacion: "Dos engranajes en contacto directo siempre invierten el sentido de giro porque los dientes empujan el borde opuesto."
+    },
+    {
+      pregunta: "¿Qué ocurre cuando una rueda dentada grande (motriz) mueve a una rueda dentada pequeña (conducida)?",
+      opciones: [
+        "La rueda pequeña gira más lento y con mucha más fuerza",
+        "Ambas ruedas giran exactamente a la misma velocidad",
+        "La rueda pequeña gira más rápido pero con menos fuerza",
+        "El mecanismo se bloquea por diferencia de dientes"
+      ],
+      correcta: 2,
+      explicacion: "Al pasar movimiento de una rueda grande a una pequeña se multiplica la velocidad de giro a cambio de reducir la fuerza."
+    },
+    {
+      pregunta: "En un mecanismo, la rueda motriz tiene 30 dientes (Z1) y la rueda conducida tiene 10 dientes (Z2). ¿Cuál es su relación de transmisión (i)?",
+      opciones: [
+        "i = 0,33",
+        "i = 20",
+        "i = 3",
+        "i = 300"
+      ],
+      correcta: 2,
+      explicacion: "Se divide Z1 entre Z2 (30 / 10 = 3), lo que indica que la rueda conducida da 3 vueltas por cada vuelta de la motriz."
+    },
+    {
+      pregunta: "Un agricultor necesita construir un molino manual para triturar maíz muy duro y requiere que la piedra gire con mucha fuerza. ¿Qué combinación debe usar?",
+      opciones: [
+        "Una rueda pequeña en la manivela (motriz) moviendo una rueda grande en el molino (conducida)",
+        "Una rueda gigante en la manivela (motriz) moviendo un piñón diminuto en el molino",
+        "Dos ruedas exactamente del mismo tamaño conectadas por una banda lisa",
+        "Quitar los dientes de las ruedas para evitar la fricción"
+      ],
+      correcta: 0,
+      explicacion: "Para ganar fuerza mecánica se debe conectar una rueda motriz pequeña a una rueda conducida grande."
+    },
+    {
+      pregunta: "¿Para qué sirve colocar una tercera rueda intermedia («rueda loca») entre dos engranajes?",
+      opciones: [
+        "Para detener el movimiento en caso de emergencia",
+        "Para lograr que la primera y la última rueda giren en el mismo sentido",
+        "Para duplicar el número de dientes de la primera rueda",
+        "Para evitar que las ruedas necesiten lubricación"
+      ],
+      correcta: 1,
+      explicacion: "La rueda loca invierte el giro dos veces seguidas, haciendo que el engranaje de salida gire en el mismo sentido que el de entrada."
+    },
+    {
+      pregunta: "¿Por qué los engranajes son mejores que las poleas lisas en máquinas que requieren mucha precisión o fuerza?",
+      opciones: [
+        "Porque son más livianos y no hacen ningún ruido",
+        "Porque sus dientes encajan entre sí y evitan que el mecanismo resbale",
+        "Porque funcionan sin necesidad de ningún eje central",
+        "Porque siempre aumentan tanto la fuerza como la velocidad al mismo tiempo"
+      ],
+      correcta: 1,
+      explicacion: "El encaje mecánico diente con diente elimina el deslizamiento y garantiza una transmisión exacta del movimiento."
+    }
+  ],
+  hoja: {
+    preguntas: [
+      { id: "r1", texto: "1. Explica con tus propias palabras la diferencia entre una rueda motriz y una rueda conducida.", lineas: 2 },
+      { id: "r2", texto: "2. Si la rueda motriz de un juguete tiene 20 dientes y la conducida tiene 40 dientes, ¿cuál gira más rápido y cuál tiene más fuerza? ¿Por qué?", lineas: 3 },
+      { id: "r3", texto: "3. En el reto de Excel y la consulta con la IA, ¿qué fue lo que más te sorprendió sobre el funcionamiento de los cambios de una bicicleta?", lineas: 3 },
+      { id: "r4", texto: "4. Menciona dos objetos o máquinas de tu casa o de Buga que creas que tienen engranajes por dentro y explica qué función cumplen allí.", lineas: 2 },
+      { id: "r5", texto: "5. ¿Qué aprendí hoy sobre las ruedas dentadas que antes no sabía?", lineas: 2 }
+    ]
+  },
+  notasDocente: [
+    "En el tablero, dibuje dos círculos tangentes con flechas curvas opuestas antes de iniciar la copia al cuaderno; la visualización espacial facilita que los estudiantes de 12 años comprendan la inversión de giro.",
+    "Durante el reto en Excel, verifique que los estudiantes escriban el signo igual (=C2/D2) en la columna F y no digiten los resultados manualmente.",
+    "Recuerde al grupo que esta semana no hay investigación para la casa ni entrega en hoja suelta: toda la evidencia se evalúa con el archivo de Excel y las respuestas de cierre en sala."
+  ]
+};
+</script>
+<script src="../../motor-bernal-v5.js"></script>
+</body>
+</html>
